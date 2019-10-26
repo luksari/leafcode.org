@@ -1,0 +1,18 @@
+{
+  "rulesDirectory": [
+    "tslint-plugin-prettier"
+  ],
+  "extends": [
+    "tslint-config-blvd/react",
+    "tslint-config-prettier",
+    "tslint-functional-preset"
+  ],
+  "rules": {
+    "semicolon": true,
+    "object-literal-sort-keys": false,
+    "quotemark": [true, "single", "jsx-single"],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "jsx-quotes": ["error", "prefer-single"]
+  }
+}
+
