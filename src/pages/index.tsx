@@ -2,9 +2,9 @@ import { graphql, Link } from 'gatsby';
 import React, { FC } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { config } from '../../config/SiteConfig';
 import { Article, Button, Layout, PostsContent } from '../components';
 import Hero from '../components/Hero';
+import { config } from '@config/SiteConfig';
 import { IPageProps } from '../models/PageProps';
 
 const SublineWrapper = styled.div`

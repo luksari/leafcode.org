@@ -1,10 +1,10 @@
 import { Link } from 'gatsby';
 import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
-import { config } from '../../config/SiteConfig';
 import { Content, Header, Layout, SectionTitle, Wrapper } from '../components';
+import { config } from '@config/SiteConfig';
 
-export const NotFoundPage: FunctionComponent<{}> = ({}) => (
+export const NotFoundPage: FunctionComponent<{}> = ({ }) => (
   <Layout>
     <Helmet title={`404 Nie znaleziono | ${config.siteTitle}`} />
     <Header>

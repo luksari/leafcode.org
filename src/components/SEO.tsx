@@ -1,6 +1,6 @@
+import { config } from '@config/SiteConfig';
 import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
-import { config } from '../../config/SiteConfig';
 import { IPost } from '../models/Post';
 
 interface ISEO {
@@ -22,49 +22,49 @@ export const SEO: FunctionComponent<ISEO> = ({ postNode, postPath, postSEO }) =>
   const blogURL = config.siteUrl + config.pathPrefix;
   const schemaOrgJSONLD: ReadonlyArray<any> = postSEO
     ? [
-        {
-          '@context': 'http://schema.org',
+      {
+        '@context': 'http://schema.org',
+        '@type': 'WebSite',
+        '@id': blogURL,
+        url: blogURL,
+        name: title,
+        alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
+      },
+    ]
+    : [
+      {
+        '@context': 'http://schema.org',
+        '@id': postURL,
+        '@type': 'BlogPosting',
+        alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
+        name: title,
+        url: postURL,
+        image: {
+          '@type': 'ImageObject',
+          url: image,
+        },
+        description: config.siteDescription,
+        datePublished: postNode.frontmatter.date,
+        dateModified: postNode.frontmatter.date,
+        author: {
+          '@type': 'Person',
+          name: config.author,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: config.author,
+          logo: {
+            '@type': 'ImageObject',
+            url: config.siteUrl + realPrefix + config.siteLogo,
+          },
+        },
+        isPartOf: blogURL,
+        mainEntityOfPage: {
           '@type': 'WebSite',
           '@id': blogURL,
-          url: blogURL,
-          name: title,
-          alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
         },
-      ]
-    : [
-        {
-          '@context': 'http://schema.org',
-          '@id': postURL,
-          '@type': 'BlogPosting',
-          alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
-          name: title,
-          url: postURL,
-          image: {
-            '@type': 'ImageObject',
-            url: image,
-          },
-          description: config.siteDescription,
-          datePublished: postNode.frontmatter.date,
-          dateModified: postNode.frontmatter.date,
-          author: {
-            '@type': 'Person',
-            name: config.author,
-          },
-          publisher: {
-            '@type': 'Organization',
-            name: config.author,
-            logo: {
-              '@type': 'ImageObject',
-              url: config.siteUrl + realPrefix + config.siteLogo,
-            },
-          },
-          isPartOf: blogURL,
-          mainEntityOfPage: {
-            '@type': 'WebSite',
-            '@id': blogURL,
-          },
-        },
-      ];
+      },
+    ];
 
   return (
     <Helmet>

@@ -4,7 +4,7 @@ import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
 import { AnimatedTitle, Content, Header, Layout, SectionTitle } from '../components';
 
-import { config } from '../../config/SiteConfig';
+import { config } from '@config/SiteConfig';
 import { IPageProps } from '../models/PageProps';
 
 export const AllCategoryTemplate: FunctionComponent<IPageProps> = ({ pathContext: { categories } }) => (

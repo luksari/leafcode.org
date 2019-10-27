@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
 import { Button, Layout } from '../components';
 
+import { config } from '@config/SiteConfig';
 import styled from 'styled-components';
-import { config } from '../../config/SiteConfig';
 import Hero from '../components/Hero';
 import { IPageProps } from '../models/PageProps';
 

@@ -1,6 +1,6 @@
 const path = require('path');
 const _ = require('lodash');
-const config = require('./config/SiteConfig').default;
+const config = require('./src/config/SiteConfig').default;
 
 exports.onCreateNode = ({
   node,
@@ -103,6 +103,15 @@ exports.onCreateWebpackConfig = ({
   actions.setWebpackConfig({
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+      alias: {
+        '@src': path.resolve(__dirname, 'src/'),
+        '@components': path.resolve(__dirname, 'src/components/'),
+        '@templates': path.resolve(__dirname, 'src/templates/'),
+        '@pages': path.resolve(__dirname, 'src/pages/'),
+        '@config': path.resolve(__dirname, 'src/config/'),
+        '@models': path.resolve(__dirname, 'src/models/'),
+        '@utils': path.resolve(__dirname, 'src/utils/'),
+      },
     },
   });
 };

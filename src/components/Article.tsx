@@ -13,12 +13,12 @@ const Post = styled.article<{ readonly primary?: boolean }>`
   overflow: hidden;
   grid-column-gap: 20px;
   border-radius: 8px;
-  background: ${props => props.theme.colors.white};
-  box-shadow: 0px 2px 5px ${props => props.theme.colors.grey.ultraLight};
+  background: ${({ theme }) => theme.colors.white};
+  box-shadow: 0px 2px 5px ${({ theme }) => theme.colors.grey.ultraLight};
   transition: transform 500ms ease-in-out;
-  flex: ${props => (props.primary ? '1 100%' : '1 30%')};
-  max-width: ${props => (props.primary ? '100%' : '500px')};
-  grid-template-columns: ${props => (props.primary ? '1fr 0.8fr' : '1fr')};
+  flex: ${({ primary }) => (primary ? '1 100%' : '1 30%')};
+  max-width: ${({ primary }) => (primary ? '100%' : '500px')};
+  grid-template-columns: ${({ primary }) => (primary ? '1fr 0.8fr' : '1fr')};
   @media ${media.tablet} {
     flex: 1 100%;
     max-width: 100%;
@@ -35,7 +35,7 @@ const Post = styled.article<{ readonly primary?: boolean }>`
 
 const Banner = styled(Img)`
   margin: 0;
-  border: 5px solid ${props => props.theme.colors.white};
+  border: 5px solid ${({ theme }) => theme.colors.white};
   max-width: 100%;
   @media ${media.tablet} {
     max-width: 100%;
@@ -50,12 +50,12 @@ const Title = styled.h2<{ readonly primary?: boolean }>`
   position: relative;
   text-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
   margin-bottom: 0.75rem;
-  font-size: ${props => (props.primary ? props.theme.fontSize.big : props.theme.fontSize.medium)};
+  font-size: ${({ theme, primary }) => (primary ? theme.fontSize.big : theme.fontSize.medium)};
   @media ${media.tablet} {
-    font-size: ${props => props.theme.fontSize.big};
+    font-size: ${({ theme }) => theme.fontSize.big};
   }
   @media ${media.phone} {
-    font-size: ${props => props.theme.fontSize.small};
+    font-size: ${({ theme }) => theme.fontSize.small};
   }
 `;
 

@@ -1,9 +1,8 @@
+import { styled } from '@config/Theme';
 import { Link } from 'gatsby';
 import { darken } from 'polished';
 import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
-import theme from '../../config/Theme';
-import { media } from '../utils/media';
+import { media } from '@utils/media';
 
 export const PaginationContainer = styled.div`
   width: 100%;
@@ -25,14 +24,14 @@ export const PaginationContent = styled.div`
     display: block;
     float: left;
     transition: 400ms ease;
-    color: ${theme.colors.grey.light};
+    color: ${({ theme }) => theme.colors.grey.light};
     letter-spacing: 0.1em;
     padding: 1rem;
 
     &:hover,
     &.current {
-      background: ${theme.colors.secondary};
-      color: ${theme.colors.white};
+      background: ${({ theme }) => theme.colors.secondary};
+      color: ${({ theme }) => theme.colors.white};
     }
     &.prev {
       margin-left: -1.5rem;
@@ -43,7 +42,7 @@ export const PaginationContent = styled.div`
     &.prev:hover,
     &.next:hover {
       background-color: transparent;
-      color: ${darken(0.2, theme.colors.primary)};
+      color: ${darken(0.2, ({ theme }) => theme.colors.primary)};
     }
 
     @media ${media.tablet} {

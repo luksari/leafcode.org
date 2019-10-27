@@ -1,7 +1,7 @@
+import { config } from '@config/SiteConfig';
 import { graphql } from 'gatsby';
 import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
-import { config } from '../../config/SiteConfig';
 import { Article, Layout, Pagination, PostsContent } from '../components';
 import Hero from '../components/Hero';
 import { IData } from '../models/Data';

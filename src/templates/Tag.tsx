@@ -2,7 +2,7 @@ import Link from 'gatsby-link';
 import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { config } from '../../config/SiteConfig';
+import { config } from '@config/SiteConfig';
 import { Article, Button, Layout, PostsContent, Subline } from '../components';
 import Hero from '../components/Hero';
 import { IPageProps } from '../models/PageProps';

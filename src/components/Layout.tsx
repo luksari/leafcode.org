@@ -1,9 +1,10 @@
+import { styled, theme } from '@config/Theme';
 import { graphql, StaticQuery } from 'gatsby';
 import { split } from 'lodash';
 import React, { FunctionComponent, ReactElement } from 'react';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-import theme from '../../config/Theme';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { media } from '../utils/media';
+import { Footer } from './Footer';
 import './layout.scss';
 import Menu from './Menu';
 import { Wrapper } from './Wrapper';
@@ -60,22 +61,6 @@ const GlobalStyle = createGlobalStyle`
   }
   .textRight {
     text-align:right;
-  }
-`;
-
-const Footer = styled.footer`
-  width: 100%;
-  height: 100%;
-  background: ${props => props.theme.colors.grey.bluish};
-  color: ${props => props.theme.colors.white};
-  align-self: flex-end;
-  text-align: center;
-  margin-top: auto;
-  span {
-    font-size: 0.75rem;
-  }
-  a {
-    color: white;
   }
 `;
 

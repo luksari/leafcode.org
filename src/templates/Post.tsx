@@ -1,3 +1,4 @@
+import { config } from '@config/SiteConfig';
 import { graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { kebabCase } from 'lodash';
@@ -6,7 +7,6 @@ import { rgba } from 'polished';
 import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { config } from '../../config/SiteConfig';
 import { Content, Header, Layout, PageTitle, PrevNext, SectionTitle, SEO, StyledLink, Subline } from '../components';
 import { IPathContext } from '../models/PathContext';
 import { IPost } from '../models/Post';

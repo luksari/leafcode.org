@@ -8,6 +8,17 @@
       "es2015",
       "es2017"
     ],
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@src": ["src"],
+      "@components": ["src/components"],
+      "@templates": ["src/templates"],
+      "@pages": ["src/pages"],
+      "@config": ["src/config"],
+      "@models": ["src/models"],
+      "@utils": ["src/utils"]
+    },
     "plugins": [
       {
         "name": "typescript-styled-plugin",

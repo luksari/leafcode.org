@@ -1,4 +1,6 @@
-export const colors = {
+import baseStyled, { ThemedStyledInterface } from 'styled-components';
+
+const colors = {
   primary: '#98B7D7', // Color for buttons or links
   secondary: '#5E62A3',
   warning: '#FA6900',
@@ -17,18 +19,18 @@ export const colors = {
   },
 };
 
-export const gradients = {
+const gradients = {
   primary: (angle: number) => `linear-gradient(${angle}deg, ${colors.primary}, ${colors.secondary})`,
   warning: (angle: number) => `linear-gradient(${angle}deg, ${colors.warning}, ${colors.error})`,
   neonBlue: (angle: number) => `linear-gradient(${angle}deg, ${colors.neonBlue}, ${colors.secondary})`,
   neonPink: (angle: number) => `linear-gradient(${angle}deg, ${colors.neonPink}, ${colors.error})`,
 };
 
-export const transitions = {
+const transitions = {
   normal: '0.5s',
 };
 
-export const fontSize = {
+const fontSize = {
   smallest: '0.75rem',
   small: '0.9rem',
   medium: '1.5rem',
@@ -36,9 +38,12 @@ export const fontSize = {
   biggest: '4.5rem',
 };
 
-export default {
+export const theme = {
   colors,
   transitions,
   fontSize,
-  gradients,
+  gradients
 };
+
+export type Theme = typeof theme;
+export const styled = baseStyled as ThemedStyledInterface<Theme>;
