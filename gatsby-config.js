@@ -1,42 +1,120 @@
+require('source-map-support').install();
+require('ts-node').register({
+  compilerOptions: {
+    module: 'commonjs',
+    target: 'es2017',
+  },
+});
+const path = require('path');
+
+const config = require('./src/config/SiteConfig').default;
+const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
+
 module.exports = {
+  pathPrefix: config.pathPrefix,
   siteMetadata: {
-    title: `Na Froncie - blog`,
-    description: `Front-end, IT, Web Development`,
-    author: `@Łukasz Tyszkiewicz`,
+    siteUrl: config.siteUrl + pathPrefix,
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    `gatsby-transformer-sharp`,
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-styled-components',
+    'gatsby-plugin-offline',
+    'gatsby-plugin-typescript',
+    'gatsby-plugin-sass',
+    'gatsby-plugin-manifest',
+    'gatsby-plugin-catch-links',
+    'gatsby-plugin-sitemap',
+    'gatsby-plugin-lodash',
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    `gatsby-transformer-remark`,
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        name: 'images',
+        path: `${__dirname}/static/assets/`,
       },
     },
     {
-      resolve: `gatsby-mdx`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        // Apply gatsby-mdx to both .mdx and .md files
-        extensions: ['.mdx', '.md'],
-        defaultLayout: require.resolve('./src/components/blog-post-layout.js')
+        name: 'post',
+        path: `${__dirname}/blog`,
+
+      },
+    },
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /assets/,
+        }
       }
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
-  ],
-}
+    {
+      resolve: `gatsby-plugin-google-tagmanager`,
+      options: {
+        id: config.Google_Tag_Manager_ID,
+        // Include GTM in development.
+        // Defaults to false meaning GTM will only be loaded in production.
+        includeInDevelopment: false,
+      },
+    },
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: [{
+            resolve: 'gatsby-remark-external-links',
+            options: {
+              target: '_blank',
+              rel: 'nofollow noopener noreferrer',
+            },
+          },
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              showLineNumbers: true,
+            },
+          },
+          'gatsby-remark-autolink-headers',
+        ],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: 'src/utils/typography.ts',
+      },
+    },
+    {
+      resolve: `gatsby-plugin-alias-imports`,
+      options: {
+        alias: {
+          '@src': path.resolve(__dirname, 'src/'),
+          '@components': path.resolve(__dirname, 'src/components/'),
+          '@templates': path.resolve(__dirname, 'src/templates/'),
+          '@pages': path.resolve(__dirname, 'src/pages/'),
+          '@config': path.resolve(__dirname, 'src/config/'),
+          '@models': path.resolve(__dirname, 'src/models/'),
+          '@utils': path.resolve(__dirname, 'src/utils/'),
+        },
+        extensions: [
+          'js', 'ts', 'tsx', 'jsx'
+        ],
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: config.siteTitle,
+        short_name: config.siteTitleAlt,
+        description: config.siteDescription,
+        start_url: config.pathPrefix,
+        background_color: config.backgroundColor,
+        theme_color: config.themeColor,
+        display: 'standalone',
+        icon: config.favicon,
+      },
+    },
+  ]
+};
