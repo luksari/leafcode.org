@@ -1,9 +1,12 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
+import { graphql, StaticQuery } from 'gatsby';
 import { LogoImage } from '.';
 import { media } from '../utils/media';
 import { PageTitle, PageTitleSecondary } from './Title';
 import { Wrapper } from './Wrapper';
+import BackgroundImage from 'gatsby-background-image';
+import { theme } from '@config/Theme';
 
 const HeroWrapper = styled.div<{ readonly main?: boolean }>`
   width: 100%;
@@ -23,13 +26,20 @@ const HeroWrapper = styled.div<{ readonly main?: boolean }>`
   }
 `;
 
-const GridRow: any = styled.div<{ readonly expanded: boolean }>`
-  background: url("/assets/bg.jpg") no-repeat;
-  background-size: cover;
+const GridRow = styled(BackgroundImage)`
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: bottom center;
   background-attachment: fixed;
-  background-position: 20% 100%;
-  color: ${(props: any) =>
-    props.background ? props.theme.colors.white : null};
+  background-repeat: repeat-y;
+  background-size: cover;
+  height: 600px;
+  @media ${media.tablet} {
+    height: 400px;
+  }
 `;
 
 const TitleWrapper = styled(Wrapper)`
@@ -65,7 +75,6 @@ const ChildrenWrapper = styled.div`
 interface IProps {
   readonly title?: string;
   readonly subTitle?: string;
-  readonly children?: ReactElement | HTMLElement;
   readonly main?: boolean;
 }
 
@@ -75,25 +84,50 @@ const Hero: FC<IProps> = ({
   children,
   main,
 }) => {
-  const secondaryText = `${subTitle}`;
-  const mainText = `${title}`;
-
   return (
-    <GridRow background>
-      <HeroWrapper main={main}>
-        <LogoImage src={'/assets/sigil.svg'} alt='Qarbon' />
-        <TitleWrapper>
-          <PageTitle data-text={mainText} background>
-            {mainText}
-          </PageTitle>
-          <PageTitleSecondary data-text={secondaryText} background>
-            {secondaryText}
-          </PageTitleSecondary>
-        </TitleWrapper>
-        {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
-      </HeroWrapper>
-    </GridRow>
+    <StaticQuery
+      query={imageQuery}
+      render={(data) => {
+        const fluidImage = data.allFile.edges[0].node.childImageSharp.fluid;
+        return (
+          <GridRow 
+            Tag='section'
+            fluid={fluidImage}
+            backgroundColor={theme.colors.neonBlue}
+          >
+            <HeroWrapper main={main}>
+              <LogoImage src={'/assets/sigil.svg'} alt='Na froncie' />
+              <TitleWrapper>
+                <PageTitle data-text={title} background>
+                  {title}
+                </PageTitle>
+                <PageTitleSecondary data-text={subTitle} background>
+                  {subTitle}
+                </PageTitleSecondary>
+              </TitleWrapper>
+              {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
+            </HeroWrapper>
+          </GridRow>)
+      }}
+    />
+  
   );
 };
 
 export default Hero;
+
+export const imageQuery = graphql`
+  query {
+    allFile(filter: {name: {eq: "bg"}}) {
+      edges {
+        node {
+          childImageSharp {
+            fluid(maxWidth: 1920) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+   }
+`;

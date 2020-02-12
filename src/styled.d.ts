@@ -1,6 +1,6 @@
 
 import 'styled-components';
-import { Theme } from './config/Theme';
+import { ThemeInterface } from '@config/Theme';
 
 declare module 'styled-components' {
 

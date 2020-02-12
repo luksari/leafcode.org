@@ -66,7 +66,7 @@ export const Title = styled.h3`
   margin-bottom: 0.75rem;
 `;
 
-export const AnimatedTitle = styled(Title) <{ readonly delay: number }>`
+export const AnimatedTitle = styled(Title)<{ delay: number }>`
   transition: color 0.15s, transform 0.15s;
   display: flex;
   justify-content: center;
@@ -80,7 +80,7 @@ export const AnimatedTitle = styled(Title) <{ readonly delay: number }>`
   `};
 `;
 
-export const PageTitle = styled.h1<{ readonly background: boolean }>`
+export const PageTitle = styled.h1<{ background: boolean }>`
   margin-top: 20px;
   text-align: left;
   position: relative;
@@ -90,7 +90,7 @@ export const PageTitle = styled.h1<{ readonly background: boolean }>`
   z-index: 3;
   animation: ${glitchMain} 1.4s 0s linear infinite;
   white-space: pre;
-  color: ${(props: any) => (props.background ? props.theme.colors.white : null)};
+  color: ${({ background, theme }) => (background ? theme.colors.white : null)};
   @media ${media.tablet} {
     width: 100%;
     font-size: 5rem;
@@ -141,7 +141,7 @@ export const PageTitleSecondary = styled.h2<{ readonly background: boolean }>`
   @media ${media.phone} {
     margin-bottom: 15px;
     width: 100%;
-    font-size: 0.65rem;
+    font-size: 0.8rem;
   }
   /* &::after,
   &::before {

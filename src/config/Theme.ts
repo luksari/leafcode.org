@@ -43,4 +43,4 @@ export const theme = {
   gradients
 };
 
-export type Theme = typeof theme;
+export type ThemeInterface = typeof theme;

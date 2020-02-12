@@ -42,7 +42,7 @@ export const PaginationContent = styled.div`
     &.prev:hover,
     &.next:hover {
       background-color: transparent;
-      color: ${darken(0.2, ({ theme }) => theme.colors.primary)};
+      color: ${({ theme }) => darken(0.2, theme.colors.primary)};
     }
 
     @media ${media.tablet} {

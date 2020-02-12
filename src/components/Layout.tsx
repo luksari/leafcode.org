@@ -1,8 +1,8 @@
-import { styled, theme } from '@config/Theme';
+import { theme } from '@config/Theme';
 import { graphql, StaticQuery } from 'gatsby';
 import { split } from 'lodash';
 import React, { FunctionComponent, ReactElement } from 'react';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider }  from 'styled-components';
 import { media } from '../utils/media';
 import { Footer } from './Footer';
 import './layout.scss';
@@ -88,8 +88,7 @@ export const Layout: FunctionComponent<{ readonly children: ReactElement | Reado
           <Menu />
           <Wrapper fullWidth>{children}</Wrapper>
           <Footer>
-            &copy; {split(data.site.buildTime, '.')[2]} by Qarbon. All rights reserved. <br />
-            <a href='https://qarbon.pl'>QARBON</a> <br />
+            &copy; {split(data.site.buildTime, '.')[2]} by Łukasz Tyszkiewicz.<br />
             <span>Ostatnia zmiana: {data.site.buildTime}</span>
           </Footer>
         </PageWrapper>
