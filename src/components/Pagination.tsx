@@ -1,4 +1,4 @@
-import { styled } from '@config/Theme';
+import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { darken } from 'polished';
 import React, { FunctionComponent } from 'react';

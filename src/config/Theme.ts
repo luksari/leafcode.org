@@ -1,5 +1,3 @@
-import baseStyled, { ThemedStyledInterface } from 'styled-components';
-
 const colors = {
   primary: '#98B7D7', // Color for buttons or links
   secondary: '#5E62A3',
@@ -46,4 +44,3 @@ export const theme = {
 };
 
 export type Theme = typeof theme;
-export const styled = baseStyled as ThemedStyledInterface<Theme>;
