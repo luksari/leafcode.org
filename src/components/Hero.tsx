@@ -8,7 +8,7 @@ import { Wrapper } from './Wrapper';
 import BackgroundImage from 'gatsby-background-image';
 import { theme } from '@config/Theme';
 
-const HeroWrapper = styled.div<{ readonly main?: boolean }>`
+const HeroWrapper = styled.div<{  main?: boolean }>`
   width: 100%;
   position: relative;
   justify-content: center;
@@ -16,9 +16,9 @@ const HeroWrapper = styled.div<{ readonly main?: boolean }>`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  min-height: ${props => (props.main ? '100vh' : '70vh')};
+  min-height: ${({ main }) => main ? '100vh' : '70vh'};
   @media ${media.tablet} {
-    min-height: ${props => (props.main ? '100vh' : '60vh')};
+    min-height: ${({ main }) => main ? '100vh' : '60vh'};
     padding: 2rem 2rem;
   }
   @media ${media.phone} {
@@ -30,16 +30,13 @@ const GridRow = styled(BackgroundImage)`
   position: relative;
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   background-position: bottom center;
   background-attachment: fixed;
-  background-repeat: repeat-y;
   background-size: cover;
-  height: 600px;
   @media ${media.tablet} {
     height: 400px;
   }
+  
 `;
 
 const TitleWrapper = styled(Wrapper)`
@@ -73,9 +70,9 @@ const ChildrenWrapper = styled.div`
 `;
 
 interface IProps {
-  readonly title?: string;
-  readonly subTitle?: string;
-  readonly main?: boolean;
+  title?: string;
+  subTitle?: string;
+  main?: boolean;
 }
 
 const Hero: FC<IProps> = ({

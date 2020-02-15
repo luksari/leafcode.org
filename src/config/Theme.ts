@@ -1,6 +1,7 @@
 const colors = {
-  primary: '#98B7D7', // Color for buttons or links
-  secondary: '#5E62A3',
+  primary: '#4687C8', // Color for buttons or links
+  secondary: '#85B4E2',
+  accent: '#FFE063',
   warning: '#FA6900',
   error: '#D32F2F',
   neonPink: '#DA2EB8',

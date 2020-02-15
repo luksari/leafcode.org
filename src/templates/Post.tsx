@@ -7,7 +7,7 @@ import { rgba } from 'polished';
 import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Content, Header, Layout, PageTitle, PrevNext, SectionTitle, SEO, StyledLink, Subline } from '../components';
+import { Content, Header, Layout, PrevNext, SectionTitle, SEO, StyledLink, Subline, GlitchedPageTitle } from '../components';
 import { IPathContext } from '../models/PathContext';
 import { IPost } from '../models/Post';
 import { media } from '../utils/media';
@@ -73,9 +73,9 @@ export const PostPage: FunctionComponent<IProps> = ({ pathContext: { prev, next 
         </PostHeader>
         <StyledBackgroundImage Tag='header' fluid={post.frontmatter.banner.childImageSharp.fluid}>
           <StyledLink color={'white'} to={`/categories/${kebabCase(post.frontmatter.category)}`}>
-            <PageTitle background data-text={`#${post.frontmatter.category}`}>
+            <GlitchedPageTitle background data-text={`#${post.frontmatter.category}`}>
               #{post.frontmatter.category}{' '}
-            </PageTitle>
+            </GlitchedPageTitle>
           </StyledLink>
         </StyledBackgroundImage>
         <Content>

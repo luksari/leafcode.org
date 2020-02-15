@@ -72,23 +72,20 @@ export const AnimatedTitle = styled(Title)<{ delay: number }>`
   justify-content: center;
   &:focus,
   &:hover {
-    color: ${props => props.theme.colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
     transform: translateX(150px);
   }
-  ${props => css`
-    animation: ${slideFromLeft} 0.65s linear ${props.delay * 0.13}s 1 both;
+  ${({ delay }) => css`
+    animation: ${slideFromLeft} 0.65s linear ${delay * 0.13}s 1 both;
   `};
 `;
 
 export const PageTitle = styled.h1<{ background: boolean }>`
   margin-top: 20px;
   text-align: left;
-  position: relative;
   letter-spacing: 13px;
   font-size: 8rem;
   margin-bottom: 15px;
-  z-index: 3;
-  animation: ${glitchMain} 1.4s 0s linear infinite;
   white-space: pre;
   color: ${({ background, theme }) => (background ? theme.colors.white : null)};
   @media ${media.tablet} {
@@ -100,41 +97,42 @@ export const PageTitle = styled.h1<{ background: boolean }>`
     width: 100%;
     font-size: 2rem;
   }
-  &::after,
-  &::before {
+`;
+
+export const GlitchedPageTitle = styled(PageTitle)`
+ animation: ${glitchMain} 1s 0s linear infinite;
+ &::after,
+ &::before {
     content: attr(data-text);
     position: absolute;
     z-index: -1;
-    top: 0;
-  }
+  };
   &::before {
     left: -3px;
     animation: ${glitchPseudo1} 1.6s 0.3s infinite linear alternate-reverse;
-    background: ${props => props.theme.gradients.neonPink(180)};
+    background: ${({ theme }) => theme.gradients.neonPink(180)};
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   &::after {
     left: 3px;
-    animation: ${glitchPseudo2} 1.3s 0.1s infinite linear alternate-reverse;
-    background: ${props => props.theme.gradients.neonBlue(180)};
+    animation: ${glitchPseudo2} 1.3s 0.2s infinite linear alternate-reverse;
+    background: ${({ theme }) => theme.gradients.neonBlue(180)};
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-`;
+`
 
-export const PageTitleSecondary = styled.h2<{ readonly background: boolean }>`
+export const PageTitleSecondary = styled.h2<{ background: boolean }>`
   text-align: left;
-  position: relative;
   text-transform: uppercase;
   font-weight: 500;
   letter-spacing: 6px;
   font-size: 1.5rem;
   z-index: 2;
-  /* animation: ${glitchMain} 1s 0s linear infinite; */
-  color: ${(props: any) => (props.background ? props.theme.colors.white : null)};
+  color: ${({ background, theme })=> (background ? theme.colors.white : null)};
   @media ${media.tablet} {
     font-size: 2rem;
   }
@@ -143,28 +141,5 @@ export const PageTitleSecondary = styled.h2<{ readonly background: boolean }>`
     width: 100%;
     font-size: 0.8rem;
   }
-  /* &::after,
-  &::before {
-    content: attr(data-text);
-    text-transform: uppercase;
-    position: absolute;
-    z-index: -1;
-  }
-  &::before {
-    left: -3px;
-    animation: ${glitchPseudo1} 1.6s 0.3s infinite linear alternate-reverse;
-    background: ${props => props.theme.gradients.neonPink(180)};
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  &::after {
-    left: 3px;
-    animation: ${glitchPseudo2} 1.3s 0.2s infinite linear alternate-reverse;
-    background: ${props => props.theme.gradients.neonBlue(180)};
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  } */
 `;
 export default Title;
