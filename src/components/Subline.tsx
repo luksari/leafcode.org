@@ -2,27 +2,10 @@ import { rgba } from 'polished';
 import styled from 'styled-components';
 import { media } from '../utils/media';
 
-interface IProps {
-  readonly theme: {
-    readonly fontSize: {
-      readonly small: number;
-      readonly big: number;
-    };
-    readonly colors: {
-      readonly white: string;
-      readonly grey: {
-        readonly light: string;
-      };
-    };
-  };
-  readonly sectionTitle: string;
-  readonly light: boolean;
-}
-
-export const Subline: any = styled.p`
-  font-size: ${(props: IProps) => props.theme.fontSize.small};
-  ${(props: IProps) => props.light && `color: ${rgba(props.theme.colors.white, 0.7)}`};
-  ${(props: IProps) => props.sectionTitle && 'text-align: center'};
+export const Subline = styled.p<{ sectionTitle?: boolean, light?: boolean}>`
+  font-size: ${({ theme }) => theme.fontSize.small};
+  ${({ light, theme }) => light && `color: ${rgba(theme.colors.white, 0.7)}`};
+  ${({ sectionTitle }) => sectionTitle && 'text-align: center'};
   display: block;
   width: 100%;
   margin-bottom: 8px;
@@ -33,7 +16,7 @@ export const Subline: any = styled.p`
   }
   @media ${media.phone} {
     width: 100%;
-    font-size: ${props => props.theme.fontSize.smallest};
+    font-size: ${({ theme }) => theme.fontSize.smallest};
   }
 `;
 export default Subline;

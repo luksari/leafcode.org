@@ -11,7 +11,7 @@ import { getPostSubline } from '../utils/subline';
 
 const StyledLink = styled(Link)`
   align-self: center;
-  color: ${props => props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   display: block;
 `;
 

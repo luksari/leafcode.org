@@ -7,10 +7,10 @@ export const config = {
   siteLanguage: 'pl', // Language Tag on <html> element
   siteBanner: '/assets/bg.jpg', // Your image for og:image tag. You can find it in the /static folder
   defaultBg: '/assets/default_post.jpg', // default post background header
-  favicon: 'src/favicon.png', // Your image for favicons. You can find it in the /src folder
-  siteDescription: 'Front-end, Back-end, Wiedza, Programowanie', // Your site description
+  favicon: '../static/assets/favicon.png', // Your image for favicons. You can find it in the /src folder
+  siteDescription: 'Front-end, Programowanie, Newsy', // Your site description
   author: 'Łukasz Tyszkiewicz', // Author for schemaORGJSONLD
-  siteLogo: '/assets/logo.svg', // Image for schemaORGJSONLD
+  siteLogo: '../static/assets/logo.svg', // Image for schemaORGJSONLD
 
   // siteFBAppID: '123456789', // Facebook App ID - Optional
   userTwitter: '', // Twitter Username - Optional
