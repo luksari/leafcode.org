@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { darken } from 'polished';
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { media } from '@utils/media';
 
 export const PaginationContainer = styled.div`
@@ -82,7 +82,7 @@ interface IProps {
   readonly url: string;
 }
 
-export const Pagination: FunctionComponent<IProps> = ({ currentPage, totalPages, url }) => {
+export const Pagination: FC<IProps> = ({ currentPage, totalPages, url }) => {
   const isFirst = currentPage === 1;
   const isLast = currentPage === totalPages;
   const prevPage = currentPage - 1 === 1 ? `/${url}/` : `/${url}/${(currentPage - 1).toString()}`;

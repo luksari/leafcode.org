@@ -6,15 +6,11 @@ import { media } from '../utils/media';
 import StyledLink, { LogoLink } from './Link';
 import { LogoSigil } from './Logo';
 
-interface IProps {
-  readonly expanded?: boolean;
-  readonly visible?: boolean;
-}
 
-const MenuWrapper = styled.header<IProps>`
+const MenuWrapper = styled.header<{ visible?: boolean }>`
   width: 100%;
   padding: 5px 15rem;
-  background: ${props => props.theme.colors.grey.main};
+  background: ${({ theme }) => theme.colors.grey.main};
   display: flex;
   align-items: center;
   z-index: 420;
@@ -24,7 +20,7 @@ const MenuWrapper = styled.header<IProps>`
 
   @media ${media.tablet} {
     padding: 10px 15px;
-    transform: ${props => (props.visible ? 'translateY(0)' : 'translateY(-300px)')};
+    transform: ${({ visible }) => (visible ? 'translateY(0)' : 'translateY(-300px)')};
     transition: transform 0.5s;
     justify-content: space-between;
     background: none;
@@ -35,7 +31,7 @@ const MenuWrapper = styled.header<IProps>`
     max-height: 65px;
   }
 `;
-const MenuList = styled.ul<IProps>`
+const MenuList = styled.ul<{ expanded?: boolean }>`
   display: flex;
   flex-direction: row;
   transform: scaleX(1);
@@ -46,14 +42,14 @@ const MenuList = styled.ul<IProps>`
   margin: 0;
 
   @media ${media.tablet} {
-    background: ${props => props.theme.colors.grey.bluish};
+    background: ${({ theme }) => theme.colors.grey.bluish};
     justify-content: center;
     margin: 0;
     top: 0;
     left: 0;
     transform-origin: right;
     transition: transform 0.1s;
-    transform: ${props => (props.expanded ? 'scaleX(1)' : 'scaleX(0)')};
+    transform: ${({ expanded }) => (expanded ? 'scaleX(1)' : 'scaleX(0)')};
     flex-direction: column;
     position: absolute;
     width: 100vw;
@@ -61,7 +57,7 @@ const MenuList = styled.ul<IProps>`
   }
 `;
 
-const MenuItem = styled.li<IProps>`
+const MenuItem = styled.li<{ expanded?: boolean }>`
   list-style: none;
   text-align: center;
   margin: 0;
@@ -69,14 +65,14 @@ const MenuItem = styled.li<IProps>`
   margin: 0 35px;
   @media ${media.tablet} {
     margin: 0;
-    font-size: ${props => props.theme.fontSize.biggest};
+    font-size: ${({ theme }) => theme.fontSize.biggest};
     position: relative;
     transition: transform 0.3s;
     transform-origin: right;
-    transform: ${props => (props.expanded ? 'scaleX(1)' : 'scaleX(0)')};
+    transform: ${({ expanded}) => (expanded ? 'scaleX(1)' : 'scaleX(0)')};
   }
   @media ${media.phone} {
-    font-size: ${props => props.theme.fontSize.big};
+    font-size: ${({ theme }) => theme.fontSize.big};
   }
   ${StyledLink} {
     display: block;
@@ -85,7 +81,7 @@ const MenuItem = styled.li<IProps>`
 
 const MenuLink = styled(StyledLink)`
   position: relative;
-  color: ${props => props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   ::after {
     content: '';
     transform-origin: center;
@@ -95,7 +91,7 @@ const MenuLink = styled(StyledLink)`
     position: absolute;
     width: 100%;
     height: 2px;
-    background: ${props => props.theme.gradients.primary(90)};
+    background: ${({ theme }) => theme.gradients.primary(90)};
     transition: transform 0.3s;
     will-change: transform;
   }
@@ -109,18 +105,15 @@ const MenuLink = styled(StyledLink)`
   }
 `;
 
-const Menu: FC<IProps> = () => {
+const Menu: FC<{ expanded?: boolean, visible?: boolean}> = () => {
   const { x, y } = useWindowScroll();
   const [expanded, setExpanded] = useState(false);
   const [visible, setVisible] = useState(true);
   const [prevPos, setPrevPos] = useState({ x, y });
 
-  // tslint:disable-next-line: no-expression-statement
   useDebounce(
     () => {
-      // tslint:disable-next-line: no-expression-statement
       setPrevPos(prevState => ({ ...prevState, y }));
-      // tslint:disable-next-line: no-expression-statement
       prevPos.y < y ? setVisible(false) : setVisible(true);
     },
     35,

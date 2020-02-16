@@ -1,6 +1,6 @@
 import { Link } from 'gatsby';
 import { kebabCase } from 'lodash';
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { IPost } from '../models/Post';
 
@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   display: flex;
   margin-top: 35px;
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
     display: flex;
     align-items: center;
   }
@@ -19,7 +19,7 @@ const Prev = styled.div`
   span {
     text-transform: uppercase;
     font-size: 0.8rem;
-    color: ${props => props.theme.colors.grey.light};
+    color: ${({ theme }) => theme.colors.grey.light};
   }
 `;
 
@@ -29,7 +29,7 @@ const Next = styled.div`
   span {
     text-transform: uppercase;
     font-size: 0.8rem;
-    color: ${props => props.theme.colors.grey.light};
+    color: ${({ theme }) => theme.colors.grey.light};
   }
 `;
 
@@ -38,7 +38,7 @@ interface IProps {
   readonly prev: IPost;
 }
 
-export const PrevNext: FunctionComponent<IProps> = ({ prev, next }) => (
+export const PrevNext: FC<IProps> = ({ prev, next }) => (
   <Wrapper>
     {prev && (
       <Prev>

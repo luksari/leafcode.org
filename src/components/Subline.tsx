@@ -1,10 +1,12 @@
 import { rgba } from 'polished';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { media } from '../utils/media';
 
 export const Subline = styled.p<{ sectionTitle?: boolean, light?: boolean}>`
   font-size: ${({ theme }) => theme.fontSize.small};
-  ${({ light, theme }) => light && `color: ${rgba(theme.colors.white, 0.7)}`};
+  ${({ light, theme }) => light && css`
+    color: ${rgba(theme.colors.white, 0.7)}
+    `};
   ${({ sectionTitle }) => sectionTitle && 'text-align: center'};
   display: block;
   width: 100%;

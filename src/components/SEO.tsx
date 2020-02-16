@@ -1,5 +1,5 @@
 import { config } from '@config/SiteConfig';
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import Helmet from 'react-helmet';
 import { IPost } from '../models/Post';
 
@@ -10,7 +10,7 @@ interface ISEO {
 }
 
 // tslint:disable-next-line: cyclomatic-complexity
-export const SEO: FunctionComponent<ISEO> = ({ postNode, postPath, postSEO }) => {
+export const SEO: FC<ISEO> = ({ postNode, postPath, postSEO }) => {
   const postMeta = postNode.frontmatter;
   const title = postSEO ? postMeta.title : config.siteTitle;
   const description = postSEO ? postNode.excerpt : config.siteDescription;
