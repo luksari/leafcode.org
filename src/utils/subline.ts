@@ -6,4 +6,4 @@ interface IPostText {
 }
 
 export const getPostSubline = ({ totalCount, name }: IPostText): string =>
-  `${totalCount} ${getPostVarian(totalCount)} ${getMarkVariant(totalCount)} jako "${name.toLocaleUpperCase()}"`;
+  `${totalCount} ${getPostVarian(totalCount)} ${getMarkVariant(totalCount)} jako ${name}`;

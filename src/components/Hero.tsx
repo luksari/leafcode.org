@@ -34,7 +34,7 @@ const GridRow = styled(BackgroundImage)`
   background-attachment: fixed;
   background-size: cover;
   @media ${media.tablet} {
-    height: 400px;
+    height: 600px;
   }
   
 `;
@@ -59,14 +59,12 @@ const TitleWrapper = styled(Wrapper)`
   }
 `;
 const ChildrenWrapper = styled.div`
-  margin-top: 1rem;
   z-index: 10;
-  border-radius: 15px;
-  padding: 0.5rem 0.7rem;
+  margin-top: 1rem;
+  padding: 0.8rem 0.7rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  box-shadow: 0px 5px 7px -5px ${props => props.theme.colors.grey.bluish};
 `;
 
 interface IProps {

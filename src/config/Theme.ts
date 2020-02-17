@@ -6,8 +6,8 @@ const colors = {
   error: '#D32F2F',
   neonPink: '#DA2EB8',
   neonBlue: '#0AB7EB',
-  bg: '#fff', // Background color
-  white: '#fff',
+  bg: '#ffffff', // Background color
+  white: '#ffffff',
   grey: {
     main: 'rgba(23, 23, 23)',
     dark: 'rgba(0, 0, 0, 0.9)',

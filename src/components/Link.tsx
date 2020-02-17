@@ -2,8 +2,8 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { media } from '../utils/media';
 
-export const StyledLink = styled(Link)<{ readonly color?: string; readonly bold?: boolean }>`
-  color: ${props => (props.color ? props.theme.colors[props.color] : props.theme.colors.primary)};
+export const StyledLink = styled(Link)<{ color?: string, bold?: boolean }>`
+  color: ${({ color, theme }) => color ? theme.colors[color] : theme.colors.primary};
   font-weight: ${({ bold }) => (bold ? '700' : '500')};
 `;
 
