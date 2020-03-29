@@ -1,9 +1,8 @@
 import { config } from '@config/SiteConfig';
 import { graphql } from 'gatsby';
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import Helmet from 'react-helmet';
-import { Article, Layout, Pagination, PostsContent } from '../components';
-import Hero from '../components/Hero';
+import { Article, Layout, Pagination, PostsContent, Hero } from '../components';
 import { IData } from '../models/Data';
 
 interface IProps {
@@ -14,7 +13,7 @@ interface IProps {
   };
 }
 
-export const BlogPage: FunctionComponent<IProps> = ({ pageContext: { currentPage, totalPages }, data }) => {
+export const BlogPage: FC<IProps> = ({ pageContext: { currentPage, totalPages }, data }) => {
   const { edges, totalCount } = data.allMarkdownRemark;
 
   return (
@@ -40,6 +39,7 @@ export const BlogPage: FunctionComponent<IProps> = ({ pageContext: { currentPage
     </Layout>
   );
 };
+
 export default BlogPage;
 
 export const BlogQuery = graphql`

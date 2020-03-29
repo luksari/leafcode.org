@@ -30,8 +30,7 @@ export const config = {
   // Social media
   siteFBAppID: '',
 
-  //
-  Google_Tag_Manager_ID: 'GTM-XXXXXXX',
+  GOOGLE_TAG_MANAGER_ID: 'GTM-XXXXXXX',
   POST_PER_PAGE: 10,
   HOMEPAGE_POSTS: 4,
 };

@@ -1,32 +1,32 @@
-import { config } from '@config/SiteConfig';
-import { Link } from 'gatsby';
-import React, { FC } from 'react';
+import Link from 'gatsby-link';
+import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
+import { config } from '@config/SiteConfig';
 import { Article, Button, Layout, PostsContent, Subline } from '../components';
-import Hero from '../components/Hero';
+import { Hero } from '../components';
 import { IPageProps } from '../models/PageProps';
 import { IPost } from '../models/Post';
 import { getPostSubline } from '../utils/subline';
 
 const StyledLink = styled(Link)`
   align-self: center;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${props => props.theme.colors.white};
   display: block;
 `;
 
-export const Category: FC<IPageProps> = ({ pathContext: { posts, categoryName } }) => {
+export const TagTemplate: FunctionComponent<IPageProps> = ({ pathContext: { posts, tagName } }) => {
   const totalCount = posts ? posts.length : 0;
-  const subline = getPostSubline({ totalCount, name: categoryName });
+  const subline = getPostSubline({ totalCount, name: tagName || '' });
 
   return (
     <Layout>
-      <Helmet title={`${categoryName} | ${config.siteTitle}`} />
-      <Hero title={'Kategorie'} subTitle={`#${categoryName}`}>
+      <Helmet title={`${'Tagi'} | ${config.siteTitle}`} />
+      <Hero title={'Tagi'} subTitle={`#${tagName}`}>
         <>
           <Subline sectionTitle>{subline}</Subline>
           <Button>
-            <StyledLink to={'/categories'}>Wszystkie kategorie</StyledLink>
+            <StyledLink to={'/tags'}>Wszystkie tagi</StyledLink>
           </Button>
         </>
       </Hero>
@@ -49,4 +49,4 @@ export const Category: FC<IPageProps> = ({ pathContext: { posts, categoryName } 
     </Layout>
   );
 };
-export default Category;
+export default TagTemplate;

@@ -13,8 +13,8 @@
     "paths": {
       "@src/*": ["src"],
       "@components/*": ["./src/components/*"],
-      "@templates/*": ["./src/templates/*"],
       "@pages/*": ["./src/pages/*"],
+      "@templates/*": ["./src/templates/*"],
       "@config/*": ["./src/config/*"],
       "@models/*": ["./src/models/*"],
       "@utils/*": ["./src/utils/*"]

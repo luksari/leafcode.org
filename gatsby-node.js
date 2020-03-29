@@ -48,15 +48,13 @@ const getPostsByType = (posts, classificationType) => {
 const createClassificationPages = ({
   createPage,
   posts,
-  postsPerPage,
-  numPages
 }) => {
   const classifications = [{
       singularName: 'category',
       pluralName: 'categories',
       template: {
-        part: path.resolve(`src/templates/Category.tsx`),
-        all: path.resolve(`src/templates/AllCategory.tsx`),
+        part: path.resolve(`src/pages/Category.tsx`),
+        all: path.resolve(`src/pages/AllCategory.tsx`),
       },
       postsByClassificationNames: getPostsByType(posts, 'category'),
     },
@@ -64,8 +62,8 @@ const createClassificationPages = ({
       singularName: 'tag',
       pluralName: 'tags',
       template: {
-        part: path.resolve(`src/templates/Tag.tsx`),
-        all: path.resolve(`src/templates/AllTag.tsx`),
+        part: path.resolve(`src/pages/Tag.tsx`),
+        all: path.resolve(`src/pages/AllTag.tsx`),
       },
       postsByClassificationNames: getPostsByType(posts, 'tags'),
     },
@@ -97,7 +95,6 @@ const createClassificationPages = ({
 };
 
 exports.onCreateWebpackConfig = ({
-  stage,
   actions
 }) => {
   actions.setWebpackConfig({
@@ -116,7 +113,7 @@ exports.onCreateWebpackConfig = ({
   });
 };
 
-exports.createPages = ({
+exports.createPages = async ({
   actions,
   graphql
 }) => {
@@ -125,8 +122,7 @@ exports.createPages = ({
   } = actions;
 
   const postTemplate = path.resolve(`src/templates/Post.tsx`);
-
-  return graphql(`{
+  const result = await graphql(`{
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date] }
       limit: 10000
@@ -160,22 +156,22 @@ exports.createPages = ({
         }
       }
     }
-  }`)
-    .then(result => {
+    }`)
+    
       if (result.errors) {
         return Promise.reject(result.errors);
       }
       const posts = result.data.allMarkdownRemark.edges;
       const postsPerPage = config.POST_PER_PAGE;
       const numPages = Math.ceil(posts.length / postsPerPage);
-
+      
       Array.from({
           length: numPages
         })
         .forEach((_, i) => {
-          createPage({
+          const page = createPage({
             path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-            component: path.resolve('./src/templates/Blog.tsx'),
+            component: path.resolve('src/templates/Blog.tsx'),
             context: {
               limit: postsPerPage,
               skip: i * postsPerPage,
@@ -203,10 +199,10 @@ exports.createPages = ({
           component: postTemplate,
           context: {
             slug: _.kebabCase(node.frontmatter.title),
+            title: node.frontmatter.title,
             prev,
             next,
           },
         });
       });
-    });
 };

@@ -4,7 +4,7 @@ import BackgroundImage from 'gatsby-background-image';
 import { kebabCase } from 'lodash';
 import moment from 'moment';
 import { rgba } from 'polished';
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Content, Header, Layout, PrevNext, SectionTitle, SEO, StyledLink, Subline, GlitchedPageTitle } from '../components';
@@ -56,7 +56,7 @@ interface IProps {
   };
   readonly pathContext: IPathContext;
 }
-export const PostPage: FunctionComponent<IProps> = ({ pathContext: { prev, next }, data: { markdownRemark: post } }) => (
+export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { markdownRemark: post } }) => (
   <Layout>
     {post && (
       <>
@@ -96,6 +96,7 @@ export const PostPage: FunctionComponent<IProps> = ({ pathContext: { prev, next 
     )}
   </Layout>
 );
+
 export default PostPage;
 
 export const postQuery = graphql`

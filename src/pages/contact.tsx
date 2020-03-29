@@ -1,11 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
-import { Button, Layout } from '../components';
-
+import { Button, Layout, Hero } from '../components';
 import { config } from '@config/SiteConfig';
 import styled from 'styled-components';
-import Hero from '../components/Hero';
-import { IPageProps } from '../models/PageProps';
 
 const ContactLink = styled.a`
   margin: 5px;
@@ -13,7 +10,7 @@ const ContactLink = styled.a`
   align-items: center;
 `;
 
-export const ContactPage: FunctionComponent<IPageProps> = () => (
+export const ContactPage: FunctionComponent = () => (
   <Layout>
     <Helmet title={`Contact | ${config.siteTitle}`} />
     <Hero title={'Kontakt'} subTitle={`Skontaktuj się z nami`} main>

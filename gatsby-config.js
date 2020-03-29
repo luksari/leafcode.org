@@ -54,7 +54,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-tagmanager`,
       options: {
-        id: config.Google_Tag_Manager_ID,
+        id: config.GOOGLE_TAG_MANAGER_ID,
         // Include GTM in development.
         // Defaults to false meaning GTM will only be loaded in production.
         includeInDevelopment: false,
@@ -92,8 +92,8 @@ module.exports = {
         alias: {
           '@src': path.resolve(__dirname, 'src/'),
           '@components': path.resolve(__dirname, 'src/components/'),
-          '@templates': path.resolve(__dirname, 'src/templates/'),
           '@pages': path.resolve(__dirname, 'src/pages/'),
+          '@templates': path.resolve(__dirname, 'src/templates/'),
           '@config': path.resolve(__dirname, 'src/config/'),
           '@models': path.resolve(__dirname, 'src/models/'),
           '@utils': path.resolve(__dirname, 'src/utils/'),
@@ -107,11 +107,11 @@ module.exports = {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: config.siteTitle,
-        short_name: config.siteTitleAlt,
+        shortName: config.siteTitleAlt,
         description: config.siteDescription,
-        start_url: config.pathPrefix,
-        background_color: config.backgroundColor,
-        theme_color: config.themeColor,
+        startUrl: config.pathPrefix,
+        backgroundColor: config.backgroundColor,
+        themeColor: config.themeColor,
         display: 'standalone',
         icon: config.favicon,
       },

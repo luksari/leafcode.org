@@ -73,7 +73,24 @@ interface IProps {
   main?: boolean;
 }
 
-const Hero: FC<IProps> = ({
+export const imageQuery = graphql`
+  query {
+    allFile(filter: {name: {eq: "bg"}}) {
+      edges {
+        node {
+          childImageSharp {
+            fluid(maxWidth: 1920) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+   }
+`;
+
+
+export const Hero: FC<IProps> = ({
   title = 'Na Froncie',
   subTitle = 'Boost your frontend',
   children,
@@ -108,21 +125,3 @@ const Hero: FC<IProps> = ({
   
   );
 };
-
-export default Hero;
-
-export const imageQuery = graphql`
-  query {
-    allFile(filter: {name: {eq: "bg"}}) {
-      edges {
-        node {
-          childImageSharp {
-            fluid(maxWidth: 1920) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-    }
-   }
-`;
