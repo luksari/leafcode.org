@@ -2,7 +2,7 @@
   "name": "gatsby-starter-typescirpt-power-blog",
   "description": "gatsyby blog template with typescript and tslint",
   "version": "1.0.0",
-  "author": "Majid Hajian ( mhadaily@gmail.com )",
+  "author": "Łukasz Tyszkiewicz - Luksari - (luksari23@gmail.com)",
   "keywords": [
     "gatsby, typescript",
     "blog"
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "gatsby build",
     "start": "gatsby develop",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
+    "deploy": "gatsby build --prefix-paths",
     "dev": "rm -r .cache/ && env NODE_ENV=development DEBUG=gatsby:query-watcher && gatsby develop",
     "lint": "tslint --project .",
     "lint:fix": "tslint --fix --project .",
@@ -45,7 +45,6 @@
     "gatsby-remark-prismjs": "^3.0.2",
     "gatsby-source-filesystem": "^2.0.4",
     "gatsby-transformer-remark": "^2.1.7",
-    "gh-pages": "^2.0.1",
     "husky": "^1.1.2",
     "lint-staged": "^7.3.0",
     "lodash": "^4.17.11",
@@ -67,11 +66,6 @@
     "stylelint-order": "^1.0.0",
     "stylelint-scss": "^3.3.1",
     "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
-    "tslint-config-blvd": "^1.2.1",
-    "tslint-config-prettier": "^1.15.0",
-    "tslint-functional-preset": "^1.5.0",
-    "tslint-plugin-prettier": "^2.0.0",
     "typescript": "^3.6.2",
     "typescript-styled-plugin": "^0.14.0",
     "typography": "^0.16.17"
