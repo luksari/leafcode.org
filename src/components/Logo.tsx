@@ -20,10 +20,10 @@ const slideFromTop = keyframes`
 `;
 
 export const LogoImage = styled.img<{ readonly big?: boolean }>`
-  position: absolute;
   left: -250px;
   top: 0;
   height: 100%;
+  width: 100%;
   width: auto;
   @media ${media.tablet} {
     left: -200px;
@@ -35,16 +35,16 @@ export const LogoImage = styled.img<{ readonly big?: boolean }>`
 
 export const LogoSigil = styled.img`
   animation: ${slideFromTop} 0.6s ease-in-out;
+  height: 85px;
+  width: 85px;
   margin: 0;
-  height: 100%;
-  max-height: 65px;
-  width: 100%;
   @media ${media.tablet} {
-    max-height: 85px;
-    margin-bottom: 0rem;
+    height: 85px;
+    width: 85px;
   }
   @media ${media.phone} {
-    max-height: 65px;
+    height: 65px;
+    width: 65px;
   }
 `;
 

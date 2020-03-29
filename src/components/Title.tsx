@@ -86,16 +86,15 @@ export const PageTitle = styled.h1<{ background: boolean }>`
   font-size: 8rem;
   margin-bottom: 15px;
   white-space: pre;
-  width: 50%;
+  width: 100%;
   color: ${({ background, theme }) => (background && theme.colors.white )};
   @media ${media.tablet} {
-    width: 100%;
-    font-size: 4.5rem;
+    font-size: 4rem;
   }
   @media ${media.phone} {
     margin-bottom: 15px;
     width: 100%;
-    font-size: 2rem;
+    font-size: 2.8rem;
   }
 `;
 
@@ -131,12 +130,12 @@ export const PageTitleSecondary = styled.h2<{ background: boolean }>`
   letter-spacing: 6px;
   font-size: 1.5rem;
   z-index: 2;
+  margin: 0;
   color: ${({ background, theme })=> (background ? theme.colors.white : null)};
   @media ${media.tablet} {
     font-size: 1.7rem;
   }
   @media ${media.phone} {
-    margin-bottom: 15px;
     width: 100%;
     font-size: 0.8rem;
   }

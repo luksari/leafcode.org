@@ -6,8 +6,5 @@ export const StyledLink = styled(Link)<{ color?: string, bold?: boolean }>`
   font-weight: ${({ bold }) => (bold ? '700' : '500')};
 `;
 
-export const LogoLink = styled(Link)`
-  display: flex;
-`;
 
 export default StyledLink;

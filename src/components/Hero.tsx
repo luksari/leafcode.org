@@ -4,14 +4,12 @@ import { graphql, StaticQuery } from 'gatsby';
 import { LogoImage } from './Logo';
 import { media } from '../utils/media';
 import { PageTitle, PageTitleSecondary } from './Title';
-import { Wrapper } from './Wrapper';
 import BackgroundImage from 'gatsby-background-image';
 import { theme } from '@config/Theme';
 
 const HeroWrapper = styled.div<{  main?: boolean }>`
   width: 100%;
   position: relative;
-  overflow: hidden;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -20,11 +18,8 @@ const HeroWrapper = styled.div<{  main?: boolean }>`
   min-height: ${({ main }) => main ? '100vh' : '70vh'};
   @media ${media.tablet} {
     min-height: ${({ main }) => main ? '100vh' : '60vh'};
-    padding: 2rem 2rem;
   }
-  @media ${media.phone} {
-    padding: 2rem 2rem;
-  }
+
 `;
 
 const GridRow = styled(BackgroundImage)`
@@ -41,17 +36,29 @@ const GridRow = styled(BackgroundImage)`
 `;
 
 const TitleWrapper = styled.div`
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  position: relative;
-  &::after {
-    position: absolute;
-    content: "";
-    width: 120px;
-    height: 4px;
-    background: ${props => props.theme.gradients.primary(90)};
-    bottom: 5px;
+  display: grid;
+  grid-template-columns: 225px 1fr;
+  grid-template-rows: 1fr auto;
+  ${PageTitleSecondary} {
+    grid-column: 2;
+    @media ${media.phone} {
+      grid-column: 1;
+    }
+  }
+  ${LogoImage} {
+    grid-row-end: span 2;
+    @media ${media.phone} {
+      margin-top: 15px;
+      grid-row: 3;
+    }
+  }
+  @media ${media.tablet} {
+    grid-template-columns: 150px 1fr;
+  }
+  @media ${media.phone} {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 150px;
+    justify-items: center;
   }
 `;
 const ChildrenWrapper = styled.div`
@@ -105,10 +112,10 @@ export const Hero: FC<IProps> = ({
           >
             <HeroWrapper main={main}>
               <TitleWrapper>
-                <LogoImage src={'/assets/sigil.svg'} alt='Na froncie' />
-                <PageTitle data-text={title} background>
-                  {title}
-                </PageTitle>
+                  <LogoImage src={'/assets/sigil.svg'} alt='Na froncie' />
+                  <PageTitle data-text={title} background>
+                    {title}
+                  </PageTitle>        
                 <PageTitleSecondary data-text={subTitle} background>
                   {subTitle}
                 </PageTitleSecondary>

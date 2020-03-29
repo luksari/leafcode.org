@@ -3,8 +3,9 @@ import { useDebounce, useWindowScroll } from 'react-use';
 import styled from 'styled-components';
 import { BurgerButton } from '.';
 import { media } from '../utils/media';
-import StyledLink, { LogoLink } from './Link';
+import { StyledLink } from './Link';
 import { LogoSigil } from './Logo';
+import { Link } from 'gatsby';
 
 
 const MenuWrapper = styled.header<{ visible?: boolean }>`
@@ -16,19 +17,36 @@ const MenuWrapper = styled.header<{ visible?: boolean }>`
   margin: 0;
   position: absolute;
   justify-content: space-between;
-
   @media ${media.tablet} {
     padding: 10px 15px;
     transform: ${({ visible }) => (visible ? 'translateY(0)' : 'translateY(-300px)')};
     transition: transform 0.5s;
     background: none;
     position: fixed;
-    max-height: 85px;
-  }
-  @media ${media.phone} {
-    max-height: 65px;
   }
 `;
+
+const MenuItem = styled.li`
+  list-style: none;
+  text-align: center;
+  margin: 0;
+  font-size: 1rem;
+  margin: 0 35px;
+  @media ${media.tablet} {
+    margin: 0;
+    font-size: ${({ theme }) => theme.fontSize.biggest};
+    position: relative;
+    transition: transform 0.3s;
+    transform-origin: right;
+  }
+  @media ${media.phone} {
+    font-size: ${({ theme }) => theme.fontSize.big};
+  }
+  ${StyledLink} {
+    display: block;
+  }
+`;
+
 const MenuList = styled.ul<{ expanded?: boolean }>`
   display: flex;
   flex-direction: row;
@@ -52,30 +70,13 @@ const MenuList = styled.ul<{ expanded?: boolean }>`
     position: absolute;
     width: 100vw;
     height: 100vh;
+    ${MenuItem} {
+      transform: ${({ expanded}) => (expanded ? 'scaleX(1)' : 'scaleX(0)')};
+    }
   }
 `;
 
-const MenuItem = styled.li<{ expanded?: boolean }>`
-  list-style: none;
-  text-align: center;
-  margin: 0;
-  font-size: 1rem;
-  margin: 0 35px;
-  @media ${media.tablet} {
-    margin: 0;
-    font-size: ${({ theme }) => theme.fontSize.biggest};
-    position: relative;
-    transition: transform 0.3s;
-    transform-origin: right;
-    transform: ${({ expanded}) => (expanded ? 'scaleX(1)' : 'scaleX(0)')};
-  }
-  @media ${media.phone} {
-    font-size: ${({ theme }) => theme.fontSize.big};
-  }
-  ${StyledLink} {
-    display: block;
-  }
-`;
+
 
 const MenuLink = styled(StyledLink)`
   position: relative;
@@ -95,7 +96,7 @@ const MenuLink = styled(StyledLink)`
     will-change: transform;
   }
   &:hover {
-    ::after {
+    &::after {
       transform: scaleX(1);
     }
   }
@@ -119,25 +120,29 @@ const Menu: FC<{ expanded?: boolean, visible?: boolean}> = () => {
     [x, y],
   );
 
+  const handleMenuClick = () => {
+    setExpanded(false)
+  }
+
   return (
     <MenuWrapper visible={visible}>
-      <LogoLink to='/'>
+      <Link to='/'>
         <LogoSigil src={'/assets/sigil.svg'} />
-      </LogoLink>
+      </Link>
       <BurgerButton handleExpanded={setExpanded} expanded={expanded} />
       <MenuList expanded={expanded}>
-        <MenuItem expanded={expanded}>
-          <MenuLink color='white' to='/'>
+        <MenuItem>
+          <MenuLink color='white' to='/' onClick={handleMenuClick}>
             Strona główna
           </MenuLink>
         </MenuItem>
-        <MenuItem expanded={expanded}>
-          <MenuLink color='white' to='/blog'>
+        <MenuItem>
+          <MenuLink color='white' to='/blog' onClick={handleMenuClick}>
             Blog
           </MenuLink>
         </MenuItem>
-        <MenuItem expanded={expanded}>
-          <MenuLink color='white' to='/contact'>
+        <MenuItem>
+          <MenuLink color='white' to='/contact' onClick={handleMenuClick}>
             Kontakt
           </MenuLink>
         </MenuItem>
