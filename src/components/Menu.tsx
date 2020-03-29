@@ -9,8 +9,7 @@ import { LogoSigil } from './Logo';
 
 const MenuWrapper = styled.header<{ visible?: boolean }>`
   width: 100%;
-  padding: 5px 15rem;
-  background: ${({ theme }) => theme.colors.grey.main};
+  padding: 5px 10rem;
   display: flex;
   align-items: center;
   z-index: 420;
@@ -22,7 +21,6 @@ const MenuWrapper = styled.header<{ visible?: boolean }>`
     padding: 10px 15px;
     transform: ${({ visible }) => (visible ? 'translateY(0)' : 'translateY(-300px)')};
     transition: transform 0.5s;
-    justify-content: space-between;
     background: none;
     position: fixed;
     max-height: 85px;
@@ -81,6 +79,7 @@ const MenuItem = styled.li<{ expanded?: boolean }>`
 
 const MenuLink = styled(StyledLink)`
   position: relative;
+  font-weight: bold;
   color: ${({ theme }) => theme.colors.white};
   ::after {
     content: '';

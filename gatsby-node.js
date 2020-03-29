@@ -169,7 +169,7 @@ exports.createPages = async ({
           length: numPages
         })
         .forEach((_, i) => {
-          const page = createPage({
+          createPage({
             path: i === 0 ? `/blog` : `/blog/${i + 1}`,
             component: path.resolve('src/templates/Blog.tsx'),
             context: {

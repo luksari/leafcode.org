@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import styled from 'styled-components';
 import { media } from '../utils/media';
 
-const HeaderWrapper: any = styled.header`
+const HeaderWrapper = styled.header`
   margin-top: 65px;
   position: relative;
   height: 100%;

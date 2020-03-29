@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { graphql, StaticQuery } from 'gatsby';
-import { LogoImage } from '.';
+import { LogoImage } from './Logo';
 import { media } from '../utils/media';
 import { PageTitle, PageTitleSecondary } from './Title';
 import { Wrapper } from './Wrapper';
@@ -11,6 +11,7 @@ import { theme } from '@config/Theme';
 const HeroWrapper = styled.div<{  main?: boolean }>`
   width: 100%;
   position: relative;
+  overflow: hidden;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -39,8 +40,9 @@ const GridRow = styled(BackgroundImage)`
   
 `;
 
-const TitleWrapper = styled(Wrapper)`
-  justify-content: flex-start;
+const TitleWrapper = styled.div`
+  justify-content: center;
+  align-items: center;
   padding: 0;
   position: relative;
   &::after {
@@ -50,12 +52,6 @@ const TitleWrapper = styled(Wrapper)`
     height: 4px;
     background: ${props => props.theme.gradients.primary(90)};
     bottom: 5px;
-  }
-  @media ${media.tablet} {
-    width: 100%;
-  }
-  @media ${media.phone} {
-    width: 100%;
   }
 `;
 const ChildrenWrapper = styled.div`
@@ -108,8 +104,8 @@ export const Hero: FC<IProps> = ({
             backgroundColor={theme.colors.neonBlue}
           >
             <HeroWrapper main={main}>
-              <LogoImage src={'/assets/sigil.svg'} alt='Na froncie' />
               <TitleWrapper>
+                <LogoImage src={'/assets/sigil.svg'} alt='Na froncie' />
                 <PageTitle data-text={title} background>
                   {title}
                 </PageTitle>
