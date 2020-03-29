@@ -2,7 +2,7 @@
   "name": "gatsby-starter-typescirpt-power-blog",
   "description": "gatsyby blog template with typescript and tslint",
   "version": "1.0.0",
-  "author": "Łukasz Tyszkiewicz - Luksari - (luksari23@gmail.com)",
+  "author": "Łukasz Tyszkiewicz - Na Froncie - (nafroncie@gmail.com)",
   "keywords": [
     "gatsby, typescript",
     "blog"
@@ -26,8 +26,14 @@
     "@types/react-helmet": "^5.0.7",
     "@types/styled-components": "^4.0.1",
     "@types/typography": "^0.16.0",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
     "babel-plugin-styled-components": "^1.10.7",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
     "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
     "gatsby": "^2.17.4",
     "gatsby-link": "^2.2.10",
     "gatsby-plugin-catch-links": "^2.0.5",
