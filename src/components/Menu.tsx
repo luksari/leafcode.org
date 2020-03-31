@@ -8,6 +8,7 @@ import { LogoSigil } from './Logo';
 import { Link } from 'gatsby';
 
 
+
 const MenuWrapper = styled.header<{ visible?: boolean }>`
   width: 100%;
   padding: 5px 10rem;
@@ -32,6 +33,10 @@ const MenuItem = styled.li`
   margin: 0;
   font-size: 1rem;
   margin: 0 35px;
+  text-transform: uppercase;
+  &:last-of-type {
+    margin-right: 0;
+  }
   @media ${media.tablet} {
     margin: 0;
     font-size: ${({ theme }) => theme.fontSize.biggest};
@@ -80,8 +85,8 @@ const MenuList = styled.ul<{ expanded?: boolean }>`
 
 const MenuLink = styled(StyledLink)`
   position: relative;
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.white};
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.darkText};
   ::after {
     content: '';
     transform-origin: center;
@@ -127,7 +132,7 @@ const Menu: FC<{ expanded?: boolean, visible?: boolean}> = () => {
   return (
     <MenuWrapper visible={visible}>
       <Link to='/'>
-        <LogoSigil src={'/assets/sigil.svg'} />
+        <LogoSigil src={'assets/sigil.svg'} />
       </Link>
       <BurgerButton handleExpanded={setExpanded} expanded={expanded} />
       <MenuList expanded={expanded}>

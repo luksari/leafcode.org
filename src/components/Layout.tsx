@@ -11,13 +11,13 @@ import { Wrapper } from './Wrapper';
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
-    color: ${theme.colors.bg};
-    background: ${theme.colors.secondary};
+    color: ${theme.colors.primary};
+    background: ${theme.colors.accent};
   }
   body {
     overflow: hidden;
-    background: ${theme.colors.bg};
-    color: ${theme.colors.grey.default};
+    background: ${theme.colors.bgLight};
+    color: ${theme.colors.darkText};
     @media ${media.phone} {
       font-size: 14px;
     }
@@ -31,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
     color: ${theme.colors.secondary};
   }
   h1, h2, h3, h4 {
-    color: ${theme.colors.grey.dark};
+    color: ${theme.colors.darkText};
   }
   blockquote {
     font-style: italic;
@@ -48,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
   }
   label {
     margin-bottom: .5rem;
-    color: ${theme.colors.grey.dark};
+    color: ${theme.colors.darkText};
   }
   input, textarea {
     border-radius: .5rem;

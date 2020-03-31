@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { graphql, StaticQuery } from 'gatsby';
 import { LogoImage } from './Logo';
 import { media } from '../utils/media';
 import { PageTitle, PageTitleSecondary } from './Title';
-import BackgroundImage from 'gatsby-background-image';
+import Particles, { IParticlesParams } from 'react-particles-js';
 import { theme } from '@config/Theme';
 
 const HeroWrapper = styled.div<{  main?: boolean }>`
@@ -22,15 +22,21 @@ const HeroWrapper = styled.div<{  main?: boolean }>`
 
 `;
 
-const GridRow = styled(BackgroundImage)`
+const GridRow = styled.div`
   position: relative;
   width: 100%;
   display: flex;
-  background-position: bottom center;
-  background-attachment: fixed;
-  background-size: cover;
+  height: 100vh;
+  z-index: -1;
+  canvas {
+      position: absolute;
+      display: inline-block;
+    }
   @media ${media.tablet} {
     height: 600px;
+    canvas {
+      display: none;
+    }
   }
   
 `;
@@ -76,22 +82,33 @@ interface IProps {
   main?: boolean;
 }
 
-export const imageQuery = graphql`
-  query {
-    allFile(filter: {name: {eq: "bg"}}) {
-      edges {
-        node {
-          childImageSharp {
-            fluid(maxWidth: 1920) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
+const particlesOpts: IParticlesParams = {
+  particles: {
+    number: {
+      value: 356,
+    },
+    color: {
+      value: theme.colors.primary,
+    },
+    line_linked: {
+      enable: false,
+    },
+    size: {
+      value: 6,
+      random: true
+    },
+    opacity: {
+      value: 0.2,
+      anim: {
+        enable: false,
       }
+    },
+    shape: {
+      type: 'circle',
     }
-   }
-`;
-
+   },
+  retina_detect: true
+}
 
 export const Hero: FC<IProps> = ({
   title = 'Na Froncie',
@@ -100,31 +117,21 @@ export const Hero: FC<IProps> = ({
   main,
 }) => {
   return (
-    <StaticQuery
-      query={imageQuery}
-      render={(data) => {
-        const fluidImage = data.allFile.edges[0].node.childImageSharp.fluid;
-        return (
-          <GridRow 
-            Tag='section'
-            fluid={fluidImage}
-            backgroundColor={theme.colors.neonBlue}
-          >
-            <HeroWrapper main={main}>
-              <TitleWrapper>
-                  <LogoImage src={'/assets/sigil.svg'} alt='Na froncie' />
-                  <PageTitle data-text={title} background>
-                    {title}
-                  </PageTitle>        
-                <PageTitleSecondary data-text={subTitle} background>
-                  {subTitle}
-                </PageTitleSecondary>
-              </TitleWrapper>
-              {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
-            </HeroWrapper>
-          </GridRow>)
-      }}
-    />
-  
-  );
+      <GridRow>
+        <Particles 
+          params={particlesOpts}
+        />
+        <HeroWrapper main={main}>
+          <TitleWrapper>
+              <LogoImage />
+              <PageTitle data-text={title} background>
+                {title}
+              </PageTitle>        
+            <PageTitleSecondary data-text={subTitle} background>
+              {subTitle}
+            </PageTitleSecondary>
+          </TitleWrapper>
+          {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
+        </HeroWrapper>
+      </GridRow>)
 };

@@ -1,8 +1,8 @@
 ---
-date: 2018-01-05
-title: Kim jesteśmy?
-category: "Coding"
-tags: ['programowanie', 'o nas', 'start-up', 'webdev']
+date: 2020-03-31
+title: "Junior w Software Housie"
+category: "Praca"
+tags: ['Junior', 'Praca', 'Front-end', 'webdev']
 banner: "./post.jpg"
 ---
 

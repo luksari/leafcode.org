@@ -12,6 +12,19 @@ const SublineWrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 15px;
+  position: relative;
+  background: ${({ theme}) => theme.colors.primary};
+  &::before {
+    content: '';
+    width: 700px;
+    height: 500px;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transform: translateX(-100px) rotate(15deg);
+  }
 `;
 
 export const IndexPage: FC<IPageProps> = ({ data }) => {
@@ -22,8 +35,7 @@ export const IndexPage: FC<IPageProps> = ({ data }) => {
       <Helmet title={`Homepage | ${config.siteTitle}`} />
       <Hero />
       <PostsContent>
-        {edges &&
-          edges
+        {edges
             .slice(0, config.HOMEPAGE_POSTS)
             .map((post, index) => (
               <Article
@@ -60,7 +72,7 @@ export const IndexQuery = graphql`
           }
           frontmatter {
             title
-            date(formatString: "DD.MM.YYYY")
+            date
             category
             tags
             banner {

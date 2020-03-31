@@ -82,12 +82,11 @@ export const AnimatedTitle = styled(Title)<{ delay: number }>`
 
 export const PageTitle = styled.h1<{ background: boolean }>`
   margin-top: 20px;
-  letter-spacing: 13px;
   font-size: 8rem;
   margin-bottom: 15px;
   white-space: pre;
   width: 100%;
-  color: ${({ background, theme }) => (background && theme.colors.white )};
+  color: ${({ theme }) => theme.colors.bgDark};
   @media ${media.tablet} {
     font-size: 4rem;
   }
@@ -127,11 +126,10 @@ export const GlitchedPageTitle = styled(PageTitle)`
 export const PageTitleSecondary = styled.h2<{ background: boolean }>`
   text-transform: uppercase;
   font-weight: 500;
-  letter-spacing: 6px;
   font-size: 1.5rem;
   z-index: 2;
   margin: 0;
-  color: ${({ background, theme })=> (background ? theme.colors.white : null)};
+  color: ${({ theme }) => theme.colors.darkText};
   @media ${media.tablet} {
     font-size: 1.7rem;
   }

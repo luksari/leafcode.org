@@ -12,13 +12,14 @@ const Post = styled.article<{ readonly primary?: boolean }>`
   margin: 15px;
   overflow: hidden;
   grid-column-gap: 20px;
-  border-radius: 8px;
-  background: ${({ theme }) => theme.colors.white};
-  box-shadow: 0px 2px 5px ${({ theme }) => theme.colors.grey.ultraLight};
+  border-radius: 4px;
+  background: ${({ theme }) => theme.colors.bgLight};
+  box-shadow: 0px 2px 8px ${({ theme }) => theme.colors.grey.ultraLight};
   transition: transform 500ms ease-in-out;
   flex: ${({ primary }) => (primary ? '1 100%' : '1 30%')};
   max-width: ${({ primary }) => (primary ? '100%' : '500px')};
   grid-template-columns: ${({ primary }) => (primary ? '1fr 0.8fr' : '1fr')};
+  border-top: 5px solid ${({ theme }) => theme.colors.accent};
   @media ${media.tablet} {
     flex: 1 100%;
     max-width: 100%;
@@ -35,11 +36,8 @@ const Post = styled.article<{ readonly primary?: boolean }>`
 
 const Banner = styled(Img)`
   margin: 0;
-  border: 5px solid ${({ theme }) => theme.colors.white};
-  max-width: 100%;
-  @media ${media.tablet} {
-    max-width: 100%;
-  }
+  border: 5px solid ${({ theme }) => theme.colors.bgLight};
+  width: auto;
 `;
 
 const ContentWrapper = styled.div`
@@ -100,7 +98,7 @@ export const Article: FunctionComponent<IProps> = ({ title, date, excerpt, slug,
           <Link to={`/blog/${slug}`}>{title}</Link>
         </Title>
         <Subline>
-          {moment(date).format('DD.MM.YYYY')} &mdash; {timeToRead} min. czytania &mdash; w
+          {moment(date, 'YYYY-MM-DD').format('DD.MM.YYYY')} &mdash; {timeToRead} min. czytania &mdash; w
           <Link to={`/categories/${kebabCase(category)}`}> {category}</Link>
         </Subline>
         <Excerpt>{excerpt}</Excerpt>
