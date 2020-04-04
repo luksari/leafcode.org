@@ -18,8 +18,17 @@ const PostContent = styled.div`
   padding: 2rem;
   border-radius: 0.6rem;
   margin-top: -12rem;
-  box-shadow: 0px 5px 7px -5px ${props => rgba(props.theme.colors.grey.dark, 0.2)};
   margin-bottom: 1rem;
+  position: relative;
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+    background: ${({ theme }) => theme.colors.accent};
+    transform: translate(10px, 10px)
+  }
   @media ${media.tablet} {
     padding: 1rem;
     margin-top: -4rem;
@@ -35,7 +44,7 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background-position: bottom center;
   background-attachment: fixed;
   background-repeat: repeat-y;
@@ -46,6 +55,12 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   }
 `;
 
+const TagsWrapper = styled.div`
+  padding: 5px 0;
+  width: 100%;
+  font-size: 15px;
+  background: ${({ theme }) => theme.colors.bgLight}
+`
 const PostHeader = styled(Header)`
   min-height: 300px;
 `;
@@ -81,14 +96,14 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mark
         <Content>
           <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
           {post.frontmatter.tags && (
-            <Subline>
+            <TagsWrapper>
               Tagi: &#160;
               {post.frontmatter.tags.map((tag, i) => (
                 <StyledLink key={i} to={`/tags/${kebabCase(tag)}`}>
                   <strong>{tag}</strong> {i < post.frontmatter.tags.length - 1 ? `, ` : ``}
                 </StyledLink>
               ))}
-            </Subline>
+            </TagsWrapper>
           )}
           <PrevNext prev={prev} next={next} />
         </Content>

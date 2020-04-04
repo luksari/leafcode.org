@@ -7,6 +7,25 @@ import { PageTitle, PageTitleSecondary } from './Title';
 import Particles, { IParticlesParams } from 'react-particles-js';
 import { theme } from '@config/Theme';
 
+export const StyledParticles = styled(Particles)`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+    @media ${media.tablet} {
+      opacity: 0;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-attachment:fixed;
+    }
+    
+`
+
 const HeroWrapper = styled.div<{  main?: boolean }>`
   width: 100%;
   position: relative;
@@ -20,30 +39,16 @@ const HeroWrapper = styled.div<{  main?: boolean }>`
     min-height: ${({ main }) => main ? '100vh' : '60vh'};
   }
 
-`;
-
-const GridRow = styled.div`
-  position: relative;
-  width: 100%;
-  display: flex;
-  height: 100vh;
-  z-index: -1;
-  canvas {
-      position: absolute;
-      display: inline-block;
-    }
   @media ${media.tablet} {
     height: 600px;
-    canvas {
-      display: none;
-    }
   }
-  
+
 `;
+
 
 const TitleWrapper = styled.div`
   display: grid;
-  grid-template-columns: 225px 1fr;
+  grid-template-columns: auto 1fr;
   grid-template-rows: 1fr auto;
   ${PageTitleSecondary} {
     grid-column: 2;
@@ -85,7 +90,11 @@ interface IProps {
 const particlesOpts: IParticlesParams = {
   particles: {
     number: {
-      value: 356,
+      value: 120,
+      density: {
+        enable: true,
+        value_area: 1000,
+      }
     },
     color: {
       value: theme.colors.primary,
@@ -98,7 +107,7 @@ const particlesOpts: IParticlesParams = {
       random: true
     },
     opacity: {
-      value: 0.2,
+      value: 0.6,
       anim: {
         enable: false,
       }
@@ -107,31 +116,35 @@ const particlesOpts: IParticlesParams = {
       type: 'circle',
     }
    },
-  retina_detect: true
+  interactivity: {
+    detect_on: 'canvas',
+    events: {
+      resize: true,
+    }
+  },
 }
 
 export const Hero: FC<IProps> = ({
   title = 'Na Froncie',
   subTitle = 'Boost your frontend',
   children,
-  main,
+  main = false,
 }) => {
   return (
-      <GridRow>
-        <Particles 
-          params={particlesOpts}
-        />
         <HeroWrapper main={main}>
+        <StyledParticles 
+            params={particlesOpts}
+          />
           <TitleWrapper>
-              <LogoImage />
-              <PageTitle data-text={title} background>
-                {title}
-              </PageTitle>        
+            <LogoImage />
+            <PageTitle data-text={title} background>
+              {title}
+            </PageTitle>        
             <PageTitleSecondary data-text={subTitle} background>
               {subTitle}
             </PageTitleSecondary>
           </TitleWrapper>
           {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
         </HeroWrapper>
-      </GridRow>)
+      )
 };

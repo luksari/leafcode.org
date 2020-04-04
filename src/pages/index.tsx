@@ -13,18 +13,8 @@ const SublineWrapper = styled.div`
   justify-content: center;
   padding: 15px;
   position: relative;
-  background: ${({ theme}) => theme.colors.primary};
-  &::before {
-    content: '';
-    width: 700px;
-    height: 500px;
-    background: #fff;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    transform: translateX(-100px) rotate(15deg);
-  }
+  background: ${({ theme}) => theme.colors.bgLight};
+
 `;
 
 export const IndexPage: FC<IPageProps> = ({ data }) => {
@@ -33,7 +23,7 @@ export const IndexPage: FC<IPageProps> = ({ data }) => {
   return (
     <Layout>
       <Helmet title={`Homepage | ${config.siteTitle}`} />
-      <Hero />
+      <Hero main/>
       <PostsContent>
         {edges
             .slice(0, config.HOMEPAGE_POSTS)

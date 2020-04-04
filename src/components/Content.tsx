@@ -23,7 +23,14 @@ export const PostsContent = styled.section<{ center?: boolean }>`
   margin-top: -8rem;
   position: relative;
   text-align: ${({ center }) => (center ? 'center' : 'left')};
-  background: ${({ theme }) => theme.colors.bgLight};
+  &::after {
+    content: '';
+    width: 50%;
+    height: 3px;
+    position: absolute;
+    bottom: 15px;
+    background: ${({ theme }) => theme.colors.primary}
+  }
   @media ${media.tablet} {
     padding: 1rem 2rem;
     margin-top: -3.5rem;

@@ -21,11 +21,8 @@ const slideFromTop = keyframes`
 `;
 
 export const LogoImage = styled(Sigil)<{ readonly big?: boolean }>`
-  left: -250px;
-  top: 0;
   height: 100%;
   width: 100%;
-  width: auto;
   @media ${media.tablet} {
     left: -200px;
   }

@@ -6,7 +6,7 @@ export const Subline = styled.p<{ sectionTitle?: boolean, light?: boolean}>`
   font-size: ${({ theme }) => theme.fontSize.small};
   color: ${({ theme }) => theme.colors.grey.bluish};
   ${({ light, theme }) => light && css`
-    color: ${rgba(theme.colors.white, 0.7)}
+    color: ${rgba(theme.colors.bgLight, 0.7)}
     `};
   ${({ sectionTitle }) => sectionTitle && 'text-align: center'};
   width: 100%;

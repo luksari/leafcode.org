@@ -88,7 +88,7 @@ export const Layout: FunctionComponent<{ readonly children: ReactElement | Reado
           <Menu />
           <Wrapper fullWidth>{children}</Wrapper>
           <Footer>
-            &copy; {split(data.site.buildTime, '.')[2]} by Łukasz Tyszkiewicz.<br />
+            &copy; {split(data.site.buildTime, '.')[2]} by Na Froncie.<br />
             <span>Ostatnia zmiana: {data.site.buildTime}</span>
           </Footer>
         </PageWrapper>
