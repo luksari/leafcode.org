@@ -33,7 +33,7 @@ const MenuItem = styled.li`
   margin: 0;
   font-size: 1rem;
   margin: 0 35px;
-  text-transform: uppercase;
+  text-transform: lowercase;
   &:last-of-type {
     margin-right: 0;
   }
@@ -84,6 +84,8 @@ const MenuList = styled.ul<{ expanded?: boolean }>`
 
 
 const MenuLink = styled(StyledLink)`
+  font-style: 'Cabin';
+  text-transform: uppercase;
   position: relative;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.darkText};

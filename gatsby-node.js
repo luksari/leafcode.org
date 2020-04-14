@@ -171,7 +171,7 @@ exports.createPages = async ({
         .forEach((_, i) => {
           createPage({
             path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-            component: path.resolve('src/templates/Blog.tsx'),
+            component: path.resolve('src/pages/Blog.tsx'),
             context: {
               limit: postsPerPage,
               skip: i * postsPerPage,

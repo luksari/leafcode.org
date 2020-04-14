@@ -23,8 +23,8 @@ export const config = {
   backgroundColor: '#2b2e3c',
 
   // Settings for typography.ts
-  headerFontFamily: 'Lato',
-  bodyFontFamily: 'Lato',
+  headerFontFamily: 'Arvo',
+  bodyFontFamily: 'Cabin',
   baseFontSize: '18px',
 
   // Social media

@@ -82,10 +82,11 @@ export const AnimatedTitle = styled(Title)<{ delay: number }>`
 
 export const PageTitle = styled.h1<{ background: boolean }>`
   font-size: 12rem;
-  margin-top: 95px;
+  margin-bottom: 0;
   white-space: pre;
   width: 100%;
-  color: ${({ theme }) => theme.colors.bgLight};
+  color: ${({ theme }) => theme.colors.darkText};
+  text-align: left;
   @media ${media.tablet} {
     font-size: 4rem;
   }
@@ -96,36 +97,10 @@ export const PageTitle = styled.h1<{ background: boolean }>`
   }
 `;
 
-export const GlitchedPageTitle = styled(PageTitle)`
- animation: ${glitchMain} 1s 0s linear infinite;
- &::after,
- &::before {
-    content: attr(data-text);
-    position: absolute;
-    z-index: -1;
-  };
-  &::before {
-    left: -3px;
-    animation: ${glitchPseudo1} 1.6s 0.3s infinite linear alternate-reverse;
-    background: ${({ theme }) => theme.gradients.neonPink(180)};
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  &::after {
-    left: 3px;
-    animation: ${glitchPseudo2} 1.3s 0.2s infinite linear alternate-reverse;
-    background: ${({ theme }) => theme.gradients.neonBlue(180)};
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-`
-
 export const PageTitleSecondary = styled.h2<{ background: boolean }>`
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 2rem;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 2.5rem;
   z-index: 2;
   margin: 0;
   color: ${({ theme }) => theme.colors.darkText};
