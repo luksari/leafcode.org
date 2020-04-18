@@ -1,13 +1,11 @@
+import React, { FC } from 'react';
 import { config } from '@config/SiteConfig';
 import { graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { kebabCase } from 'lodash';
-import moment from 'moment';
-import { rgba } from 'polished';
-import React, { FC } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Content, Header, Layout, PrevNext, SectionTitle, SEO, StyledLink, Subline, GlitchedPageTitle } from '../components';
+import { Content, Header, Layout, PrevNext, SectionTitle, SEO, StyledLink, Subline } from '../components';
 import { IPathContext } from '../models/PathContext';
 import { IPost } from '../models/Post';
 import { media } from '../utils/media';
@@ -16,19 +14,12 @@ import '../utils/prismjs-theme.css';
 const PostContent = styled.div`
   background: white;
   padding: 2rem;
-  border-radius: 0.6rem;
+  border-radius: 8px;
   margin-top: -12rem;
   margin-bottom: 1rem;
   position: relative;
-  &::before {
-    content: '';
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    position: absolute;
-    background: ${({ theme }) => theme.colors.accent};
-    transform: translate(10px, 10px)
-  }
+  box-shadow: 0px 15px 10px -15px ${({ theme }) => theme.colors.darkText};
+ 
   @media ${media.tablet} {
     padding: 1rem;
     margin-top: -4rem;
@@ -36,7 +27,11 @@ const PostContent = styled.div`
 `;
 
 const PostSubline = styled(Subline)`
-  color: ${props => props.theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.primary};
+  width: 250px;
+  * {
+    margin: 0 6px;
+  }
 `;
 
 const StyledBackgroundImage = styled(BackgroundImage)`
@@ -78,20 +73,18 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mark
         <SEO postPath={post.fields.slug} postNode={post} postSEO />
         <Helmet title={`${post.frontmatter.title} | ${config.siteTitle}`} />
         <PostHeader>
-          <PostSubline light={false} sectionTitle>
+          <PostSubline sectionTitle>
             <StyledLink bold to={'/blog'}>
               Blog
-            </StyledLink>{' '}
-            / {moment(post.frontmatter.date).format('LLL')}
+            </StyledLink>
+            /<StyledLink bold to={`/categories/${kebabCase(post.frontmatter.category)}`}>
+              {post.frontmatter.category}
+            </StyledLink>
+            / {post.frontmatter.date}
           </PostSubline>
           <SectionTitle>{post.frontmatter.title}</SectionTitle>
         </PostHeader>
         <StyledBackgroundImage Tag='header' fluid={post.frontmatter.banner.childImageSharp.fluid}>
-          <StyledLink color={'white'} to={`/categories/${kebabCase(post.frontmatter.category)}`}>
-            <GlitchedPageTitle background data-text={`#${post.frontmatter.category}`}>
-              #{post.frontmatter.category}{' '}
-            </GlitchedPageTitle>
-          </StyledLink>
         </StyledBackgroundImage>
         <Content>
           <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />

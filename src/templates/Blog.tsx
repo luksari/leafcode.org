@@ -42,7 +42,7 @@ export const BlogPage: FC<IProps> = ({ pageContext: { currentPage, totalPages },
 
 export default BlogPage;
 
-export const BlogQuery = graphql`
+export const blogQuery = graphql`
   query($skip: Int!, $limit: Int!) {
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: $limit, skip: $skip) {
       totalCount

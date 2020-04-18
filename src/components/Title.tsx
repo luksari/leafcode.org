@@ -1,4 +1,3 @@
-import { random } from 'lodash';
 import styled, { css, keyframes } from 'styled-components';
 import { media } from '../utils/media';
 
@@ -18,46 +17,6 @@ const slideFromLeft = keyframes`
     transform: translateX(0px);
 
   }
-`;
-const glitchPseudoFactory = (steps: number) => {
-  const styles = [...Array(steps).keys()]
-    .map(
-      step => `
-  ${(step / steps) * 100}% {
-      clip: rect(${random(100)}px, 9999px, ${random(100)}px, 30px);
-			transform: skew(${random(100) / 5}deg);
-  }`,
-    )
-    .join('');
-
-  return css`
-    ${styles}
-  `;
-};
-const glitchMainFactory = (steps: number) => {
-  const styles = [...Array(steps).keys()]
-    .map(
-      step => `
-  ${(step / steps) * 100}% {
-			transform: skew(${random(5) - 5}deg);
-  }`,
-    )
-    .join('');
-
-  return css`
-    ${styles}
-  `;
-};
-
-const glitchPseudo1 = keyframes`
-  ${glitchPseudoFactory(20)};
-`;
-
-const glitchPseudo2 = keyframes`
-  ${glitchPseudoFactory(16)};
-`;
-const glitchMain = keyframes`
-  ${glitchMainFactory(10)};
 `;
 
 export const Title = styled.h3`

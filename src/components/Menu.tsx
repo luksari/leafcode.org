@@ -84,10 +84,9 @@ const MenuList = styled.ul<{ expanded?: boolean }>`
 
 
 const MenuLink = styled(StyledLink)`
-  font-style: 'Cabin';
-  text-transform: uppercase;
+  text-transform: lowercase;
   position: relative;
-  font-weight: 700;
+  font-weight: 900;
   color: ${({ theme }) => theme.colors.darkText};
   ::after {
     content: '';

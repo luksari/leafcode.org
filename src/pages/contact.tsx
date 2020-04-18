@@ -14,11 +14,11 @@ export const ContactPage: FunctionComponent = () => (
   <Layout>
     <Helmet title={`Kontakt | ${config.siteTitle}`} />
     <Hero title={'Kontakt'} subTitle={`Skontaktuj się ze mną`} main>
-        <ContactLink href=''>
-          <Button big>
-            Więcej o nas
-          </Button>
-        </ContactLink>
+      <ContactLink href=''>
+        <Button big>
+          Więcej o mnie
+        </Button>
+      </ContactLink>
     </Hero>
   </Layout>
 );
