@@ -9,7 +9,13 @@ import { Content, Header, Layout, PrevNext, SectionTitle, SEO, StyledLink, Subli
 import { IPathContext } from '../models/PathContext';
 import { IPost } from '../models/Post';
 import { media } from '../utils/media';
-import '../utils/prismjs-theme.css';
+import { MDXProvider } from '@mdx-js/mdx';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { Link } from 'gatsby';
+
+const components = {
+  Link
+}
 
 const PostContent = styled.div`
   background: white;
@@ -66,7 +72,7 @@ interface IProps {
   };
   readonly pathContext: IPathContext;
 }
-export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { markdownRemark: post } }) => (
+export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx: post } }) => (
   <Layout>
     {post && (
       <>
@@ -87,7 +93,9 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mark
         <StyledBackgroundImage Tag='header' fluid={post.frontmatter.banner.childImageSharp.fluid}>
         </StyledBackgroundImage>
         <Content>
-          <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
+        <MDXProvider components={components}>
+          <MDXRenderer>{post.body}</MDXRenderer>
+        </MDXProvider>
           {post.frontmatter.tags && (
             <TagsWrapper>
               Tagi: &#160;
@@ -108,9 +116,10 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mark
 export default PostPage;
 
 export const postQuery = graphql`
-  query($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
+  query blogPostQuery($slug: String!) {
+    mdx(fields: { slug: { eq: $slug } }) {
+      id
+      body
       fields {
         slug
       }

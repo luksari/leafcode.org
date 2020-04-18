@@ -14,7 +14,7 @@ interface IProps {
 }
 
 export const BlogPage: FC<IProps> = ({ pageContext: { currentPage, totalPages }, data }) => {
-  const { edges, totalCount } = data.allMarkdownRemark;
+  const { edges, totalCount } = data.allMdx;
 
   return (
     <Layout>
@@ -44,7 +44,7 @@ export default BlogPage;
 
 export const blogQuery = graphql`
   query($skip: Int!, $limit: Int!) {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: $limit, skip: $skip) {
+    allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: $limit, skip: $skip) {
       totalCount
       edges {
         node {

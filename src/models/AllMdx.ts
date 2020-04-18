@@ -1,6 +1,6 @@
 import { IPost } from './Post';
 
-export interface IAllMarkdownRemark {
+export interface IAllMdx {
   readonly totalCount: number;
   readonly edges: ReadonlyArray<{ readonly node: IPost }>;
 }

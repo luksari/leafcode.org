@@ -6,7 +6,6 @@ require('ts-node').register({
   },
 });
 const path = require('path');
-
 const config = require('./src/config/SiteConfig').default;
 const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
 
@@ -20,7 +19,6 @@ module.exports = {
     'gatsby-plugin-styled-components',
     'gatsby-plugin-offline',
     'gatsby-plugin-typescript',
-    'gatsby-plugin-sass',
     'gatsby-plugin-manifest',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sitemap',
@@ -28,6 +26,12 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -38,7 +42,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'post',
+        name: 'posts',
         path: `${__dirname}/blog`,
 
       },

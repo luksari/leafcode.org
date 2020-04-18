@@ -18,7 +18,7 @@ const SublineWrapper = styled.div`
 `;
 
 export const IndexPage: FC<IPageProps> = ({ data }) => {
-  const { edges, totalCount } = data.allMarkdownRemark;
+  const { edges, totalCount } = data.allMdx;
 
   return (
     <Layout>
@@ -53,7 +53,7 @@ export default IndexPage;
 
 export const IndexQuery = graphql`
   query {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 4) {
+    allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: 4) {
       totalCount
       edges {
         node {

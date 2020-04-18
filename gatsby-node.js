@@ -1,15 +1,17 @@
 const path = require('path');
 const _ = require('lodash');
 const config = require('./src/config/SiteConfig').default;
+const { createFilePath } = require("gatsby-source-filesystem")
 
 exports.onCreateNode = ({
   node,
-  actions
+  actions,
+  getNode,
 }) => {
   const {
     createNodeField
   } = actions;
-  if (node.internal.type === 'MarkdownRemark' && _.has(node, 'frontmatter') && _.has(node.frontmatter, 'title')) {
+  if (node.internal.type === 'Mdx' && _.has(node, 'frontmatter') && _.has(node.frontmatter, 'title')) {
     const slug = `${_.kebabCase(node.frontmatter.title)}`;
     createNodeField({
       node,
@@ -115,15 +117,16 @@ exports.onCreateWebpackConfig = ({
 
 exports.createPages = async ({
   actions,
-  graphql
+  graphql,
+  reporter,
 }) => {
   const {
     createPage
   } = actions;
 
-  const postTemplate = path.resolve(`src/templates/Post.tsx`);
+  const postTemplate = path.resolve('src/templates/Post.tsx');
   const result = await graphql(`{
-    allMarkdownRemark(
+    allMdx(
       sort: { order: DESC, fields: [frontmatter___date] }
       limit: 10000
     ) {
@@ -159,20 +162,19 @@ exports.createPages = async ({
     }`)
     
       if (result.errors) {
-        return Promise.reject(result.errors);
+        reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
       }
-      const posts = result.data.allMarkdownRemark.edges;
+
+      const posts = result.data.allMdx.edges;
       const postsPerPage = config.POST_PER_PAGE;
       const numPages = Math.ceil(posts.length / postsPerPage);
       
-      Array.from({
-          length: numPages
-        })
-        .forEach((_, i) => {
+      posts.forEach(({ node }, i) => {
           createPage({
-            path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+            path: node.fields.slug,
             component: path.resolve('src/templates/Blog.tsx'),
             context: {
+              id: node.id,
               limit: postsPerPage,
               skip: i * postsPerPage,
               totalPages: numPages,

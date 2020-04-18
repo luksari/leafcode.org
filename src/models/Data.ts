@@ -1,5 +1,5 @@
-import { IAllMarkdownRemark } from './AllMarkdownRemark';
+import { IAllMdx } from './AllMdx';
 
 export interface IData {
-  readonly allMarkdownRemark: IAllMarkdownRemark;
+  readonly allMdx: IAllMdx;
 }
