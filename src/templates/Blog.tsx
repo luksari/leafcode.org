@@ -28,7 +28,7 @@ export const BlogPage: FC<IProps> = ({ pageContext: { currentPage, totalPages },
             primary={index % 4 === 0}
             date={post.node.frontmatter.date}
             excerpt={post.node.excerpt}
-            timeToRead={post.node.timeToRead}
+            timeToRead={post.node.frontmatter.timeToRead}
             slug={post.node.fields.slug}
             category={post.node.frontmatter.category}
             key={post.node.fields.slug}

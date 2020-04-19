@@ -2,9 +2,10 @@ require('source-map-support').install();
 require('ts-node').register({
   compilerOptions: {
     module: 'commonjs',
-    target: 'es2017',
+    target: 'esnext',
   },
 });
+
 const path = require('path');
 const config = require('./src/config/SiteConfig').default;
 const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
@@ -25,13 +26,6 @@ module.exports = {
     'gatsby-plugin-lodash',
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    `gatsby-transformer-remark`,
-    {
-      resolve: `gatsby-plugin-mdx`,
-      options: {
-        extensions: [`.mdx`, `.md`],
-      },
-    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -42,7 +36,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'posts',
+        name: 'post',
         path: `${__dirname}/blog`,
 
       },
@@ -62,26 +56,6 @@ module.exports = {
         // Include GTM in development.
         // Defaults to false meaning GTM will only be loaded in production.
         includeInDevelopment: false,
-      },
-    },
-    {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [{
-            resolve: 'gatsby-remark-external-links',
-            options: {
-              target: '_blank',
-              rel: 'nofollow noopener noreferrer',
-            },
-          },
-          {
-            resolve: 'gatsby-remark-prismjs',
-            options: {
-              showLineNumbers: true,
-            },
-          },
-          'gatsby-remark-autolink-headers',
-        ],
       },
     },
     {
@@ -118,6 +92,25 @@ module.exports = {
         themeColor: config.themeColor,
         display: 'standalone',
         icon: config.favicon,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        decks: [],
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              classPrefix: 'language-',
+              inlineCodeMarker: {
+                tsx: 'tsx',
+              },
+              aliases: {},
+            },
+          },
+        ],
       },
     },
   ]

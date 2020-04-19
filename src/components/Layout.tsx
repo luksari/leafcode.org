@@ -5,7 +5,6 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import styled, { createGlobalStyle, ThemeProvider }  from 'styled-components';
 import { media } from '../utils/media';
 import { Footer } from './Footer';
-import './layout.scss';
 import Menu from './Menu';
 import { Wrapper } from './Wrapper';
 
@@ -15,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     background: ${theme.colors.accent};
   }
   body {
+    box-sizing: border-box;
     overflow: hidden;
     background: ${theme.colors.bgLight};
     color: ${theme.colors.darkText};

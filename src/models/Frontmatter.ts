@@ -6,4 +6,5 @@ export interface IFrontmatter {
   readonly category: string;
   readonly tags: ReadonlyArray<string>;
   readonly banner: IBanner;
+  readonly timeToRead: number;
 }

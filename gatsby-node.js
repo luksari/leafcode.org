@@ -1,18 +1,17 @@
 const path = require('path');
 const _ = require('lodash');
 const config = require('./src/config/SiteConfig').default;
-const { createFilePath } = require("gatsby-source-filesystem")
 
 exports.onCreateNode = ({
   node,
   actions,
-  getNode,
 }) => {
   const {
     createNodeField
   } = actions;
+
   if (node.internal.type === 'Mdx' && _.has(node, 'frontmatter') && _.has(node.frontmatter, 'title')) {
-    const slug = `${_.kebabCase(node.frontmatter.title)}`;
+    const slug = _.kebabCase(node.frontmatter.title);
     createNodeField({
       node,
       name: 'slug',
@@ -100,6 +99,9 @@ exports.onCreateWebpackConfig = ({
   actions
 }) => {
   actions.setWebpackConfig({
+    node: {     
+      fs: 'empty',
+    },
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
       alias: {
@@ -126,43 +128,33 @@ exports.createPages = async ({
 
   const postTemplate = path.resolve('src/templates/Post.tsx');
   const result = await graphql(`{
-    allMdx(
-      sort: { order: DESC, fields: [frontmatter___date] }
-      limit: 10000
-    ) {
-      edges {
-        node {
-          excerpt(pruneLength: 255)
-          html
-          id
-          fields {
-            slug
-          }
-          frontmatter {
-            date
-            title
-            category
-            tags
-             banner {
-              childImageSharp {
-                fluid(maxWidth: 1920) {
-                  src
-                  srcSet
-                  sizes
-                  base64
-                  aspectRatio
-                }
-              }
+      allMdx(
+        sort: { order: DESC, fields: [frontmatter___date] }
+        limit: 10000
+      ) {
+        edges {
+          node {
+            excerpt(pruneLength: 255)
+            body
+            id
+            fields {
+              slug
+            }
+            frontmatter {
+              date
+              title
+              category
+              tags
+              timeToRead
+
             }
           }
-          timeToRead
         }
       }
-    }
-    }`)
+      }`)
     
       if (result.errors) {
-        reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
+        reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query', result.errors)
       }
 
       const posts = result.data.allMdx.edges;
@@ -171,7 +163,7 @@ exports.createPages = async ({
       
       posts.forEach(({ node }, i) => {
           createPage({
-            path: node.fields.slug,
+            path: i === 0 ? `/blog` : `/blog/${i + 1}`,
             component: path.resolve('src/templates/Blog.tsx'),
             context: {
               id: node.id,

@@ -11,11 +11,6 @@ import { IPost } from '../models/Post';
 import { media } from '../utils/media';
 import { MDXProvider } from '@mdx-js/mdx';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { Link } from 'gatsby';
-
-const components = {
-  Link
-}
 
 const PostContent = styled.div`
   background: white;
@@ -68,55 +63,60 @@ const PostHeader = styled(Header)`
 
 interface IProps {
   readonly data: {
-    readonly markdownRemark: IPost;
+    readonly mdx: IPost;
   };
   readonly pathContext: IPathContext;
 }
-export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx: post } }) => (
-  <Layout>
-    {post && (
-      <>
-        <SEO postPath={post.fields.slug} postNode={post} postSEO />
-        <Helmet title={`${post.frontmatter.title} | ${config.siteTitle}`} />
-        <PostHeader>
-          <PostSubline sectionTitle>
-            <StyledLink bold to={'/blog'}>
-              Blog
-            </StyledLink>
-            /<StyledLink bold to={`/categories/${kebabCase(post.frontmatter.category)}`}>
-              {post.frontmatter.category}
-            </StyledLink>
-            / {post.frontmatter.date}
-          </PostSubline>
-          <SectionTitle>{post.frontmatter.title}</SectionTitle>
-        </PostHeader>
-        <StyledBackgroundImage Tag='header' fluid={post.frontmatter.banner.childImageSharp.fluid}>
-        </StyledBackgroundImage>
-        <Content>
-        <MDXProvider components={components}>
-          <MDXRenderer>{post.body}</MDXRenderer>
-        </MDXProvider>
-          {post.frontmatter.tags && (
-            <TagsWrapper>
-              Tagi: &#160;
-              {post.frontmatter.tags.map((tag, i) => (
-                <StyledLink key={i} to={`/tags/${kebabCase(tag)}`}>
-                  <strong>{tag}</strong> {i < post.frontmatter.tags.length - 1 ? `, ` : ``}
-                </StyledLink>
-              ))}
-            </TagsWrapper>
-          )}
-          <PrevNext prev={prev} next={next} />
-        </Content>
-      </>
-    )}
-  </Layout>
-);
+export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx: post } }) => {
+  console.log(post);
+  return (
+    <Layout>
+      {post && (
+        <>
+          <SEO postPath={post.fields.slug} postNode={post} postSEO />
+          <Helmet title={`${post.frontmatter.title} | ${config.siteTitle}`} />
+          <PostHeader>
+            <PostSubline sectionTitle>
+              <StyledLink to={'/blog'}>
+                Blog
+              </StyledLink>
+              /<StyledLink to={`/categories/${kebabCase(post.frontmatter.category)}`}>
+                {post.frontmatter.category}
+              </StyledLink>
+              / {post.frontmatter.date}
+            </PostSubline>
+            <SectionTitle>{post.frontmatter.title}</SectionTitle>
+          </PostHeader>
+          <StyledBackgroundImage fluid={post.frontmatter.banner.childImageSharp.fluid} />
+          <Content>
+            <PostContent>
+              {/* <MDXProvider> */}
+                <MDXRenderer>{post.body}</MDXRenderer>
+              {/* </MDXProvider> */}
+                {post.frontmatter.tags && (
+                  <TagsWrapper>
+                    Tagi: &#160;
+                    {post.frontmatter.tags.map((tag, i) => (
+                      <StyledLink key={i} to={`/tags/${kebabCase(tag)}`}>
+                        <strong>{tag}</strong> {i < post.frontmatter.tags.length - 1 ? `, ` : ``}
+                      </StyledLink>
+                    ))}
+                  </TagsWrapper>
+                )}
+                <PrevNext prev={prev} next={next} />
+            </PostContent>
+          </Content>
+    
+        </>
+      )}
+    </Layout>
+  );
+}
 
 export default PostPage;
 
 export const postQuery = graphql`
-  query blogPostQuery($slug: String!) {
+  query BlogPostQuery($slug: String!) {
     mdx(fields: { slug: { eq: $slug } }) {
       id
       body
@@ -128,6 +128,7 @@ export const postQuery = graphql`
         date(formatString: "DD.MM.YYYY")
         category
         tags
+        timeToRead
         banner {
           childImageSharp {
             fluid(maxWidth: 1920) {
@@ -136,7 +137,6 @@ export const postQuery = graphql`
           }
         }
       }
-      timeToRead
     }
   }
 `;
