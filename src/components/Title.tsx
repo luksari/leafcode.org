@@ -40,35 +40,30 @@ export const AnimatedTitle = styled(Title)<{ delay: number }>`
 `;
 
 export const PageTitle = styled.h1<{ background: boolean }>`
-  font-size: 12rem;
+  font-size: 8rem;
   margin-bottom: 0;
-  white-space: pre;
-  width: 100%;
+  z-index: 1;
   color: ${({ theme }) => theme.colors.darkText};
   text-align: left;
   @media ${media.tablet} {
-    font-size: 4rem;
+    font-size: 5.5rem;
   }
   @media ${media.phone} {
-    margin-bottom: 15px;
-    width: 100%;
-    font-size: 2.8rem;
+    font-size: 3.3rem;
   }
 `;
 
 export const PageTitleSecondary = styled.h2<{ background: boolean }>`
   font-style: italic;
   font-weight: 900;
-  font-size: 2.5rem;
-  z-index: 2;
+  font-size: 2rem;
+  z-index: 1;
   margin: 0;
   color: ${({ theme }) => theme.colors.darkText};
   @media ${media.tablet} {
-    font-size: 1.7rem;
+    font-size: 2.3rem;
   }
   @media ${media.phone} {
-    width: 100%;
-    font-size: 0.8rem;
+    font-size: 1.5rem;
   }
 `;
-export default Title;

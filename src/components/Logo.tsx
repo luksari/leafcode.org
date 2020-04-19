@@ -20,15 +20,14 @@ const slideFromTop = keyframes`
   }
 `;
 
-export const LogoImage = styled(Sigil)<{ readonly big?: boolean }>`
-  height: 100%;
-  width: 100%;
-  @media ${media.tablet} {
-    left: -200px;
-  }
-  @media ${media.phone} {
-    left: -150px;
-  }
+export const LogoImage = styled(Sigil)`
+  position: absolute;
+  width: auto;
+  left: 50%;
+  transform: translateX(-50%) scale(4);
+  opacity: 1;
+  top: 0;
+  z-index: 1;
 `;
 
 export const LogoSigil = styled(Sigil)`

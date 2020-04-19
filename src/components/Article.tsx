@@ -24,7 +24,7 @@ const Post = styled.article<{ readonly primary?: boolean }>`
     flex: 1 100%;
     max-width: 100%;
     grid-template-columns: 1fr;
-    grid-template-rows: 450px 1fr;
+    grid-template-rows: 350px 1fr;
   }
   @media ${media.phone} {
     grid-template-rows: 235px 1fr;
@@ -39,6 +39,9 @@ const Banner = styled(Img)`
   border: 5px solid ${({ theme }) => theme.colors.bgLight};
   width: auto;
   max-height: 355px;
+  picture {
+    height: 150px;
+  }
 `;
 
 const ContentWrapper = styled.div`

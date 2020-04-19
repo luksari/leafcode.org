@@ -42,7 +42,7 @@ export const Category: FC<IPageProps> = ({ pathContext: { posts, categoryName } 
               timeToRead={post.timeToRead}
               slug={post.fields.slug}
               category={post.frontmatter.category}
-              key={post.fields.slug}
+              key={post.id}
             />
           ))}
       </PostsContent>

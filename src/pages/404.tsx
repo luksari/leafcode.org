@@ -13,7 +13,7 @@ export const NotFoundPage: FC = () => (
     </Header>
     <Wrapper>
       <Content>
-        <p>Przepraszamy, chyba nie powinno Cię tu być 😔😔😔</p>
+        <p>Hej, chyba nie powinno Cię tu być 😔</p>
       </Content>
     </Wrapper>
   </Layout>

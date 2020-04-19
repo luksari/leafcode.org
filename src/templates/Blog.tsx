@@ -31,7 +31,7 @@ export const BlogPage: FC<IProps> = ({ pageContext: { currentPage, totalPages },
             timeToRead={post.node.frontmatter.timeToRead}
             slug={post.node.fields.slug}
             category={post.node.frontmatter.category}
-            key={post.node.fields.slug}
+            key={post.node.id}
           />
         ))}
         <Pagination currentPage={currentPage} totalPages={totalPages} url={'blog'} />
@@ -57,12 +57,19 @@ export const blogQuery = graphql`
             category
             timeToRead
             banner {
-              childImageSharp {
-                fluid(maxWidth: 1920) {
-                  ...GatsbyImageSharpFluid
+                childImageSharp {
+                  fluid(maxWidth: 1920) {
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                    base64
+                    tracedSVG
+                    srcWebp
+                    srcSetWebp
+                  }
                 }
               }
-            }
           }
           excerpt(pruneLength: 255)
         }

@@ -47,29 +47,12 @@ const HeroWrapper = styled.div<{  main?: boolean }>`
 
 
 const TitleWrapper = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: 1fr auto;
-  ${PageTitleSecondary} {
-    grid-column: 2;
-    @media ${media.phone} {
-      grid-column: 1;
-    }
-  }
-  ${LogoImage} {
-    grid-row-end: span 2;
-    @media ${media.phone} {
-      margin-top: 15px;
-      grid-row: 3;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: flex-start;
   @media ${media.tablet} {
-    grid-template-columns: 150px 1fr;
-  }
-  @media ${media.phone} {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto 150px;
-    justify-items: center;
+    align-items: center;
   }
 `;
 const ChildrenWrapper = styled.div`

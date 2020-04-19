@@ -42,7 +42,7 @@ export const TagTemplate: FunctionComponent<IPageProps> = ({ pathContext: { post
               timeToRead={post.frontmatter.timeToRead}
               slug={post.fields.slug}
               category={post.frontmatter.category}
-              key={post.fields.slug}
+              key={post.id}
             />
           ))}
       </PostsContent>

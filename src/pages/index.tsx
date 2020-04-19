@@ -37,7 +37,7 @@ export const IndexPage: FC<IPageProps> = ({ data }) => {
                 timeToRead={post.node.frontmatter.timeToRead}
                 slug={post.node.fields.slug}
                 category={post.node.frontmatter.category}
-                key={post.node.fields.slug}
+                key={post.node.id}
               />
             ))}
       </PostsContent>
@@ -57,6 +57,7 @@ export const IndexQuery = graphql`
       totalCount
       edges {
         node {
+          id
           excerpt(pruneLength: 255)
           fields {
             slug

@@ -61,9 +61,10 @@ const MenuList = styled.ul<{ expanded?: boolean }>`
   align-items: center;
   justify-content: flex-end;
   margin: 0;
+  position: sticky;
 
   @media ${media.tablet} {
-    background: ${({ theme }) => theme.colors.grey.bluish};
+    background: ${({ theme }) => theme.colors.lightText};
     justify-content: center;
     margin: 0;
     top: 0;
@@ -72,7 +73,8 @@ const MenuList = styled.ul<{ expanded?: boolean }>`
     transition: transform 0.1s;
     transform: ${({ expanded }) => (expanded ? 'scaleX(1)' : 'scaleX(0)')};
     flex-direction: column;
-    position: absolute;
+    position: fixed;
+    z-index: 100;
     width: 100vw;
     height: 100vh;
     ${MenuItem} {
@@ -96,7 +98,7 @@ const MenuLink = styled(StyledLink)`
     left: 0;
     position: absolute;
     width: 100%;
-    height: 2px;
+    height: 3px;
     background: ${({ theme }) => theme.gradients.primary(90)};
     transition: transform 0.3s;
     will-change: transform;
@@ -105,9 +107,6 @@ const MenuLink = styled(StyledLink)`
     &::after {
       transform: scaleX(1);
     }
-  }
-  @media ${media.tablet} {
-    color: white;
   }
 `;
 
@@ -120,7 +119,7 @@ const Menu: FC<{ expanded?: boolean, visible?: boolean}> = () => {
   useDebounce(
     () => {
       setPrevPos(prevState => ({ ...prevState, y }));
-      prevPos.y < y ? setVisible(false) : setVisible(true);
+      prevPos.y < y && !expanded ? setVisible(false) : setVisible(true);
     },
     35,
     [x, y],
@@ -130,30 +129,34 @@ const Menu: FC<{ expanded?: boolean, visible?: boolean}> = () => {
     setExpanded(false)
   }
 
+
   return (
+    <>
     <MenuWrapper visible={visible}>
       <Link to='/'>
         <LogoSigil src={'assets/sigil.svg'} />
       </Link>
-      <BurgerButton handleExpanded={setExpanded} expanded={expanded} />
-      <MenuList expanded={expanded}>
-        <MenuItem>
-          <MenuLink color='white' to='/' onClick={handleMenuClick}>
-            Strona główna
-          </MenuLink>
-        </MenuItem>
-        <MenuItem>
-          <MenuLink color='white' to='/blog' onClick={handleMenuClick}>
-            Blog
-          </MenuLink>
-        </MenuItem>
-        <MenuItem>
-          <MenuLink color='white' to='/contact' onClick={handleMenuClick}>
-            Kontakt
-          </MenuLink>
-        </MenuItem>
-      </MenuList>
+    <BurgerButton handleExpanded={setExpanded} expanded={expanded} />
     </MenuWrapper>
+    <MenuList expanded={expanded}>
+      <MenuItem>
+        <MenuLink color='white' to='/' onClick={handleMenuClick}>
+          Strona główna
+        </MenuLink>
+      </MenuItem>
+      <MenuItem>
+        <MenuLink color='white' to='/blog' onClick={handleMenuClick}>
+          Blog
+        </MenuLink>
+      </MenuItem>
+      <MenuItem>
+        <MenuLink color='white' to='/contact' onClick={handleMenuClick}>
+          Kontakt
+        </MenuLink>
+      </MenuItem>
+    </MenuList>
+    </>
+
   );
 };
 export default Menu;
