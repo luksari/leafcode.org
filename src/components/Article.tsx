@@ -38,6 +38,7 @@ const Banner = styled(Img)`
   margin: 0;
   border: 5px solid ${({ theme }) => theme.colors.bgLight};
   width: auto;
+  max-height: 355px;
 `;
 
 const ContentWrapper = styled.div`

@@ -55,6 +55,7 @@ export const blogQuery = graphql`
             title
             date(formatString: "DD.MM.YYYY")
             category
+            timeToRead
             banner {
               childImageSharp {
                 fluid(maxWidth: 1920) {
@@ -64,7 +65,6 @@ export const blogQuery = graphql`
             }
           }
           excerpt(pruneLength: 255)
-          timeToRead
         }
       }
     }

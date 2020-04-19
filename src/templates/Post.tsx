@@ -116,8 +116,8 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx:
 export default PostPage;
 
 export const postQuery = graphql`
-  query BlogPostQuery($slug: String!) {
-    mdx(fields: { slug: { eq: $slug } }) {
+  query BlogPostQuery($id: String!) {
+    mdx(id: { eq: $id }) {
       id
       body
       fields {

@@ -34,7 +34,7 @@ export const IndexPage: FC<IPageProps> = ({ data }) => {
                 title={post.node.frontmatter.title}
                 date={post.node.frontmatter.date}
                 excerpt={post.node.excerpt}
-                timeToRead={post.node.timeToRead}
+                timeToRead={post.node.frontmatter.timeToRead}
                 slug={post.node.fields.slug}
                 category={post.node.frontmatter.category}
                 key={post.node.fields.slug}
@@ -57,6 +57,7 @@ export const IndexQuery = graphql`
       totalCount
       edges {
         node {
+          excerpt(pruneLength: 255)
           fields {
             slug
           }
@@ -65,6 +66,7 @@ export const IndexQuery = graphql`
             date
             category
             tags
+            timeToRead
             banner {
               childImageSharp {
                 fluid(maxWidth: 1920) {
@@ -73,8 +75,6 @@ export const IndexQuery = graphql`
               }
             }
           }
-          excerpt(pruneLength: 255)
-          timeToRead
         }
       }
     }

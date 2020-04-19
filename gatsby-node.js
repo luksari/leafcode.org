@@ -127,6 +127,7 @@ exports.createPages = async ({
   } = actions;
 
   const postTemplate = path.resolve('src/templates/Post.tsx');
+
   const result = await graphql(`{
       allMdx(
         sort: { order: DESC, fields: [frontmatter___date] }
@@ -146,7 +147,20 @@ exports.createPages = async ({
               category
               tags
               timeToRead
-
+              banner {
+                childImageSharp {
+                  fluid(maxWidth: 1920) {
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                    base64
+                    tracedSVG
+                    srcWebp
+                    srcSetWebp
+                  }
+                }
+              }
             }
           }
         }
@@ -193,6 +207,7 @@ exports.createPages = async ({
           component: postTemplate,
           context: {
             slug: _.kebabCase(node.frontmatter.title),
+            id: node.id,
             title: node.frontmatter.title,
             prev,
             next,
