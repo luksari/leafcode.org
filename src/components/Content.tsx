@@ -13,31 +13,21 @@ export const Content = styled.section`
   }
 `;
 
-export const PostsContent = styled.section<{ center?: boolean }>`
-  padding: 3rem 15%;
+export const PostsContent = styled.section`
+  padding: 3rem 10%;
   display: flex;
   flex-wrap: wrap;
   height: 100%;
   z-index: 25;
   margin-top: -8rem;
   position: relative;
-  &::after {
-    content: '';
-    width: 50%;
-    height: 3px;
-    position: absolute;
-    bottom: 15px;
-    background: ${({ theme }) => theme.colors.primary}
-  }
   @media ${media.tablet} {
-    padding: 1rem 2rem;
+    padding: 1rem 7rem;
     margin-top: -3.5rem;
-    grid-template-columns: 1fr;
+    justify-content: center;
   }
   @media ${media.phone} {
     margin-top: -4rem;
-    padding: 1rem 1rem;
+    padding: 1rem 5rem;
   }
 `;
-
-export default Content;

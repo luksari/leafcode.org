@@ -7,6 +7,12 @@ import styled from 'styled-components';
 import { media } from '../utils/media';
 import { Subline } from './Subline';
 
+const Banner = styled(Img)`
+  margin: 0;
+  border: 5px solid ${({ theme }) => theme.colors.bgLight};
+  width: auto;
+`;
+
 const Post = styled.article<{ readonly primary?: boolean }>`
   display: grid;
   margin: 15px;
@@ -16,33 +22,31 @@ const Post = styled.article<{ readonly primary?: boolean }>`
   background: ${({ theme }) => theme.colors.bgLight};
   box-shadow: 0px 2px 8px ${({ theme }) => theme.colors.grey.ultraLight};
   transition: transform 500ms ease-in-out;
-  flex: ${({ primary }) => (primary ? '1 100%' : '1 30%')};
-  max-width: ${({ primary }) => (primary ? '100%' : '500px')};
+  flex: ${({ primary }) => (primary ? '1 100%' : '1 25%')};
   grid-template-columns: ${({ primary }) => (primary ? '1fr 0.8fr' : '1fr')};
   border-top: 5px solid ${({ theme }) => theme.colors.accent};
   @media ${media.tablet} {
     flex: 1 100%;
-    max-width: 100%;
+    max-width: 500px;
     grid-template-columns: 1fr;
     grid-template-rows: 350px 1fr;
   }
   @media ${media.phone} {
     grid-template-rows: 235px 1fr;
   }
-  &:hover {
-    transform: scale(1.015);
+  ${Banner} {
+    width: auto;
+    height: ${({ primary }) => (primary ? 'auto' : '250px')};
+    @media ${media.tablet} {
+      width: auto;
+      height: 350px;
+    }
+    @media ${media.phone} {
+      height: 235px;
+  }
   }
 `;
 
-const Banner = styled(Img)`
-  margin: 0;
-  border: 5px solid ${({ theme }) => theme.colors.bgLight};
-  width: auto;
-  max-height: 355px;
-  picture {
-    height: 150px;
-  }
-`;
 
 const ContentWrapper = styled.div`
   padding: 25px;
@@ -52,12 +56,12 @@ const Title = styled.h2<{ readonly primary?: boolean }>`
   position: relative;
   text-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
   margin-bottom: 0.75rem;
-  font-size: ${({ theme, primary }) => (primary ? theme.fontSize.big : theme.fontSize.medium)};
+  font-size: ${({ primary }) => (primary ? '2rem' : '1.7rem')};
   @media ${media.tablet} {
-    font-size: ${({ theme }) => theme.fontSize.big};
+    font-size: 1.5rem;
   }
   @media ${media.phone} {
-    font-size: ${({ theme }) => theme.fontSize.small};
+    font-size: 1rem;
   }
 `;
 
