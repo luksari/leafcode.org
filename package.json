@@ -15,8 +15,7 @@
     "deploy": "gatsby build --prefix-paths",
     "dev": "rm -r .cache/ && env NODE_ENV=development DEBUG=gatsby:query-watcher && gatsby develop",
     "lint": "tslint --project .",
-    "lint:fix": "tslint --fix --project .",
-    "fix": "prettier --write 'src/**/*.{ts,tsx,scss,md}' && tslint --fix 'src/**/*.{ts,tsx}' -p tsconfig.json && stylelint --fix 'src/**/*.scss' "
+    "lint:fix": "tslint --fix --project ."
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^16.8.6",
@@ -30,7 +29,6 @@
     "@typescript-eslint/parser": "^2.25.0",
     "babel-plugin-styled-components": "^1.10.7",
     "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-react": "^7.19.0",
     "husky": "^1.1.2",
