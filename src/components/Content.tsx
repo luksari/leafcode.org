@@ -17,12 +17,10 @@ export const PostsContent = styled.section<{ center?: boolean }>`
   padding: 3rem 15%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   height: 100%;
   z-index: 25;
   margin-top: -8rem;
   position: relative;
-  text-align: ${({ center }) => (center ? 'center' : 'left')};
   &::after {
     content: '';
     width: 50%;

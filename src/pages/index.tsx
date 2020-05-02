@@ -6,6 +6,7 @@ import { Article, Button, Layout, PostsContent } from '../components';
 import { Hero } from '../components';
 import { config } from '@config/SiteConfig';
 import { IPageProps } from '../models/PageProps';
+import { SectionTitle } from '@components/Title';
 
 const SublineWrapper = styled.div`
   display: flex;
@@ -25,6 +26,9 @@ export const IndexPage: FC<IPageProps> = ({ data }) => {
       <Helmet title={`Homepage | ${config.siteTitle}`} />
       <Hero main/>
       <PostsContent>
+        <SectionTitle>
+          Ostatnie posty
+        </SectionTitle>
         {edges
             .slice(0, config.HOMEPAGE_POSTS)
             .map((post, index) => (

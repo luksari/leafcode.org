@@ -39,21 +39,21 @@ export const AnimatedTitle = styled(Title)<{ delay: number }>`
   `};
 `;
 
-export const PageTitle = styled.h1<{ background: boolean }>`
+export const PageTitle = styled.h1`
   font-size: 8rem;
   margin-bottom: 0;
   z-index: 1;
   color: ${({ theme }) => theme.colors.darkText};
   text-align: left;
   @media ${media.tablet} {
-    font-size: 5.5rem;
+    font-size: 4.2rem;
   }
   @media ${media.phone} {
     font-size: 3.3rem;
   }
 `;
 
-export const PageTitleSecondary = styled.h2<{ background: boolean }>`
+export const PageTitleSecondary = styled.h2`
   font-style: italic;
   font-weight: 900;
   font-size: 2rem;
@@ -61,9 +61,20 @@ export const PageTitleSecondary = styled.h2<{ background: boolean }>`
   margin: 0;
   color: ${({ theme }) => theme.colors.darkText};
   @media ${media.tablet} {
-    font-size: 2.3rem;
+    font-size: 1.9rem;
   }
   @media ${media.phone} {
     font-size: 1.5rem;
+  }
+`;
+
+export const SectionTitle = styled.h3`
+  font-size: ${({ theme }) => theme.fontSize.biggest};
+  text-transform: 'normal';
+  text-align: center;
+  color: ${({  theme }) => theme.colors.darkText};
+  margin-bottom: 10px;
+  @media ${media.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.big};
   }
 `;

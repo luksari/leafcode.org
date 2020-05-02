@@ -3,13 +3,13 @@ import styled, { css } from 'styled-components';
 import { media } from '../utils/media';
 
 interface IProps {
-  readonly expanded: boolean;
-  // tslint:disable-next-line: no-mixed-interface
-  readonly handleExpanded: (expanded: boolean) => void;
+  isExpanded: boolean;
+  onClick: () => void;
+  
 }
 
 const ButtonContainer = styled.button`
-  z-index: 2;
+  z-index: 450;
   background: none;
   cursor: pointer;
   outline: none;
@@ -26,7 +26,7 @@ const ButtonContainer = styled.button`
     transform: scale(1);
   }
 `;
-const Burger = styled.div<{ readonly expanded: boolean }>`
+const Burger = styled.div<{ readonly isExpanded: boolean }>`
   width: 100%;
   height: 3px;
   background: ${props => props.theme.gradients.primary(90)};
@@ -48,7 +48,7 @@ const Burger = styled.div<{ readonly expanded: boolean }>`
     top: 9px;
   }
   ${props =>
-    props.expanded &&
+    props.isExpanded &&
     css`
       height: 0;
       &::before,
@@ -64,9 +64,9 @@ const Burger = styled.div<{ readonly expanded: boolean }>`
       }
     `}
 `;
-export const BurgerButton: FC<IProps> = ({ expanded, handleExpanded }) => (
-  <ButtonContainer onClick={() => handleExpanded(!expanded)}>
-    <Burger expanded={expanded} />
+export const BurgerButton: FC<IProps> = ({ isExpanded, onClick }) => (
+  <ButtonContainer onClick={onClick}>
+    <Burger isExpanded={isExpanded} />
   </ButtonContainer>
 );
 export default BurgerButton;

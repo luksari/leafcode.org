@@ -5,11 +5,10 @@ import BackgroundImage from 'gatsby-background-image';
 import { kebabCase } from 'lodash';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Content, Header, Layout, PrevNext, SectionTitle, SEO, StyledLink, Subline } from '../components';
+import { Content, Header, Layout, PrevNext, SEO, StyledLink, Subline, PageTitle } from '../components';
 import { IPathContext } from '../models/PathContext';
 import { IPost } from '../models/Post';
 import { media } from '../utils/media';
-import { MDXProvider } from '@mdx-js/mdx';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 const PostContent = styled.div`
@@ -85,7 +84,7 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx:
               </StyledLink>
               / {post.frontmatter.date}
             </PostSubline>
-            <SectionTitle>{post.frontmatter.title}</SectionTitle>
+            <PageTitle>{post.frontmatter.title}</PageTitle>
           </PostHeader>
           <StyledBackgroundImage fluid={post.frontmatter.banner.childImageSharp.fluid} />
           <Content>

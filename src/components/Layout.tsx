@@ -5,7 +5,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import styled, { createGlobalStyle, ThemeProvider }  from 'styled-components';
 import { media } from '../utils/media';
 import { Footer } from './Footer';
-import Menu from './Menu';
+import { Menu } from './Menu';
 import { Wrapper } from './Wrapper';
 
 const GlobalStyle = createGlobalStyle`
@@ -18,6 +18,9 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     background: ${theme.colors.bgLight};
     color: ${theme.colors.darkText};
+    * {
+      box-sizing: border-box;
+    }
     @media ${media.phone} {
       font-size: 14px;
     }
@@ -45,22 +48,6 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 6px;
     margin-left: -1.6rem;
-  }
-  label {
-    margin-bottom: .5rem;
-    color: ${theme.colors.darkText};
-  }
-  input, textarea {
-    border-radius: .5rem;
-    border: none;
-    background: rgba(0, 0, 0, 0.05);
-    padding: .25rem 1rem;
-    &:focus {
-      outline: none;
-    }
-  }
-  .textRight {
-    text-align:right;
   }
 `;
 

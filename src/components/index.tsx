@@ -3,7 +3,6 @@ export * from './Button';
 export * from './Header';
 export * from './Layout';
 export * from './PrevNext';
-export * from './SectionTitle';
 export * from './SEO';
 export * from './Subline';
 export * from './Wrapper';

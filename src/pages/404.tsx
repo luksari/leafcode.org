@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import React, { FC } from 'react';
 import Helmet from 'react-helmet';
-import { Content, Header, Layout, SectionTitle, Wrapper } from '../components';
+import { Content, Header, Layout, PageTitle, Wrapper } from '../components';
 import { config } from '@config/SiteConfig';
 
 export const NotFoundPage: FC = () => (
@@ -9,7 +9,7 @@ export const NotFoundPage: FC = () => (
     <Helmet title={`404 Nie znaleziono | ${config.siteTitle}`} />
     <Header>
       <Link to='/'>{config.siteTitle}</Link>
-      <SectionTitle>Nie znaleziono</SectionTitle>
+      <PageTitle>Nie znaleziono</PageTitle>
     </Header>
     <Wrapper>
       <Content>
