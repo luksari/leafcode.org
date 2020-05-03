@@ -14,7 +14,7 @@ export const Content = styled.section`
 `;
 
 export const PostsContent = styled.section`
-  padding: 3rem 10%;
+  padding: 3rem 15%;
   display: flex;
   flex-wrap: wrap;
   height: 100%;
@@ -22,12 +22,12 @@ export const PostsContent = styled.section`
   margin-top: -8rem;
   position: relative;
   @media ${media.tablet} {
-    padding: 1rem 7rem;
+    padding: 1rem 10%;
     margin-top: -3.5rem;
     justify-content: center;
   }
   @media ${media.phone} {
     margin-top: -4rem;
-    padding: 1rem 5rem;
+    padding: 1rem 10%;
   }
 `;

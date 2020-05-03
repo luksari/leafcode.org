@@ -29,8 +29,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'images',
-        path: `${__dirname}/src/assets/`,
+        name: 'static',
+        path: `${__dirname}/static`,
       },
     },
     {
@@ -45,7 +45,8 @@ module.exports = {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: `${__dirname}/src/assets/`,
+          include: `${__dirname}/static`,
+          omitKeys: ['xmlnsDc', 'xmlnsCc', 'xmlnsRdf', 'xmlnsSvg', 'xmlnsSodipodi', 'xmlnsInkscape', 'xmlnsSerif'],
         }
       }
     },
@@ -70,6 +71,7 @@ module.exports = {
         alias: {
           '@src': path.resolve(__dirname, 'src/'),
           '@components': path.resolve(__dirname, 'src/components/'),
+          '@static': path.resolve(__dirname, 'static/'),
           '@pages': path.resolve(__dirname, 'src/pages/'),
           '@templates': path.resolve(__dirname, 'src/templates/'),
           '@config': path.resolve(__dirname, 'src/config/'),

@@ -21,20 +21,22 @@ export const BlogPage: FC<IProps> = ({ pageContext: { currentPage, totalPages },
       <Helmet title={`Blog | ${config.siteTitle}`} />
       <Hero subTitle={`Wszystkie wpisy ( ${totalCount} )`} />
       <PostsContent>
-        {edges.map((post, index) => (
-          <Article
-            banner={post.node.frontmatter.banner.childImageSharp.fluid}
-            title={post.node.frontmatter.title}
-            primary={index % 4 === 0}
-            date={post.node.frontmatter.date}
-            excerpt={post.node.excerpt}
-            timeToRead={post.node.frontmatter.timeToRead}
-            slug={post.node.fields.slug}
-            category={post.node.frontmatter.category}
-            key={post.node.id}
-          />
-        ))}
-        <Pagination currentPage={currentPage} totalPages={totalPages} url={'blog'} />
+        {edges.map((post, index) => {
+          return (
+            <Article
+              banner={post.node.frontmatter.banner.childImageSharp.fluid}
+              title={post.node.frontmatter.title}
+              primary={index % 4 === 0}
+              date={post.node.frontmatter.date}
+              excerpt={post.node.excerpt}
+              timeToRead={post.node.frontmatter.timeToRead}
+              slug={post.node.fields.slug}
+              category={post.node.frontmatter.category}
+              key={post.node.id}
+            />
+          )
+        })}
+        <Pagination currentPage={currentPage} totalPages={totalPages} url='blog' />
       </PostsContent>
     </Layout>
   );
@@ -48,6 +50,7 @@ export const blogQuery = graphql`
       totalCount
       edges {
         node {
+          id
           fields {
             slug
           }

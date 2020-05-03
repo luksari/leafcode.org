@@ -107,6 +107,7 @@ exports.onCreateWebpackConfig = ({
       alias: {
         '@src': path.resolve(__dirname, 'src/'),
         '@components': path.resolve(__dirname, 'src/components/'),
+        '@static': path.resolve(__dirname, 'static/'),
         '@templates': path.resolve(__dirname, 'src/templates/'),
         '@pages': path.resolve(__dirname, 'src/pages/'),
         '@config': path.resolve(__dirname, 'src/config/'),

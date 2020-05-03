@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { media } from '../utils/media';
-import Sigil from 'assets/sigil.svg'
+import Sigil from '@static/sigil.svg'
 
 const slideFromTop = keyframes`
   0% {

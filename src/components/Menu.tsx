@@ -1,4 +1,4 @@
-import React, { FC, useState, Children } from 'react';
+import React, { FC, useState, useMemo } from 'react';
 import { useDebounce, useWindowScroll, useWindowSize } from 'react-use';
 import styled from 'styled-components';
 import { BurgerButton } from '.';
@@ -6,7 +6,7 @@ import { media } from '../utils/media';
 import { StyledLink } from './Link';
 import { LogoSigil } from './Logo';
 import { Link } from 'gatsby';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 const visibilityVariants = {
   visible: { y: 0 },
@@ -30,36 +30,19 @@ const MenuWrapper = styled(motion.nav).attrs({ variants: visibilityVariants })`
   }
 `;
 
-
-const MenuItem = styled.li`
-  list-style: none;
-  font-size: 1rem;
-  margin-right: 45px;
-  text-transform: lowercase;
-  display: block;
-  margin-bottom: 0;
-  &:last-of-type {
-    margin-right: 0;
+const expandListVariants: Variants = {
+  expanded: { 
+    x: 0,  
+    transition: {
+      staggerChildren: 0.07,
+    }, 
+  },
+  closed: {
+    x: '100%',
+    transition: {
+      staggerDirection: -1,
+    },
   }
-  @media ${media.tablet} {
-    margin: 0;
-    font-size: ${({ theme }) => theme.fontSize.biggest};
-    position: relative;
-    transition: transform 0.3s;
-    transform-origin: right;
-    margin-bottom: 15px;
-  }
-  @media ${media.phone} {
-    font-size: ${({ theme }) => theme.fontSize.big};
-  }
-  ${StyledLink} {
-    display: block;
-  }
-`;
-
-const expandVariants = {
-  expanded: { x: 0 },
-  closed: { x: '100%' }
 }
 
 const MenuListDesktop = styled(motion.ul)`
@@ -69,18 +52,17 @@ const MenuListDesktop = styled(motion.ul)`
   width: 100%;
   height: 100%;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   margin: 0;
 `
 
-const MenuListMobile = styled(MenuListDesktop).attrs({ variants: expandVariants })`
+const MenuListMobile = styled(MenuListDesktop).attrs({ variants: expandListVariants })`
   @media ${media.tablet} {
     background: ${({ theme }) => theme.colors.lightText};
     justify-content: center;
     margin: 0;
     top: 0;
     left: 0;
-    transform-origin: right;
     flex-direction: column;
     position: fixed;
     z-index: 100;
@@ -89,54 +71,102 @@ const MenuListMobile = styled(MenuListDesktop).attrs({ variants: expandVariants 
   }
 `;
 
-const MenuLink = styled(StyledLink)`
-  text-transform: lowercase;
-  position: relative;
-  font-weight: 900;
-  color: ${({ theme }) => theme.colors.darkText};
-  ::after {
-    content: '';
-    transform-origin: center;
-    transform: scaleX(0);
-    bottom: -3px;
-    left: 0;
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    background: ${({ theme }) => theme.gradients.primary(90)};
-    transition: transform 0.3s;
-    will-change: transform;
+const expandItemVariants = {
+  expanded: { 
+    x: 0,
+  },
+  closed: {
+    x: '100%',
   }
+}
+
+const MenuItem = styled(motion.li).attrs({ variants: expandItemVariants })`
+  list-style: none;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+`;
+
+const MenuLink = styled(StyledLink)`
+  position: relative;
+  font-family: 'Arvo';
+  display: flex;
+  width: 200px;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.lightText};
+  transition: transform 300ms ease-in-out, color 300ms ease-in-out;
   &:hover {
-    &::after {
-      transform: scaleX(1);
+    color: ${({ theme }) => theme.colors.accent};
+    transform: scale(1.1)
+  }
+  &::after {
+    content: '';
+    background: url('./mark.svg');
+    position: absolute;
+    background-blend-mode: multiply;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 45px;
+    top: -10px;
+    background-position: 50% 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 300ms ease-in-out;
+    @media ${media.tablet} {
+      width: 600px;
+      top: -30px;
+      height: 155px;
     }
+    @media ${media.phone} {
+      width: 500px;
+      top: -15px;
+      height: 100px;
+    }
+  }
+  @media ${media.tablet} {
+    font-size: 3rem;
+    width: 600px;
+    height: 155px;
+  }
+  @media ${media.phone} {
+    font-size: 2.5rem;
+    width: 500px;
+    height: 100px;
   }
 `;
 
-const MenuListComponent: FC<{ isExpanded: boolean }> = ({ children, isExpanded }) => {
-  const { width } = useWindowSize();
-
+const MenuListComponent: FC<{ isExpanded: boolean; width: number }> = ({ width, children, isExpanded }) => {
   return (<>
     {width < 1025
       ? 
       <MenuListMobile initial='closed' animate={isExpanded ? 'expanded' : 'closed'}>
-        {Children.map(children, (child) => child)}
+        {children}
       </MenuListMobile>
       : 
       <MenuListDesktop>
-        {Children.map(children, (child) => child)}
+        {children}
       </MenuListDesktop>
       }
   </>)
 }
 
 export const Menu: FC = () => {
+  const { width } = useWindowSize();
   const { x, y } = useWindowScroll();
   const [isExpanded, setIsExpanded] = useState(false);
   const [visible, setVisible] = useState(true);
   const [prevPos, setPrevPos] = useState({ x, y });
+  
+  const isBlogPost = useMemo(() => {
+    const regex = /(blog)\/((\w+)-(\w)([\w-]*)|\w+)/g
+    return regex.test(window.location.href)
+  }, [window.location.href]) 
 
+  
   useDebounce(
     () => {
       setPrevPos(prevState => ({ ...prevState, y }));
@@ -152,24 +182,24 @@ export const Menu: FC = () => {
 
 
   return (
-    <MenuWrapper initial='visible' animate={visible ? 'visible' : 'hidden'}>
+    <MenuWrapper initial='visible' animate={visible || !isBlogPost ? 'visible' : 'hidden'}>
       <Link to='/'>
-        <LogoSigil src={'assets/sigil.svg'} />
+        <LogoSigil />
       </Link>
       <BurgerButton onClick={() => setIsExpanded((prev) => !prev)} isExpanded={isExpanded} />
-      <MenuListComponent isExpanded={isExpanded}>
+      <MenuListComponent isExpanded={isExpanded} width={width}>
         <MenuItem>	
-          <MenuLink color='white' to='/' onClick={handleMenuClick}>
+          <MenuLink to='/' onClick={handleMenuClick}>
             Strona główna
           </MenuLink>
         </MenuItem>
         <MenuItem>
-          <MenuLink color='white' to='/blog' onClick={handleMenuClick}>
+          <MenuLink to='/blog' onClick={handleMenuClick}>
             Blog
           </MenuLink>
         </MenuItem>
         <MenuItem>
-          <MenuLink color='white' to='/contact' onClick={handleMenuClick}>
+          <MenuLink to='/contact' onClick={handleMenuClick}>
             Kontakt
           </MenuLink>
         </MenuItem>

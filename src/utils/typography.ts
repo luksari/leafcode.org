@@ -17,11 +17,11 @@ const typography = new Typography({
   googleFonts: [
     {
       name: config.headerFontFamily,
-      styles: ['700', '600', '900'],
+      styles: ['400', '700', '600', '900'],
     },
     {
       name: config.bodyFontFamily,
-      styles: ['400', '500'],
+      styles: ['400', '500', '700', '900'],
     },
   ],
 });

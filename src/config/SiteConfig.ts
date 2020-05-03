@@ -5,12 +5,11 @@ export const config = {
   siteTitleAlt: 'Na Froncie - Frontend new', // Alternative Site title for SEO
   siteUrl: 'https://typescript-power-blog.github.com', // Domain of your site. No trailing slash!
   siteLanguage: 'pl', // Language Tag on <html> element
-  siteBanner: 'src/assets/bg.jpg', // Your image for og:image tag. You can find it in the /static folder
-  defaultBg: 'src/assets/default_post.jpg', // default post background header
-  favicon: 'src/assets/favicon.png', // Your image for favicons. You can find it in the /src folder
+  defaultBg: 'static/default_post.jpg', // default post background header
+  favicon: 'static/favicon.png', // Your image for favicons. You can find it in the /src folder
   siteDescription: 'Front-end, Programowanie, Newsy', // Your site description
   author: 'Łukasz Tyszkiewicz',
-  siteLogo: 'src/assets/sigil.svg', 
+  siteLogo: 'static/sigil.svg', 
 
   // siteFBAppID: '123456789', // Facebook App ID - Optional
   userTwitter: '', // Twitter Username - Optional

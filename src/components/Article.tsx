@@ -10,40 +10,25 @@ import { Subline } from './Subline';
 const Banner = styled(Img)`
   margin: 0;
   border: 5px solid ${({ theme }) => theme.colors.bgLight};
-  width: auto;
 `;
 
 const Post = styled.article<{ readonly primary?: boolean }>`
   display: grid;
   margin: 15px;
   overflow: hidden;
-  grid-column-gap: 20px;
   border-radius: 4px;
   background: ${({ theme }) => theme.colors.bgLight};
   box-shadow: 0px 2px 8px ${({ theme }) => theme.colors.grey.ultraLight};
-  transition: transform 500ms ease-in-out;
-  flex: ${({ primary }) => (primary ? '1 100%' : '1 25%')};
-  grid-template-columns: ${({ primary }) => (primary ? '1fr 0.8fr' : '1fr')};
+  flex: ${({ primary }) => (primary ? '1 1 100%' : '1 1 25%')};
+  grid-template-columns: ${({ primary }) => (primary ? '1fr 1fr' : '1fr')};
   border-top: 5px solid ${({ theme }) => theme.colors.accent};
   @media ${media.tablet} {
     flex: 1 100%;
-    max-width: 500px;
     grid-template-columns: 1fr;
     grid-template-rows: 350px 1fr;
   }
   @media ${media.phone} {
     grid-template-rows: 235px 1fr;
-  }
-  ${Banner} {
-    width: auto;
-    height: ${({ primary }) => (primary ? 'auto' : '250px')};
-    @media ${media.tablet} {
-      width: auto;
-      height: 350px;
-    }
-    @media ${media.phone} {
-      height: 235px;
-  }
   }
 `;
 

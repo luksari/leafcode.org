@@ -10,6 +10,7 @@ import { SectionTitle } from '@components/Title';
 
 const SublineWrapper = styled.div`
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
   padding: 15px;
@@ -27,7 +28,7 @@ export const IndexPage: FC<IPageProps> = ({ data }) => {
       <Hero main/>
       <PostsContent>
         <SectionTitle>
-          Ostatnie posty
+          Latest articles
         </SectionTitle>
         {edges
             .slice(0, config.HOMEPAGE_POSTS)
@@ -44,12 +45,13 @@ export const IndexPage: FC<IPageProps> = ({ data }) => {
                 key={post.node.id}
               />
             ))}
+        <SublineWrapper>
+          <Link to='/blog'>
+            <Button>Wszystkie wpisy ( {totalCount} )</Button>
+          </Link>
+        </SublineWrapper>
       </PostsContent>
-      <SublineWrapper>
-        <Link to='/blog'>
-          <Button>Wszystkie wpisy ( {totalCount} )</Button>
-        </Link>
-      </SublineWrapper>
+      
     </Layout>
   );
 };

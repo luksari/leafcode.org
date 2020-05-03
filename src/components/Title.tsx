@@ -69,12 +69,16 @@ export const PageTitleSecondary = styled.h2`
 `;
 
 export const SectionTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSize.biggest};
-  text-transform: 'normal';
-  text-align: center;
+  font-size: 3rem;
+  align-self: flex-start;
+  justify-self: flex-start;
+  margin-right: auto;
   color: ${({  theme }) => theme.colors.darkText};
   margin-bottom: 10px;
   @media ${media.tablet} {
-    font-size: ${({ theme }) => theme.fontSize.big};
+    font-size: 2rem;
+  }
+  @media ${media.phone} {
+    font-size: 1.6rem;
   }
 `;
