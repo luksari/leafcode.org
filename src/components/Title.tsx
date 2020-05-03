@@ -74,7 +74,7 @@ export const SectionTitle = styled.h3`
   justify-self: flex-start;
   margin-right: auto;
   color: ${({  theme }) => theme.colors.darkText};
-  margin-bottom: 10px;
+  margin-bottom: 35px;
   @media ${media.tablet} {
     font-size: 2rem;
   }

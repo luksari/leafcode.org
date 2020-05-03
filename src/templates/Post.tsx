@@ -67,7 +67,6 @@ interface IProps {
   readonly pathContext: IPathContext;
 }
 export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx: post } }) => {
-  console.log(post);
   return (
     <Layout>
       {post && (

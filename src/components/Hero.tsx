@@ -120,10 +120,10 @@ export const Hero: FC<IProps> = ({
           />
           <TitleWrapper>
             <LogoImage />
-            <PageTitle data-text={title} background>
+            <PageTitle data-text={title}>
               {title}
             </PageTitle>        
-            <PageTitleSecondary data-text={subTitle} background>
+            <PageTitleSecondary data-text={subTitle}>
               {subTitle}
             </PageTitleSecondary>
           </TitleWrapper>

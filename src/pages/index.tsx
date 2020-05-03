@@ -2,11 +2,9 @@ import { graphql, Link } from 'gatsby';
 import React, { FC } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Article, Button, Layout, PostsContent } from '../components';
-import { Hero } from '../components';
+import { Article, Button, Layout, PostsContent, AboutMe, Hero, SectionTitle } from '../components';
 import { config } from '@config/SiteConfig';
 import { IPageProps } from '../models/PageProps';
-import { SectionTitle } from '@components/Title';
 
 const SublineWrapper = styled.div`
   display: flex;
@@ -51,7 +49,7 @@ export const IndexPage: FC<IPageProps> = ({ data }) => {
           </Link>
         </SublineWrapper>
       </PostsContent>
-      
+      <AboutMe />
     </Layout>
   );
 };

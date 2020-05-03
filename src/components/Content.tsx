@@ -2,25 +2,27 @@ import styled from 'styled-components';
 import { media } from '../utils/media';
 
 export const Content = styled.section`
-  padding: 2rem 9rem;
+  padding: 3rem 15%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background-color: ${({ theme }) => theme.colors.bgLight};
-  z-index: 2;
+  z-index: 1;
   @media ${media.tablet} {
-    padding: 3rem 3rem;
+    padding: 1rem 10%;
   }
   @media ${media.phone} {
-    padding: 1rem 1.5rem;
+    padding: 1rem 10%;
   }
 `;
 
 export const PostsContent = styled.section`
-  padding: 3rem 15%;
+  padding: 0 15%;
   display: flex;
   flex-wrap: wrap;
   height: 100%;
-  z-index: 25;
+  z-index: 1;
   margin-top: -8rem;
-  position: relative;
   @media ${media.tablet} {
     padding: 1rem 10%;
     margin-top: -3.5rem;
