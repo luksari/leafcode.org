@@ -107,7 +107,7 @@ export const AboutMe = () => {
           I do like learning new languages,
           for now I have chosen Spanish and Brasilian Portuguese to learn.
           On daily basis I spend my free time on Yoga <Emoji label="Man doing yoga emoji">🧘‍♂️</Emoji>,
-          Cycling <Emoji label="Bicycle emoji">🚴</Emoji> and little bit of gaming <Emoji label="Desktop emoji">🎮</Emoji>
+          Cycling <Emoji label="Bicycle emoji">🚴</Emoji> and a little bit of gaming <Emoji label="Gamepad emoji">🎮</Emoji>
         </MainParagraph>
       </ParagraphContainer>
     </Content>

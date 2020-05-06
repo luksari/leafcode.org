@@ -160,8 +160,13 @@ export const Menu: FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [visible, setVisible] = useState(true);
   const [prevPos, setPrevPos] = useState({ x, y });
+
+  const isClient = typeof window === 'object';
   
   const isBlogPost = useMemo(() => {
+    if(!isClient) {
+      return;
+    }
     const regex = /(blog)\/((\w+)-(\w)([\w-]*)|\w+)/g
     return regex.test(window.location.href)
   }, [window.location.href]) 
