@@ -7,6 +7,7 @@ import { StyledLink } from './Link';
 import { LogoSigil } from './Logo';
 import { Link } from 'gatsby';
 import { motion, Variants } from 'framer-motion';
+import { useWindowLocation } from '@utils/useWindowLocation';
 
 const visibilityVariants = {
   visible: { y: 0 },
@@ -161,15 +162,12 @@ export const Menu: FC = () => {
   const [visible, setVisible] = useState(true);
   const [prevPos, setPrevPos] = useState({ x, y });
 
-  const isClient = typeof window === 'object';
-  
+  const location = useWindowLocation();
+
   const isBlogPost = useMemo(() => {
-    if(!isClient) {
-      return;
-    }
-    const regex = /(blog)\/((\w+)-(\w)([\w-]*)|\w+)/g
-    return regex.test(window.location.href)
-  }, [window.location.href]) 
+    const regex = /(blog)\/((\w+)-(\w)([\w-]*)|\w+)/g;
+    return location && regex.test(location.href);
+  }, [location]);
 
   
   useDebounce(

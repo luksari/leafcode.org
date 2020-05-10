@@ -1,11 +1,56 @@
 ---
-title: Juniorship
+title: Three.js
 tags:
   - frontend
+  - webgl
 date: 2020-04-19T11:22:01.100Z
-category: Praca
+category: frontend
 banner: banner.png
 timeToRead: 5
 ---
 
-Hej, co tam słychać 🐮 Change xdxd
+# What is three.js
+
+Three.js is a library that allows you to opperate on 3D scenes in browser,
+normally you can position elements on 3 axis X, Y, Z. 
+Three.js allows you to add some additional informations, meshes,
+light points and camera settings, like in Unity, like in every 3D game 😄
+
+
+## Scene
+
+Scene contains **meshes** and **lights**, 
+lights are just lights, simple points that act like a light bulb with a lot of properties to set 💡
+But meshes are little bit more complex, they consist of geometry of accurate shape, and material of this shape. Like cuboid ⬛️ made from metal 🤘
+
+## Camera
+
+**Camera** is some kind of the point that looks to the whole scene, it has properties like `[x,y,z]` position,
+it is not placed on scene by itself, but you will see it in code more clearly
+
+## Initialization
+
+First we need a little bit of HTML in `index.html` with our `index.js` script and Three.js for example this one [Three.js CDN](https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js) from cdn
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>3️⃣.js playground</title>
+  </head>
+  <body>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+  <script src="index.js"></script>
+  </body>
+</html>
+
+```
+
+Okay, our `index.html` is ready to go, but we also need `index.js` file that we will use to perform 3D operations with usage of Three.js library.
+Because we have included Three.js in `index.html`, we can use `THREE` object straightforward 
+
+```javascript
+
+```
+
