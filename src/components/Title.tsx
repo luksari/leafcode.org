@@ -53,6 +53,10 @@ export const PageTitle = styled.h1`
   }
 `;
 
+export const PostTitle = styled(PageTitle)`
+    text-align: center;
+`
+
 export const PageTitleSecondary = styled.h2`
   font-style: italic;
   font-weight: 900;

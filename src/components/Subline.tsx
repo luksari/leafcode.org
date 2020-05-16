@@ -1,13 +1,9 @@
-import { rgba } from 'polished';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { media } from '../utils/media';
 
-export const Subline = styled.p<{ sectionTitle?: boolean; light?: boolean}>`
+export const Subline = styled.p<{ sectionTitle?: boolean}>`
   font-size: ${({ theme }) => theme.fontSize.small};
-  color: ${({ theme }) => theme.colors.grey.bluish};
-  ${({ light, theme }) => light && css`
-    color: ${rgba(theme.colors.bgLight, 0.7)}
-    `};
+  color: ${({ theme }) => theme.colors.darkText};
   ${({ sectionTitle }) => sectionTitle && 'text-align: center'};
   width: 100%;
   margin-bottom: 8px;
@@ -21,4 +17,3 @@ export const Subline = styled.p<{ sectionTitle?: boolean; light?: boolean}>`
     font-size: ${({ theme }) => theme.fontSize.smallest};
   }
 `;
-export default Subline;

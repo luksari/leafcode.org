@@ -5,7 +5,7 @@ import BackgroundImage from 'gatsby-background-image';
 import { kebabCase } from 'lodash';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Content, Header, Layout, PrevNext, SEO, StyledLink, Subline, PageTitle } from '../components';
+import { Content, Header, Layout, PrevNext, SEO, StyledLink, Subline, PostTitle } from '../components';
 import { IPathContext } from '../models/PathContext';
 import { IPost } from '../models/Post';
 import { media } from '../utils/media';
@@ -27,7 +27,7 @@ const PostContent = styled.div`
 `;
 
 const PostSubline = styled(Subline)`
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.darkText};
   width: 250px;
   * {
     margin: 0 6px;
@@ -83,7 +83,7 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx:
               </StyledLink>
               / {post.frontmatter.date}
             </PostSubline>
-            <PageTitle>{post.frontmatter.title}</PageTitle>
+            <PostTitle>{post.frontmatter.title}</PostTitle>
           </PostHeader>
           <StyledBackgroundImage fluid={post.frontmatter.banner.childImageSharp.fluid} />
           <Content>
@@ -95,9 +95,12 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx:
                   <TagsWrapper>
                     Tagi: &#160;
                     {post.frontmatter.tags.map((tag, i) => (
-                      <StyledLink key={i} to={`/tags/${kebabCase(tag)}`}>
-                        <strong>{tag}</strong> {i < post.frontmatter.tags.length - 1 ? `, ` : ``}
-                      </StyledLink>
+                      <>
+                        <StyledLink key={i} to={`/tags/${kebabCase(tag)}`}>
+                          {tag}
+                        </StyledLink>
+                        {i < post.frontmatter.tags.length - 1 ? `, ` : ``}
+                      </>
                     ))}
                   </TagsWrapper>
                 )}

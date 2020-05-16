@@ -6,22 +6,19 @@ import React, { FunctionComponent, SyntheticEvent } from 'react';
 import styled from 'styled-components';
 import { media } from '../utils/media';
 import { Subline } from './Subline';
+import { motion } from 'framer-motion';
 
 const Banner = styled(Img)`
   margin: 0;
-  border: 5px solid ${({ theme }) => theme.colors.bgLight};
+  border-radius: 12px;
 `;
 
-const Post = styled.article<{ readonly primary?: boolean }>`
+const Post = styled(motion.article)<{ readonly primary?: boolean }>`
   display: grid;
   margin: 15px;
   overflow: hidden;
-  border-radius: 4px;
-  background: ${({ theme }) => theme.colors.bgLight};
-  box-shadow: 0px 2px 8px ${({ theme }) => theme.colors.grey.ultraLight};
   flex: ${({ primary }) => (primary ? '1 1 100%' : '1 1 25%')};
   grid-template-columns: ${({ primary }) => (primary ? '1fr 1fr' : '1fr')};
-  border-top: 5px solid ${({ theme }) => theme.colors.accent};
   @media ${media.tablet} {
     flex: 1 100%;
     grid-template-columns: 1fr;
@@ -83,7 +80,7 @@ export const Article: FunctionComponent<IProps> = ({ title, date, excerpt, slug,
   };
 
   return (
-    <Post primary={primary} onClick={handleClick}>
+    <Post primary={primary} onClick={handleClick} whileHover={{ y: -10, transition: { duration: 0.33 },  }}>
       <Banner fluid={banner} />
       <ContentWrapper>
         <Title primary={primary}>

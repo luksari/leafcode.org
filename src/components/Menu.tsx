@@ -106,7 +106,6 @@ const MenuLink = styled(StyledLink)`
     content: '';
     background: url('./mark.svg');
     position: absolute;
-    background-blend-mode: multiply;
     z-index: -1;
     left: 0;
     top: 0;
