@@ -5,7 +5,6 @@ export * from './Layout';
 export * from './PrevNext';
 export * from './SEO';
 export * from './Subline';
-export * from './Wrapper';
 export * from './Content';
 export * from './Title';
 export * from './Pagination';

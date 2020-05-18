@@ -6,7 +6,6 @@ require('ts-node').register({
   },
 });
 
-const path = require('path');
 const config = require('./src/config/SiteConfig').default;
 const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
 
@@ -62,26 +61,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-typography',
       options: {
-        pathToConfigModule: 'src/utils/typography.ts',
+        pathToConfigModule: 'src/config/Typography.ts',
       },
-    },
-    {
-      resolve: `gatsby-plugin-alias-imports`,
-      options: {
-        alias: {
-          '@src': path.resolve(__dirname, 'src/'),
-          '@components': path.resolve(__dirname, 'src/components/'),
-          '@static': path.resolve(__dirname, 'static/'),
-          '@pages': path.resolve(__dirname, 'src/pages/'),
-          '@templates': path.resolve(__dirname, 'src/templates/'),
-          '@config': path.resolve(__dirname, 'src/config/'),
-          '@models': path.resolve(__dirname, 'src/models/'),
-          '@utils': path.resolve(__dirname, 'src/utils/'),
-        },
-        extensions: [
-          'js', 'ts', 'tsx', 'jsx'
-        ],
-      }
     },
     {
       resolve: 'gatsby-plugin-manifest',

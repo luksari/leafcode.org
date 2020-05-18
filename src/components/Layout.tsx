@@ -6,7 +6,6 @@ import styled, { createGlobalStyle, ThemeProvider }  from 'styled-components';
 import { media } from '../utils/media';
 import { Footer } from './Footer';
 import { Menu } from './Menu';
-import { Wrapper } from './Wrapper';
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
@@ -51,6 +50,20 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+
+export const Wrapper = styled.div<{ fullWidth?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  max-width: ${({ fullWidth }) => (fullWidth ? '100%' : '100rem')};
+  padding: ${({ fullWidth }) => (fullWidth ? '0' : '0 3rem')};
+  @media ${media.tablet} {
+    padding: ${({ fullWidth }) => (fullWidth ? '0' : '0 3rem')};
+  }
+  @media ${media.phone} {
+    padding: ${({ fullWidth }) => (fullWidth ? '0' : '1rem 1rem')};
+  }
+`;
+
 const PageWrapper = styled.div`
   padding: 0;
   min-width: 100vw;
@@ -59,6 +72,7 @@ const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 export const Layout: FunctionComponent<{ readonly children: ReactElement | ReadonlyArray<ReactElement> }> = ({ children }) => (
   <StaticQuery
     query={graphql`

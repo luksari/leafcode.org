@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { IPost } from '../models/Post';
 
-const Wrapper = styled.div`
+const PrevNextWrapper = styled.div`
   display: flex;
   margin-top: 35px;
   a {
@@ -39,7 +39,7 @@ interface IProps {
 }
 
 export const PrevNext: FC<IProps> = ({ prev, next }) => (
-  <Wrapper>
+  <PrevNextWrapper>
     {prev && (
       <Prev>
         <span>Poprzedni</span>
@@ -52,6 +52,6 @@ export const PrevNext: FC<IProps> = ({ prev, next }) => (
         <Link to={`/blog/${kebabCase(next.frontmatter.title)}`}>{next.frontmatter.title}</Link>
       </Next>
     )}
-  </Wrapper>
+  </PrevNextWrapper>
 );
 export default PrevNext;

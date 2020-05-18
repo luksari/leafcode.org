@@ -122,7 +122,7 @@ export const Hero: FC<IProps> = ({
             <LogoImage />
             <PageTitle data-text={title}>
               {title}
-            </PageTitle>        
+            </PageTitle>
             <PageTitleSecondary data-text={subTitle}>
               {subTitle}
             </PageTitleSecondary>

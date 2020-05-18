@@ -54,8 +54,8 @@ const createClassificationPages = ({
       singularName: 'category',
       pluralName: 'categories',
       template: {
-        part: path.resolve(`src/pages/Category.tsx`),
-        all: path.resolve(`src/pages/AllCategory.tsx`),
+        part: path.resolve(`src/pages/category.tsx`),
+        all: path.resolve(`src/pages/allCategory.tsx`),
       },
       postsByClassificationNames: getPostsByType(posts, 'category'),
     },
@@ -63,8 +63,8 @@ const createClassificationPages = ({
       singularName: 'tag',
       pluralName: 'tags',
       template: {
-        part: path.resolve(`src/pages/Tag.tsx`),
-        all: path.resolve(`src/pages/AllTag.tsx`),
+        part: path.resolve(`src/pages/tag.tsx`),
+        all: path.resolve(`src/pages/allTag.tsx`),
       },
       postsByClassificationNames: getPostsByType(posts, 'tags'),
     },
@@ -173,7 +173,7 @@ exports.createPages = async ({
       }
 
       const posts = result.data.allMdx.edges;
-      const postsPerPage = config.POST_PER_PAGE;
+      const postsPerPage = config.PostsPerPage;
       const numPages = Math.ceil(posts.length / postsPerPage);
       
       posts.forEach(({ node }, i) => {

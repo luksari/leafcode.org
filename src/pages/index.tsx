@@ -29,7 +29,7 @@ export const IndexPage: FC<IPageProps> = ({ data }) => {
           Latest articles
         </SectionTitle>
         {edges
-            .slice(0, config.HOMEPAGE_POSTS)
+            .slice(0, config.HomepagePosts)
             .map((post, index) => (
               <Article
                 banner={post.node.frontmatter.banner.childImageSharp.fluid}

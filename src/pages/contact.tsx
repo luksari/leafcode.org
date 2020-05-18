@@ -10,7 +10,7 @@ const ContactLink = styled.a`
   align-items: center;
 `;
 
-export const ContactPage: FunctionComponent = () => (
+const ContactPage: FunctionComponent = () => (
   <Layout>
     <Helmet title={`Kontakt | ${config.siteTitle}`} />
     <Hero title={'Kontakt'} subTitle={`Skontaktuj się ze mną`} main>

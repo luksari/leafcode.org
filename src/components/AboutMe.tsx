@@ -5,20 +5,26 @@ import { graphql, useStaticQuery } from 'gatsby'
 import styled, { css } from 'styled-components'
 import GatsbyImage from 'gatsby-image'
 import { Emoji } from './Emoji'
+import { getImageByName } from '@utils/getImageByName'
 
-const ImagesQuery = graphql`
-    query PictureQuery {
-      imageSharp(fluid: {originalName: {regex: "/AboutMe/"}}) {
-        id
-        fluid {
-          aspectRatio
-          src
-          srcSet
-          sizes
-          base64
-          tracedSVG
-          srcWebp
-          srcSetWebp
+const PicturesQuery = graphql`
+    query PicturesQuery {
+      allImageSharp(filter: {fluid: {originalName: {regex: "/About/"}}}) {
+        edges {
+          node {
+            id
+            fluid {
+              originalName
+              aspectRatio
+              src
+              srcSet
+              sizes
+              base64
+              tracedSVG
+              srcWebp
+              srcSetWebp
+            }
+          }
         }
       }
     }
@@ -87,12 +93,15 @@ const Bolden = styled.span`
 `
 
 export const AboutMe = () => {
-  const AboutMe = useStaticQuery(ImagesQuery)
+  const images = useStaticQuery(PicturesQuery)
+
+  const image1 = getImageByName(images, 'AboutMe1');
+  const image2 = getImageByName(images, 'AboutMe2');
   return (
     <Content>
       <SectionTitle>About me</SectionTitle>
       <ParagraphContainer>
-        <StyledImage fluid={AboutMe.imageSharp.fluid} />
+      <StyledImage fluid={image1.node.fluid}/>
         <MainParagraph data-initiale='I'>
           I have started learning web development <Bolden>two years ago</Bolden>,
           since then I spend almost <Bolden>every day</Bolden> improving my skills, 
@@ -101,9 +110,16 @@ export const AboutMe = () => {
         </MainParagraph>
       </ParagraphContainer>
       <ParagraphContainer reversed>
-        <StyledImage fluid={AboutMe.imageSharp.fluid} />
+        <StyledImage fluid={image2.node.fluid}/>
         <MainParagraph data-initiale='B'>
-          Besides coding, I am also keen on traveling, meeting new people. 
+          Besides coding, I also do like UI/UX concerns, animations stuff drives me crazy, 
+          these aspects of my creative soul, improves my details and micro-interactions awareness.
+        </MainParagraph>
+      </ParagraphContainer>
+      <ParagraphContainer>
+        <StyledImage fluid={image2.node.fluid}/>
+        <MainParagraph data-initiale='B'>
+          I am also keen on traveling, meeting new people. 
           I do like learning new languages,
           for now I have chosen Spanish and Brasilian Portuguese to learn.
           On daily basis I spend my free time on Yoga <Emoji label="Man doing yoga emoji">🧘‍♂️</Emoji>,

@@ -31,7 +31,7 @@ export const PaginationContent = styled.div`
     &:hover,
     &.current {
       background: ${({ theme }) => theme.colors.secondary};
-      color: ${({ theme }) => theme.colors.white};
+      color: ${({ theme }) => theme.colors.lightText};
     }
     &.prev {
       margin-left: -1.5rem;
