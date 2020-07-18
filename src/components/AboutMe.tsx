@@ -1,5 +1,5 @@
 import React from 'react'
-import { Content } from './Content'
+import { AboutMeContent } from './Content'
 import { SectionTitle } from './Title'
 import { graphql, useStaticQuery } from 'gatsby'
 import styled, { css } from 'styled-components'
@@ -97,8 +97,9 @@ export const AboutMe = () => {
 
   const image1 = getImageByName(images, 'AboutMe1');
   const image2 = getImageByName(images, 'AboutMe2');
+  const image3 = getImageByName(images, 'AboutMe3');
   return (
-    <Content>
+    <AboutMeContent>
       <SectionTitle>About me</SectionTitle>
       <ParagraphContainer>
       <StyledImage fluid={image1.node.fluid}/>
@@ -117,7 +118,7 @@ export const AboutMe = () => {
         </MainParagraph>
       </ParagraphContainer>
       <ParagraphContainer>
-        <StyledImage fluid={image2.node.fluid}/>
+        <StyledImage fluid={image3.node.fluid}/>
         <MainParagraph data-initiale='B'>
           I am also keen on traveling, meeting new people. 
           I do like learning new languages,
@@ -126,7 +127,7 @@ export const AboutMe = () => {
           Cycling <Emoji label="Bicycle emoji">🚴</Emoji> and a little bit of gaming <Emoji label="Gamepad emoji">🎮</Emoji>
         </MainParagraph>
       </ParagraphContainer>
-    </Content>
+    </AboutMeContent>
   )
 }
 

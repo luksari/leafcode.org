@@ -1,6 +1,6 @@
 {
-  "name": "gatsby-starter-typescirpt-power-blog",
-  "description": "gatsyby blog template with typescript and tslint",
+  "name": "nafroncie.com",
+  "description": "Na froncie landing page",
   "version": "1.0.0",
   "author": "Łukasz Tyszkiewicz - Na Froncie - (nafroncie@gmail.com)",
   "keywords": [
@@ -37,7 +37,6 @@
     "prismjs": "^1.15.0",
     "react-typography": "^0.16.13",
     "source-map-support": "^0.5.16",
-    "styled-components": "^5.0.1",
     "ts-node": "^7.0.1",
     "typescript": "^3.6.2",
     "typescript-styled-plugin": "^0.14.0"
@@ -79,6 +78,7 @@
     "react-helmet": "^5.2.0",
     "react-particles-js": "^2.7.1",
     "react-use": "^14.1.1",
+    "styled-components": "^5.1.1",
     "typography": "^0.16.17",
     "typography-theme-doelger": "^0.16.19"
   }

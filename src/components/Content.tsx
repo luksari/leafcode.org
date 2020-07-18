@@ -33,3 +33,7 @@ export const PostsContent = styled.section`
     padding: 1rem 10%;
   }
 `;
+
+export const AboutMeContent = styled(Content)`
+  padding: 3rem 15%;
+`;
