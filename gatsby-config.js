@@ -28,8 +28,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'static',
-        path: `${__dirname}/static`,
+        name: 'images',
+        path: `${__dirname}/static/images`,
       },
     },
     {
@@ -44,19 +44,10 @@ module.exports = {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: `${__dirname}/static`,
+          include: `${__dirname}/static/svgs`,
           omitKeys: ['xmlnsDc', 'xmlnsCc', 'xmlnsRdf', 'xmlnsSvg', 'xmlnsSodipodi', 'xmlnsInkscape', 'xmlnsSerif'],
         }
       }
-    },
-    {
-      resolve: `gatsby-plugin-google-tagmanager`,
-      options: {
-        id: config.GOOGLE_TAG_MANAGER_ID,
-        // Include GTM in development.
-        // Defaults to false meaning GTM will only be loaded in production.
-        includeInDevelopment: false,
-      },
     },
     {
       resolve: 'gatsby-plugin-typography',

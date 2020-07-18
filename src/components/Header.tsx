@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { media } from '../utils/media';
 
 const HeaderWrapper = styled.header`
-  margin-top: 65px;
   position: relative;
   height: 100%;
 `;
@@ -24,12 +23,12 @@ const Content = styled.div`
 `;
 
 interface IProps {
-  readonly children: ReactElement | ReadonlyArray<ReactElement>;
-  readonly banner?: string;
+  children: ReactElement | ReadonlyArray<ReactElement>;
+  className?: string;
 }
 
-export const Header: FC<IProps> = ({ children }) => (
-  <HeaderWrapper>
+export const Header: FC<IProps> = ({ children, className }) => (
+  <HeaderWrapper className={className}>
     <Content>{children}</Content>
   </HeaderWrapper>
 );

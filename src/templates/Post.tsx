@@ -5,24 +5,31 @@ import BackgroundImage from 'gatsby-background-image';
 import { kebabCase } from 'lodash';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Content, Header, Layout, PrevNext, SEO, StyledLink, Subline, PostTitle } from '../components';
+import { Header, Layout, PrevNext, SEO, StyledLink, Subline, PostTitle } from '../components';
 import { IPathContext } from '../models/PathContext';
 import { IPost } from '../models/Post';
 import { media } from '../utils/media';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 const PostContent = styled.div`
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
   background: white;
   padding: 2rem;
   border-radius: 8px;
-  margin-top: -12rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   position: relative;
   box-shadow: 0px 15px 10px -15px ${({ theme }) => theme.colors.darkText};
- 
+
+  @media ${media.laptop} {
+    width: 70%;
+  }
   @media ${media.tablet} {
+    width: 80%;
     padding: 1rem;
-    margin-top: -4rem;
+    margin-top: 1rem;
   }
 `;
 
@@ -35,18 +42,23 @@ const PostSubline = styled(Subline)`
 `;
 
 const StyledBackgroundImage = styled(BackgroundImage)`
+margin-top: 65px;
   position: relative;
-  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  background-position: bottom center;
+  align-items: center;
+  background-position: center center;
   background-attachment: fixed;
-  background-repeat: repeat-y;
-  background-size: cover;
-  height: 600px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 720px;
+  width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+
   @media ${media.tablet} {
-    height: 400px;
+    height: 720px;
+    width: 100%;
   }
 `;
 
@@ -58,6 +70,9 @@ const TagsWrapper = styled.div`
 `
 const PostHeader = styled(Header)`
   min-height: 300px;
+  background: #ffffff77;
+  display: flex;
+  align-items: center;
 `;
 
 interface IProps {
@@ -73,20 +88,21 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx:
         <>
           <SEO postPath={post.fields.slug} postNode={post} postSEO />
           <Helmet title={`${post.frontmatter.title} | ${config.siteTitle}`} />
-          <PostHeader>
-            <PostSubline sectionTitle>
-              <StyledLink to={'/blog'}>
-                Blog
-              </StyledLink>
-              /<StyledLink to={`/categories/${kebabCase(post.frontmatter.category)}`}>
-                {post.frontmatter.category}
-              </StyledLink>
-              / {post.frontmatter.date}
-            </PostSubline>
-            <PostTitle>{post.frontmatter.title}</PostTitle>
-          </PostHeader>
-          <StyledBackgroundImage fluid={post.frontmatter.banner.childImageSharp.fluid} />
-          <Content>
+          
+          <StyledBackgroundImage fluid={post.frontmatter.banner.childImageSharp.fluid}>
+            <PostHeader>
+              <PostSubline sectionTitle>
+                <StyledLink to={'/blog'}>
+                  Blog
+                </StyledLink>
+                /<StyledLink to={`/categories/${kebabCase(post.frontmatter.category)}`}>
+                  {post.frontmatter.category}
+                </StyledLink>
+                / {post.frontmatter.date}
+              </PostSubline>
+              <PostTitle>{post.frontmatter.title}</PostTitle>
+            </PostHeader>
+          </StyledBackgroundImage>
             <PostContent>
               {/* <MDXProvider> */}
                 <MDXRenderer>{post.body}</MDXRenderer>
@@ -96,7 +112,7 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx:
                     Tagi: &#160;
                     {post.frontmatter.tags.map((tag, i) => (
                       <>
-                        <StyledLink key={i} to={`/tags/${kebabCase(tag)}`}>
+                        <StyledLink key={tag} to={`/tags/${kebabCase(tag)}`}>
                           {tag}
                         </StyledLink>
                         {i < post.frontmatter.tags.length - 1 ? `, ` : ``}
@@ -106,8 +122,6 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx:
                 )}
                 <PrevNext prev={prev} next={next} />
             </PostContent>
-          </Content>
-    
         </>
       )}
     </Layout>

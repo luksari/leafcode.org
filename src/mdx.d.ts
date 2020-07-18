@@ -30,8 +30,8 @@ declare module '@mdx-js/react' {
       [key in ComponentType]?: React.ComponentType<{children: React.ReactNode}>
     }
     export interface MDXProviderProps {
-      children: React.ReactNode
-      components: Components
+      children: React.ReactNode;
+      components: Components;
     }
     export class MDXProvider extends React.Component<MDXProviderProps> {}
   }

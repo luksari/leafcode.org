@@ -8,6 +8,7 @@ import { LogoSigil } from './Logo';
 import { Link } from 'gatsby';
 import { motion, Variants } from 'framer-motion';
 import { useWindowLocation } from '@utils/useWindowLocation';
+import * as MenuMark from "@static/images/mark.png"
 
 const visibilityVariants = {
   visible: { y: 0 },
@@ -104,7 +105,7 @@ const MenuLink = styled(StyledLink)`
   }
   &::after {
     content: '';
-    background: url('./mark.svg');
+    background: url(${MenuMark});
     position: absolute;
     z-index: -1;
     left: 0;
