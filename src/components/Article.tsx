@@ -22,13 +22,15 @@ const Post = styled(motion.article)<{ readonly primary?: boolean }>`
   width: 600px;
   flex: ${({ primary }) => (primary ? '1 1 100%' : '1 1 25%')};
   grid-template-columns: ${({ primary }) => (primary ? '1.2fr 1fr' : '1fr')};
+  cursor: pointer;
   @media ${media.tablet} {
     flex: 1 100%;
     grid-template-columns: 1fr;
-    grid-template-rows: 250px 1fr;
+    grid-template-rows: 300px 1fr;
+    max-height: 100%;
   }
   @media ${media.phone} {
-    grid-template-rows: 180px 1fr;
+    grid-template-rows: 300px 1fr;
   }
 `;
 

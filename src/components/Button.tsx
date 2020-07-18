@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const Button = styled.button<{ big?: boolean }>`
   background: ${({ theme }) => theme.colors.accent};
+  cursor: pointer;
   border: none;
   display: inline-flex;
   align-items: center;

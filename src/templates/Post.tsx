@@ -42,22 +42,23 @@ const PostSubline = styled(Subline)`
 `;
 
 const StyledBackgroundImage = styled(BackgroundImage)`
+margin-top: 65px;
   position: relative;
-  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   background-position: center center;
   background-attachment: fixed;
-  background-repeat: repeat-y;
+  background-repeat: no-repeat;
   background-size: contain;
-  height: 750px;
-  width: 50%;
+  height: 720px;
+  width: 1280px;
   margin-left: auto;
   margin-right: auto;
 
   @media ${media.tablet} {
-    height: 400px;
+    height: 720px;
+    width: 100%;
   }
 `;
 
@@ -69,6 +70,9 @@ const TagsWrapper = styled.div`
 `
 const PostHeader = styled(Header)`
   min-height: 300px;
+  background: #ffffff77;
+  display: flex;
+  align-items: center;
 `;
 
 interface IProps {
@@ -84,19 +88,21 @@ export const PostPage: FC<IProps> = ({ pathContext: { prev, next }, data: { mdx:
         <>
           <SEO postPath={post.fields.slug} postNode={post} postSEO />
           <Helmet title={`${post.frontmatter.title} | ${config.siteTitle}`} />
-          <PostHeader>
-            <PostSubline sectionTitle>
-              <StyledLink to={'/blog'}>
-                Blog
-              </StyledLink>
-              /<StyledLink to={`/categories/${kebabCase(post.frontmatter.category)}`}>
-                {post.frontmatter.category}
-              </StyledLink>
-              / {post.frontmatter.date}
-            </PostSubline>
-            <PostTitle>{post.frontmatter.title}</PostTitle>
-          </PostHeader>
-          <StyledBackgroundImage fluid={post.frontmatter.banner.childImageSharp.fluid} />
+          
+          <StyledBackgroundImage fluid={post.frontmatter.banner.childImageSharp.fluid}>
+            <PostHeader>
+              <PostSubline sectionTitle>
+                <StyledLink to={'/blog'}>
+                  Blog
+                </StyledLink>
+                /<StyledLink to={`/categories/${kebabCase(post.frontmatter.category)}`}>
+                  {post.frontmatter.category}
+                </StyledLink>
+                / {post.frontmatter.date}
+              </PostSubline>
+              <PostTitle>{post.frontmatter.title}</PostTitle>
+            </PostHeader>
+          </StyledBackgroundImage>
             <PostContent>
               {/* <MDXProvider> */}
                 <MDXRenderer>{post.body}</MDXRenderer>
