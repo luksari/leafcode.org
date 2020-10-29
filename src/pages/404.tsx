@@ -1,19 +1,13 @@
 import { Link } from 'gatsby';
 import React, { FC } from 'react';
-import Helmet from 'react-helmet';
-import { Content, Header, Layout, PageTitle, Wrapper } from '../components';
-import { config } from '@config/SiteConfig';
+import { Content, Layout, Wrapper } from '../components';
 
 export const NotFoundPage: FC = () => (
   <Layout>
-    <Helmet title={`404 Nie znaleziono | ${config.siteTitle}`} />
-    <Header>
-      <Link to='/'>{config.siteTitle}</Link>
-      <PageTitle>Nie znaleziono</PageTitle>
-    </Header>
     <Wrapper>
       <Content>
-        <p>Hej, chyba nie powinno Cię tu być 😔</p>
+        <p>Hmm, chyba nie powinno Cię tu być 🤔</p>
+        <Link to="/">Wróć do strony głównej</Link>
       </Content>
     </Wrapper>
   </Layout>

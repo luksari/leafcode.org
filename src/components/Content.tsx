@@ -23,6 +23,9 @@ export const PostsContent = styled.section`
   height: 100%;
   z-index: 1;
   margin-top: -8rem;
+  @media ${media.laptopS} {
+    padding: 0 10%;
+  }
   @media ${media.tablet} {
     padding: 1rem 10%;
     margin-top: -3.5rem;
@@ -35,5 +38,5 @@ export const PostsContent = styled.section`
 `;
 
 export const AboutMeContent = styled(Content)`
-  padding: 3rem 15%;
+  padding: 3rem 20%;
 `;

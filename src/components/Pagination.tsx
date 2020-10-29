@@ -14,7 +14,6 @@ export const PaginationContent = styled.div`
   border-radius: 35px;
   width: 100%;
   height: 100%;
-  background-color: #eee;
 
   @media ${media.phone} {
     padding: 0 1rem;
@@ -85,7 +84,10 @@ interface IProps {
 export const Pagination: FC<IProps> = ({ currentPage, totalPages, url }) => {
   const isFirst = currentPage === 1;
   const isLast = currentPage === totalPages;
-  const prevPage = currentPage - 1 === 1 ? `/${url}/` : `/${url}/${(currentPage - 1).toString()}`;
+  const prevPage =
+    currentPage - 1 === 1
+      ? `/${url}/`
+      : `/${url}/${(currentPage - 1).toString()}`;
   const nextPage = `/${url}/${(currentPage + 1).toString()}`;
 
   return (
@@ -94,13 +96,17 @@ export const Pagination: FC<IProps> = ({ currentPage, totalPages, url }) => {
         <PaginationContainer>
           <PaginationContent>
             {!isFirst && (
-              <Link className='prev page-numbers' to={prevPage} rel='prev'>
+              <Link className="prev page-numbers" to={prevPage} rel="prev">
                 ← Poprzednia
               </Link>
             )}
             {Array.from({ length: totalPages }, (_, i) => (
               <Link
-                className={currentPage === i + 1 ? 'page-numbers current' : 'page-numbers'}
+                className={
+                  currentPage === i + 1
+                    ? 'page-numbers current'
+                    : 'page-numbers'
+                }
                 key={`pagination-number${i + 1}`}
                 to={`/${url}/${i === 0 ? '' : i + 1}`}
               >
@@ -108,7 +114,7 @@ export const Pagination: FC<IProps> = ({ currentPage, totalPages, url }) => {
               </Link>
             ))}
             {!isLast && (
-              <Link className='next page-numbers' to={nextPage} rel='next'>
+              <Link className="next page-numbers" to={nextPage} rel="next">
                 Następna →
               </Link>
             )}

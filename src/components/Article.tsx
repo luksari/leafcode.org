@@ -11,14 +11,14 @@ import { motion } from 'framer-motion';
 const Banner = styled(Img)`
   margin: 0;
   border-radius: 12px;
-  height: 300px;
+  height: 100%;
 `;
 
 const Post = styled(motion.article)<{ readonly primary?: boolean }>`
   display: grid;
   margin: 15px;
   overflow: hidden;
-  max-height: 300px;
+  max-height: 350px;
   width: 600px;
   flex: ${({ primary }) => (primary ? '1 1 100%' : '1 1 25%')};
   grid-template-columns: ${({ primary }) => (primary ? '1.2fr 1fr' : '1fr')};
@@ -31,12 +31,15 @@ const Post = styled(motion.article)<{ readonly primary?: boolean }>`
   }
   @media ${media.phone} {
     grid-template-rows: 300px 1fr;
+    overflow: visible;
   }
 `;
 
-
 const ContentWrapper = styled.div`
   padding: 25px;
+  @media ${media.phone} {
+    padding: 10px 0;
+  }
 `;
 
 const Title = styled.h2<{ readonly primary?: boolean }>`
@@ -49,6 +52,7 @@ const Title = styled.h2<{ readonly primary?: boolean }>`
   }
   @media ${media.phone} {
     font-size: 1rem;
+    margin-bottom: 0.45rem;
   }
 `;
 
@@ -62,8 +66,11 @@ const Initiale = styled.span`
 `;
 
 const Excerpt = styled.p`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
+  @media ${media.phone} {
+    margin: 0;
+    margin-top: 0.5rem;
+  }
 `;
 
 interface IProps {
@@ -77,7 +84,16 @@ interface IProps {
   readonly banner?: FluidObject;
 }
 
-export const Article: FunctionComponent<IProps> = ({ title, date, excerpt, slug, timeToRead, category, primary, banner }) => {
+export const Article: FunctionComponent<IProps> = ({
+  title,
+  date,
+  excerpt,
+  slug,
+  timeToRead,
+  category,
+  primary,
+  banner,
+}) => {
   const firstChar = title.charAt(0);
   const handleClick = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -85,7 +101,11 @@ export const Article: FunctionComponent<IProps> = ({ title, date, excerpt, slug,
   };
 
   return (
-    <Post primary={primary} onClick={handleClick} whileHover={{ y: -10, transition: { duration: 0.33 },  }}>
+    <Post
+      primary={primary}
+      onClick={handleClick}
+      whileHover={{ y: -10, transition: { duration: 0.33 } }}
+    >
       <Banner fluid={banner} />
       <ContentWrapper>
         <Title primary={primary}>
@@ -93,7 +113,8 @@ export const Article: FunctionComponent<IProps> = ({ title, date, excerpt, slug,
           <Link to={`/blog/${slug}`}>{title}</Link>
         </Title>
         <Subline>
-          {moment(date, 'YYYY-MM-DD').format('DD.MM.YYYY')} &mdash; {timeToRead} min. czytania &mdash; w
+          {moment(date, 'YYYY-MM-DD').format('DD.MM.YYYY')} &mdash; {timeToRead}{' '}
+          min. czytania &mdash; w
           <Link to={`/categories/${kebabCase(category)}`}> {category}</Link>
         </Subline>
         <Excerpt>{excerpt}</Excerpt>

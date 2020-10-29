@@ -44,28 +44,29 @@ export const PageTitle = styled.h1`
   margin-bottom: 0;
   z-index: 1;
   color: ${({ theme }) => theme.colors.darkText};
-  text-align: left;
+  text-align: start;
   @media ${media.tablet} {
     font-size: 4.2rem;
   }
   @media ${media.phone} {
     font-size: 3.3rem;
+    text-align: center;
   }
 `;
 
 export const PostTitle = styled(PageTitle)`
-    text-align: center;
-`
+  text-align: center;
+`;
 
 export const PageTitleSecondary = styled.h2`
-  font-style: italic;
+  font-family: 'Fira sans', sans-serif;
   font-weight: 900;
-  font-size: 2rem;
+  font-size: 1.4rem;
   z-index: 1;
   margin: 0;
   color: ${({ theme }) => theme.colors.darkText};
   @media ${media.tablet} {
-    font-size: 1.9rem;
+    font-size: 1.5rem;
   }
   @media ${media.phone} {
     font-size: 1.5rem;
@@ -77,7 +78,7 @@ export const SectionTitle = styled.h3`
   align-self: flex-start;
   justify-self: flex-start;
   margin-right: auto;
-  color: ${({  theme }) => theme.colors.darkText};
+  color: ${({ theme }) => theme.colors.darkText};
   margin-bottom: 35px;
   @media ${media.tablet} {
     font-size: 2rem;

@@ -1,35 +1,13 @@
-import { config } from '@config/SiteConfig';
-import { Link } from 'gatsby';
 import React, { FC } from 'react';
-import Helmet from 'react-helmet';
-import styled from 'styled-components';
-import { Article, Button, Layout, PostsContent, Subline } from '../components';
-import { Hero } from '../components';
-import { IPageProps } from '../models/PageProps';
-import { IPost } from '../models/Post';
-import { getPostSubline } from '../utils/subline';
+import { Article, Layout, PostsContent } from '@components/index';
+import { IPageProps } from '@models/PageProps';
+import { IPost } from '@models/Post';
 
-const StyledLink = styled(Link)`
-  align-self: center;
-  color: ${({ theme }) => theme.colors.darkText};
-  display: block;
-`;
-
-export const Category: FC<IPageProps> = ({ pathContext: { posts, categoryName } }) => {
-  const totalCount = posts ? posts.length : 0;
-  const subline = getPostSubline({ totalCount, name: categoryName });
-
+export const Category: FC<IPageProps> = ({
+  pathContext: { posts, categoryName },
+}) => {
   return (
-    <Layout>
-      <Helmet title={`${categoryName} | ${config.siteTitle}`} />
-      <Hero title={'Kategorie'} subTitle={`#${categoryName}`}>
-        <>
-          <Subline sectionTitle>{subline}</Subline>
-          <Button>
-            <StyledLink to={'/categories'}>Wszystkie kategorie</StyledLink>
-          </Button>
-        </>
-      </Hero>
+    <Layout title="Kategorie" subTitle={categoryName}>
       <PostsContent>
         {posts &&
           posts.map((post: IPost, index) => (

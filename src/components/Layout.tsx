@@ -1,15 +1,18 @@
+import React, { FC } from 'react';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import Helmet from 'react-helmet';
 import { theme } from '@config/Theme';
-import { graphql, StaticQuery } from 'gatsby';
+import { config } from '@config/SiteConfig';
+import { graphql, useStaticQuery } from 'gatsby';
 import { split } from 'lodash';
-import React, { FunctionComponent, ReactElement } from 'react';
-import styled, { createGlobalStyle, ThemeProvider }  from 'styled-components';
-import { media } from '../utils/media';
+import { media } from '@utils/media';
 import { Footer } from './Footer';
 import { Menu } from './Menu';
+import { Hero } from './Hero';
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
-    color: ${theme.colors.primary};
+    color: ${theme.colors.bgLight};
     background: ${theme.colors.accent};
   }
   body {
@@ -50,10 +53,10 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-
 export const Wrapper = styled.div<{ fullWidth?: boolean }>`
   display: flex;
   flex-direction: column;
+  background: ${({ theme }) => theme.colors.bgLight};
   max-width: ${({ fullWidth }) => (fullWidth ? '100%' : '100rem')};
   padding: ${({ fullWidth }) => (fullWidth ? '0' : '0 3rem')};
   @media ${media.tablet} {
@@ -73,29 +76,45 @@ const PageWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const Layout: FunctionComponent<{ readonly children: ReactElement | ReadonlyArray<ReactElement> }> = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query LayoutQuery {
-        site {
-          buildTime(formatString: "DD.MM.YYYY")
-        }
-      }
-    `}
-    render={data => (
-      <ThemeProvider theme={theme}>
-        <PageWrapper>
-          <GlobalStyle />
-          <Menu />
-          <Wrapper fullWidth>{children}</Wrapper>
-          <Footer>
-            &copy; {split(data.site.buildTime, '.')[2]} by Na Froncie.<br />
-            <span>Ostatnia zmiana: {data.site.buildTime}</span>
-          </Footer>
-        </PageWrapper>
-      </ThemeProvider>
-    )}
-  />
-);
+interface Props {
+  title?: string;
+  subTitle?: string;
+  main?: boolean;
+  noHero?: boolean;
+}
 
-export default Layout;
+const buildQuery = graphql`
+  query LayoutQuery {
+    site {
+      buildTime(formatString: "DD.MM.YYYY")
+    }
+  }
+`;
+
+export const Layout: FC<Props> = ({
+  children,
+  title = 'Leafcode',
+  subTitle = 'Frontend, UI/UX i wiele więcej',
+  noHero = false,
+  main,
+}) => {
+  const data = useStaticQuery(buildQuery);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Helmet title={`${title} | ${config.siteTitle}`} />
+      <GlobalStyle />
+      <PageWrapper>
+        {!noHero && <Hero main={main} title={title} subTitle={subTitle} />}
+        <Menu />
+        <Wrapper fullWidth>{children}</Wrapper>
+        <Footer>
+          &copy; {split(data.site.buildTime, '.')[2]} Leafcode - Łukasz
+          Tyszkiewicz
+          <br />
+          <span>Ostatnia zmiana: {data.site.buildTime}</span>
+        </Footer>
+      </PageWrapper>
+    </ThemeProvider>
+  );
+};
