@@ -1,8 +1,9 @@
 import React, { FC, useState, useMemo } from 'react';
-import { useDebounce, useWindowScroll, useWindowSize } from 'react-use';
+import { useDebounce, useWindowScroll } from 'react-use';
+import { useWindowWidth } from '@react-hook/window-size';
 import styled from 'styled-components';
 import { BurgerButton } from '..';
-import { media } from '../../utils/media';
+import { media } from '@utils/media';
 import { LogoSigil } from '../Logo';
 import { Link } from 'gatsby';
 import { motion, Variants } from 'framer-motion';
@@ -35,7 +36,7 @@ const MenuWrapper = styled(motion.nav).attrs({ variants: visibilityVariants })`
 const MotionLink = motion.custom(Link);
 
 export const Menu: FC = () => {
-  const { width } = useWindowSize();
+  const width = useWindowWidth();
   const { x, y } = useWindowScroll();
   const [isExpanded, setIsExpanded] = useState(false);
   const [visible, setVisible] = useState(true);

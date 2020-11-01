@@ -13,6 +13,7 @@
   "scripts": {
     "build": "gatsby build",
     "start": "gatsby develop",
+    "start:prod": "gatsby serve",
     "deploy": "gatsby build --prefix-paths",
     "dev": "rm -r .cache/ && env NODE_ENV=development DEBUG=gatsby:query-watcher && gatsby develop",
     "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx",
@@ -53,6 +54,7 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.5.8",
     "@mdx-js/react": "^1.5.8",
+    "@react-hook/window-size": "^3.0.7",
     "framer": "^1.2.5",
     "framer-motion": "^2.3.0",
     "gatsby": "^2.17.4",

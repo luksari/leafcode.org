@@ -4,7 +4,7 @@ import { media, sizes } from '@utils/media';
 import React from 'react';
 import { theme } from '@config/Theme';
 import { Link } from 'gatsby';
-import { useWindowSize } from '@utils/useWindowSize';
+import { useWindowWidth } from '@react-hook/window-size';
 
 const expandItemVariants = {
   expanded: {
@@ -70,7 +70,7 @@ interface Props {
 
 export const MenuItem = ({ text, to, onClick }: Props) => {
   const { scrollYProgress } = useViewportScroll();
-  const { width } = useWindowSize();
+  const width = useWindowWidth();
   const isDesktop = width && width > sizes.laptopS;
   const scaleXAnim = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const colorAnim = useTransform(

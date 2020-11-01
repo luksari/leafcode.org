@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { LogoImage } from './Logo';
 import { media, sizes } from '@utils/media';
@@ -7,7 +6,7 @@ import { PageTitle, PageTitleSecondary } from './Title';
 import { motion, useTransform, useViewportScroll } from 'framer-motion';
 import leaves from '@static/images/leaves.png';
 import dots from '@static/images/dots.png';
-import { useWindowSize } from '@utils/useWindowSize';
+import { useWindowWidth } from '@react-hook/window-size';
 
 const HeroWrapper = styled.div<{ main?: boolean }>`
   width: 100%;
@@ -127,8 +126,10 @@ export const Hero: FC<IProps> = ({
   subTitle = 'Frontend, UI/UX i wiele więcej',
   main,
 }) => {
-  const { width } = useWindowSize();
-  const isDesktop = width && width > sizes.tablet;
+  const [isClient, setIsClient] = useState(false);
+  const width = useWindowWidth();
+  const isDesktop = width > sizes.tablet;
+
   const { scrollY } = useViewportScroll();
 
   const logoContainerMoveY = useTransform(
@@ -158,6 +159,7 @@ export const Hero: FC<IProps> = ({
   );
   const dotsMoveX = useTransform(scrollY, [0, 450], [-250, -200]);
   const dotsScale = useTransform(scrollY, [0, 450], [1, 1.25]);
+  const leavesX = isDesktop ? 700 : 1100;
 
   const dotsImageStyle = {
     y: dotsMoveY,
@@ -166,6 +168,14 @@ export const Hero: FC<IProps> = ({
     rotateZ: -15,
   };
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
+
   return (
     <HeroWrapper>
       <DotsImage src={dots} style={dotsImageStyle} />
@@ -173,7 +183,7 @@ export const Hero: FC<IProps> = ({
         role="img"
         style={{
           scale: leavesScale,
-          x: isDesktop ? 700 : 1100,
+          x: leavesX,
           y: 420,
           rotateZ: 0,
         }}
