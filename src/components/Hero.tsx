@@ -4,9 +4,9 @@ import { LogoImage } from './Logo';
 import { media, sizes } from '@utils/media';
 import { PageTitle, PageTitleSecondary } from './Title';
 import { motion, useTransform, useViewportScroll } from 'framer-motion';
-import leaves from '@static/images/leaves.png';
-import dots from '@static/images/dots.png';
 import { useWindowWidth } from '@react-hook/window-size';
+import GatsbyImage from 'gatsby-image';
+import { graphql, useStaticQuery } from 'gatsby';
 
 const HeroWrapper = styled.div<{ main?: boolean }>`
   width: 100%;
@@ -24,34 +24,36 @@ const HeroWrapper = styled.div<{ main?: boolean }>`
   }
 `;
 
-const DotsImage = styled(motion.img)`
+const LeavesImageContainer = styled(motion.div)`
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 567px;
-  transform: translate(-250px, -100px) rotateZ(-15deg) scale(1.4);
-  @media ${media.desktopS} {
-    transform: translate(-250px, -100px) rotateZ(-15deg) scale(1);
-  }
-`;
-
-const LeavesFadedImage = styled(motion.div)`
-  position: absolute;
-  width: 1920px;
-  height: 1080px;
+  width: 1000px;
+  z-index: 1;
   right: 0;
   bottom: 0;
-  z-index: 1;
-
-  ${({ theme }) => css`
-    background: linear-gradient(
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    ${({ theme }) => css`
+      background: linear-gradient(
         180deg,
         transparent,
         transparent 30%,
         ${theme.colors.bgLight} 60%
-      ),
-      url(${leaves});
-  `}
+      );
+    `};
+  }
+`;
+
+const DotsImageContainer = styled(motion.div)`
+  position: absolute !important;
+  left: 0;
+  top: 0;
+  width: 700px;
 `;
 
 const TitleWrapper = styled(motion.div)`
@@ -115,6 +117,25 @@ const StyledSecondaryTitle = styled(PageTitleSecondary)`
 
 const AnimatedSubtitle = motion.custom(StyledSecondaryTitle);
 
+const PicturesQuery = graphql`
+  query {
+    leaves: file(relativePath: { eq: "HeroLeaves.png" }) {
+      childImageSharp {
+        fluid(quality: 100) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    dots: file(relativePath: { eq: "HeroDots.png" }) {
+      childImageSharp {
+        fluid(quality: 100) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+  }
+`;
+
 interface IProps {
   title?: string;
   subTitle?: string;
@@ -126,6 +147,7 @@ export const Hero: FC<IProps> = ({
   subTitle = 'Frontend, UI/UX i wiele więcej',
   main,
 }) => {
+  const { leaves, dots } = useStaticQuery(PicturesQuery);
   const [isClient, setIsClient] = useState(false);
   const width = useWindowWidth();
   const isDesktop = width > sizes.tablet;
@@ -135,7 +157,7 @@ export const Hero: FC<IProps> = ({
   const logoContainerMoveY = useTransform(
     scrollY,
     [0, 500],
-    [0, isDesktop ? 300 : 150],
+    [0, isDesktop ? 200 : 150],
   );
   const logoContainerScale = useTransform(
     scrollY,
@@ -150,22 +172,29 @@ export const Hero: FC<IProps> = ({
   const leavesScale = useTransform(
     scrollY,
     [0, 450],
-    [isDesktop ? 0.5 : 0.3, isDesktop ? 0.7 : 0.4],
+    [isDesktop ? 1 : 0.5, isDesktop ? 1.2 : 0.6],
   );
   const dotsMoveY = useTransform(
     scrollY,
     [0, 450],
-    [-100, isDesktop ? 350 : 200],
+    [-100, isDesktop ? 100 : 200],
   );
-  const dotsMoveX = useTransform(scrollY, [0, 450], [-250, -200]);
-  const dotsScale = useTransform(scrollY, [0, 450], [1, 1.25]);
-  const leavesX = isDesktop ? 700 : 1100;
+  const dotsMoveX = useTransform(scrollY, [0, 450], [-350, -200]);
+  const dotsScale = useTransform(scrollY, [0, 450], [1, 1.1]);
+  const leavesMoveY = useTransform(scrollY, [0, 450], [150, 200]);
+  const leavesX = isDesktop ? 300 : 1100;
 
   const dotsImageStyle = {
     y: dotsMoveY,
     x: dotsMoveX,
     scale: dotsScale,
     rotateZ: -15,
+  };
+
+  const leavesStyle = {
+    x: leavesX,
+    scale: leavesScale,
+    y: leavesMoveY,
   };
 
   useEffect(() => {
@@ -178,16 +207,12 @@ export const Hero: FC<IProps> = ({
 
   return (
     <HeroWrapper>
-      <DotsImage src={dots} style={dotsImageStyle} />
-      <LeavesFadedImage
-        role="img"
-        style={{
-          scale: leavesScale,
-          x: leavesX,
-          y: 420,
-          rotateZ: 0,
-        }}
-      />
+      <DotsImageContainer style={dotsImageStyle}>
+        <GatsbyImage fluid={dots.childImageSharp.fluid} />
+      </DotsImageContainer>
+      <LeavesImageContainer style={leavesStyle}>
+        <GatsbyImage fluid={leaves.childImageSharp.fluid} />
+      </LeavesImageContainer>
       <TitleWrapper
         style={{
           y: logoContainerMoveY,
