@@ -18,7 +18,6 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-typescript',
-    'gatsby-plugin-manifest',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-lodash',
     `gatsby-plugin-sharp`,
@@ -64,11 +63,11 @@ module.exports = {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: config.siteTitle,
-        shortName: config.siteTitleAlt,
+        short_name: config.siteTitleAlt,
         description: config.siteDescription,
-        startUrl: config.pathPrefix,
-        backgroundColor: config.backgroundColor,
-        themeColor: config.themeColor,
+        start_url: config.pathPrefix,
+        background_color: config.backgroundColor,
+        color: config.themeColor,
         display: 'standalone',
         icon: config.favicon,
       },
@@ -86,9 +85,23 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-alias-imports`,
+      options: {
+        alias: {
+          '@src': 'src',
+          '@static': 'src/static',
+          '@components': 'src/components',
+          '@templates': 'src/templates',
+          '@config': 'src/config',
+          '@models': 'src/models',
+          '@utils': 'src/utils',
+        },
+        extensions: ['ts', 'tsx'],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-mdx',
       options: {
-        decks: [],
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           {

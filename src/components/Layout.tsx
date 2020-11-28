@@ -6,9 +6,9 @@ import { config } from '@config/SiteConfig';
 import { graphql, useStaticQuery } from 'gatsby';
 import { split } from 'lodash';
 import { media } from '@utils/media';
-import { Footer } from './Footer';
-import { Menu } from './Menu';
-import { Hero } from './Hero';
+import { Footer } from './sections/Footer';
+import { Menu } from './menu';
+import { Hero } from './sections';
 
 const GlobalStyle = createGlobalStyle`
   ::selection {

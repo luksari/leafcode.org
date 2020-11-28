@@ -20,4 +20,3 @@ export const Button = styled.button<{ big?: boolean }>`
     transform: translateY(-2px);
   }
 `;
-export default Button;

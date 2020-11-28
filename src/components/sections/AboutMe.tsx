@@ -1,11 +1,11 @@
 import React from 'react';
-import { AboutMeContent } from './Content';
-import { SectionTitle } from './Title';
+import { AboutMeContent } from '../Content';
+import { SectionTitle } from '../Title';
 import { graphql, useStaticQuery } from 'gatsby';
 import styled, { css } from 'styled-components';
 import GatsbyImage from 'gatsby-image';
 import { getImageByName } from '@utils/getImageByName';
-import { UISvgAnimation } from './UISvgAnimation';
+import { UISvgAnimation } from '../UISvgAnimation';
 import { media } from '@utils/media';
 
 const PicturesQuery = graphql`
@@ -149,11 +149,12 @@ export const AboutMe = () => {
       <ParagraphContainer>
         <StyledImage fluid={image1.node.fluid} />
         <MainParagraph data-initiale="I">
-          I have started learning web development <Bolden>two years ago</Bolden>
-          , since then I spend almost <Bolden>every day</Bolden> improving my
-          skills, and learning new usable stuff, to create{' '}
-          <Bolden>well produced</Bolden> web applications. After this period of
-          time, I can tell that creating things became my passion.
+          I have started learning web development
+          <Bolden>three years ago</Bolden>, since then I spend almost{' '}
+          <Bolden>every day</Bolden> improving my skills, and learning new
+          usable stuff, to create <Bolden>well produced</Bolden> web
+          applications. After this period of time, I can tell that creating
+          things became my passion.
         </MainParagraph>
       </ParagraphContainer>
       <ParagraphContainer reversed>
@@ -171,9 +172,8 @@ export const AboutMe = () => {
         <StyledImage fluid={image3.node.fluid} />
         <MainParagraph data-initiale="I">
           I am also keen on <Bolden>traveling</Bolden>, meeting new people. I do
-          like learning foreign languages, for now I have chosen{' '}
-          <Bolden>Spanish</Bolden> and <Bolden>Brazilian Portuguese</Bolden>. On
-          daily basis I spend my free time doing{' '}
+          like learning foreign languages, for now I have chosen
+          <Bolden>Spanish</Bolden>. On daily basis I spend my free time doing
           <Bolden>gym, yoga, meditation</Bolden> and a little bit of gaming.
           Sometimes I crawl through many creative events around Silesian area,
           to enjoy talks with people, <Bolden>cold craft beer</Bolden> and to

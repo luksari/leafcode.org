@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import { kebabCase } from 'lodash';
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { IPost } from '../models/Post';
+import { IPost } from '@models/Post';
 
 const PrevNextWrapper = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from '../utils/media';
+import { media } from '@utils/media';
 
 export const Subline = styled.p<{ sectionTitle?: boolean }>`
   font-size: ${({ theme }) => theme.fontSize.small};

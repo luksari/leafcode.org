@@ -68,4 +68,3 @@ export const BurgerButton: FC<IProps> = ({ isExpanded, onClick }) => (
     <Burger isExpanded={isExpanded} />
   </ButtonContainer>
 );
-export default BurgerButton;

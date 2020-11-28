@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { LogoImage } from './Logo';
 import { media, sizes } from '@utils/media';
-import { PageTitle, PageTitleSecondary } from './Title';
+import { PageTitle, PageTitleSecondary } from '@components/Title';
+import { LogoImage } from '@components/Logo';
 import { motion, useTransform, useViewportScroll } from 'framer-motion';
 import { useWindowWidth } from '@react-hook/window-size';
 import GatsbyImage from 'gatsby-image';
@@ -121,15 +121,31 @@ const PicturesQuery = graphql`
   query {
     leaves: file(relativePath: { eq: "HeroLeaves.png" }) {
       childImageSharp {
-        fluid(quality: 100) {
-          ...GatsbyImageSharpFluid_withWebp
+        fluid(quality: 85) {
+          originalName
+          aspectRatio
+          src
+          srcSet
+          sizes
+          base64
+          tracedSVG
+          srcWebp
+          srcSetWebp
         }
       }
     }
     dots: file(relativePath: { eq: "HeroDots.png" }) {
       childImageSharp {
-        fluid(quality: 100) {
-          ...GatsbyImageSharpFluid_withWebp
+        fluid(quality: 85) {
+          originalName
+          aspectRatio
+          src
+          srcSet
+          sizes
+          base64
+          tracedSVG
+          srcWebp
+          srcSetWebp
         }
       }
     }
@@ -177,9 +193,9 @@ export const Hero: FC<IProps> = ({
   const dotsMoveY = useTransform(
     scrollY,
     [0, 450],
-    [-100, isDesktop ? 100 : 200],
+    [-100, isDesktop ? 300 : 200],
   );
-  const dotsMoveX = useTransform(scrollY, [0, 450], [-350, -200]);
+  const dotsMoveX = useTransform(scrollY, [0, 450], [-350, -300]);
   const dotsScale = useTransform(scrollY, [0, 450], [1, 1.1]);
   const leavesMoveY = useTransform(scrollY, [0, 450], [150, 200]);
   const leavesX = isDesktop ? 300 : 1100;
@@ -208,10 +224,10 @@ export const Hero: FC<IProps> = ({
   return (
     <HeroWrapper>
       <DotsImageContainer style={dotsImageStyle}>
-        <GatsbyImage fluid={dots.childImageSharp.fluid} />
+        <GatsbyImage fadeIn={false} fluid={dots.childImageSharp.fluid} />
       </DotsImageContainer>
       <LeavesImageContainer style={leavesStyle}>
-        <GatsbyImage fluid={leaves.childImageSharp.fluid} />
+        <GatsbyImage fadeIn={false} fluid={leaves.childImageSharp.fluid} />
       </LeavesImageContainer>
       <TitleWrapper
         style={{

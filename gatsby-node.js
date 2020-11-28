@@ -2,33 +2,30 @@ const path = require('path');
 const _ = require('lodash');
 const config = require('./src/config/SiteConfig').default;
 
-exports.onCreateNode = ({
-  node,
-  actions,
-}) => {
-  const {
-    createNodeField
-  } = actions;
+exports.onCreateNode = ({ node, actions }) => {
+  const { createNodeField } = actions;
 
-  if (node.internal.type === 'Mdx' && _.has(node, 'frontmatter') && _.has(node.frontmatter, 'title')) {
+  if (
+    node.internal.type === 'Mdx' &&
+    _.has(node, 'frontmatter') &&
+    _.has(node.frontmatter, 'title')
+  ) {
     const slug = _.kebabCase(node.frontmatter.title);
     createNodeField({
       node,
       name: 'slug',
-      value: slug
+      value: slug,
     });
   }
 };
 
 const getPostsByType = (posts, classificationType) => {
   const postsByType = {};
-  posts.forEach(({
-    node
-  }) => {
+  posts.forEach(({ node }) => {
     const nodeClassificationType = node.frontmatter[classificationType];
     if (nodeClassificationType) {
       if (_.isArray(nodeClassificationType)) {
-        nodeClassificationType.forEach(name => {
+        nodeClassificationType.forEach((name) => {
           if (!_.has(postsByType, name)) {
             postsByType[name] = [];
           }
@@ -46,11 +43,9 @@ const getPostsByType = (posts, classificationType) => {
   return postsByType;
 };
 
-const createClassificationPages = ({
-  createPage,
-  posts,
-}) => {
-  const classifications = [{
+const createClassificationPages = ({ createPage, posts }) => {
+  const classifications = [
+    {
       singularName: 'category',
       pluralName: 'categories',
       template: {
@@ -70,7 +65,7 @@ const createClassificationPages = ({
     },
   ];
 
-  classifications.forEach(classification => {
+  classifications.forEach((classification) => {
     const names = Object.keys(classification.postsByClassificationNames);
 
     createPage({
@@ -81,7 +76,7 @@ const createClassificationPages = ({
       },
     });
 
-    names.forEach(name => {
+    names.forEach((name) => {
       const postsByName = classification.postsByClassificationNames[name];
       createPage({
         path: `/${classification.pluralName}/${_.kebabCase(name)}`,
@@ -95,11 +90,9 @@ const createClassificationPages = ({
   });
 };
 
-exports.onCreateWebpackConfig = ({
-  actions
-}) => {
+exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
-    node: {     
+    node: {
       fs: 'empty',
     },
     resolve: {
@@ -118,18 +111,13 @@ exports.onCreateWebpackConfig = ({
   });
 };
 
-exports.createPages = async ({
-  actions,
-  graphql,
-  reporter,
-}) => {
-  const {
-    createPage
-  } = actions;
+exports.createPages = async ({ actions, graphql, reporter }) => {
+  const { createPage } = actions;
 
   const postTemplate = path.resolve('src/templates/Post.tsx');
 
-  const result = await graphql(`{
+  const result = await graphql(`
+    {
       allMdx(
         sort: { order: DESC, fields: [frontmatter___date] }
         limit: 10000
@@ -166,53 +154,55 @@ exports.createPages = async ({
           }
         }
       }
-      }`)
-    
-      if (result.errors) {
-        reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query', result.errors)
-      }
+    }
+  `);
 
-      const posts = result.data.allMdx.edges;
-      const postsPerPage = config.PostsPerPage;
-      const numPages = Math.ceil(posts.length / postsPerPage);
-      
-      posts.forEach(({ node }, i) => {
-          createPage({
-            path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-            component: path.resolve('src/templates/Blog.tsx'),
-            context: {
-              id: node.id,
-              limit: postsPerPage,
-              skip: i * postsPerPage,
-              totalPages: numPages,
-              currentPage: i + 1
-            },
-          });
-        });
+  if (result.errors) {
+    reporter.panicOnBuild(
+      '🚨  ERROR: Loading "createPages" query',
+      result.errors,
+    );
+  }
 
-      createClassificationPages({
-        createPage,
-        posts,
-        postsPerPage,
-        numPages
-      });
+  const posts = result.data.allMdx.edges;
+  const postsPerPage = config.PostsPerPage;
+  const numPages = Math.ceil(posts.length / postsPerPage);
 
-      posts.forEach(({
-        node
-      }, index) => {
-        const next = index === 0 ? null : posts[index - 1].node;
-        const prev = index === posts.length - 1 ? null : posts[index + 1].node;
+  posts.forEach(({ node }, i) => {
+    createPage({
+      path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+      component: path.resolve('src/templates/Blog.tsx'),
+      context: {
+        id: node.id,
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        totalPages: numPages,
+        currentPage: i + 1,
+      },
+    });
+  });
 
-        createPage({
-          path: `/blog/${_.kebabCase(node.frontmatter.title)}`,
-          component: postTemplate,
-          context: {
-            slug: _.kebabCase(node.frontmatter.title),
-            id: node.id,
-            title: node.frontmatter.title,
-            prev,
-            next,
-          },
-        });
-      });
+  createClassificationPages({
+    createPage,
+    posts,
+    postsPerPage,
+    numPages,
+  });
+
+  posts.forEach(({ node }, index) => {
+    const next = index === 0 ? null : posts[index - 1].node;
+    const prev = index === posts.length - 1 ? null : posts[index + 1].node;
+
+    createPage({
+      path: `/blog/${_.kebabCase(node.frontmatter.title)}`,
+      component: postTemplate,
+      context: {
+        slug: _.kebabCase(node.frontmatter.title),
+        id: node.id,
+        title: node.frontmatter.title,
+        prev,
+        next,
+      },
+    });
+  });
 };

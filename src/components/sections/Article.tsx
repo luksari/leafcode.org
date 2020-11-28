@@ -4,8 +4,8 @@ import { kebabCase } from 'lodash';
 import moment from 'moment';
 import React, { FunctionComponent, SyntheticEvent } from 'react';
 import styled from 'styled-components';
-import { media } from '../utils/media';
-import { Subline } from './Subline';
+import { media } from '@utils/media';
+import { Subline } from '@components/Subline';
 import { motion } from 'framer-motion';
 
 const Banner = styled(Img)`
