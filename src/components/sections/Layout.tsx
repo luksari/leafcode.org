@@ -6,9 +6,8 @@ import { config } from '@config/SiteConfig';
 import { graphql, useStaticQuery } from 'gatsby';
 import { split } from 'lodash';
 import { media } from '@utils/media';
-import { Footer } from './sections/Footer';
-import { Menu } from './menu';
-import { Hero } from './sections';
+import { Footer, Hero } from '@components/sections';
+import { Menu } from '@components/menu';
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
@@ -94,7 +93,7 @@ const buildQuery = graphql`
 export const Layout: FC<Props> = ({
   children,
   title = 'Leafcode',
-  subTitle = 'Frontend, UI/UX i wiele więcej',
+  subTitle = 'Frontend, UI/UX and much more',
   noHero = false,
   main,
 }) => {
@@ -112,7 +111,6 @@ export const Layout: FC<Props> = ({
           &copy; {split(data.site.buildTime, '.')[2]} Leafcode - Łukasz
           Tyszkiewicz
           <br />
-          <span>Ostatnia zmiana: {data.site.buildTime}</span>
         </Footer>
       </PageWrapper>
     </ThemeProvider>

@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
-import { media } from '../utils/media';
+import { media } from '@utils/media';
 
 const slideFromLeft = keyframes`
   0% {

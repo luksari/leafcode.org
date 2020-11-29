@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
-import { media } from '../utils/media';
+import { media } from '../../utils/media';
 
-interface IProps {
+interface BurgerButtonProps {
   isExpanded: boolean;
   onClick: () => void;
 }
@@ -63,7 +63,10 @@ const Burger = styled.div<{ readonly isExpanded: boolean }>`
       }
     `}
 `;
-export const BurgerButton: FC<IProps> = ({ isExpanded, onClick }) => (
+export const BurgerButton: FC<BurgerButtonProps> = ({
+  isExpanded,
+  onClick,
+}) => (
   <ButtonContainer onClick={onClick}>
     <Burger isExpanded={isExpanded} />
   </ButtonContainer>
